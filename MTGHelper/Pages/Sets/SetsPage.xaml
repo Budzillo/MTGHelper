@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MTGHelper.Pages.SetsPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
+    Title="Sets">
+    <ContentPage.BindingContext>
+        <viewModels:SetsPageViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Margin="5">
+            <Frame BorderColor="LightGray" Padding="{OnPlatform Android='10,0',iOS='10,10'}">
+                <controls:BorderlessEntry
+                    HorizontalOptions="Center"
+                    Placeholder="Search set..."
+                    PlaceholderColor="LightGray"
+                    VerticalOptions="Center" />
+            </Frame>
+        </Grid>
+        <Grid Grid.Row="1">
+            <ListView ItemsSource="{Binding SearchedSets}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition Width="8*" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Code}"
+                                    VerticalOptions="Center" />
+                                <Grid
+                                    Grid.Column="1"
+                                    HorizontalOptions="CenterAndExpand"
+                                    VerticalOptions="Start">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="3*" />
+                                        <ColumnDefinition Width="7*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding Name}"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</ContentPage>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MTGHelper.Pages.LifeCounterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModels:LifeCounterPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonOptions" TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="45" />
+                <Setter Property="HeightRequest" Value="45" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Aspect" Value="AspectFit" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <ContentView Content="{Binding LifeTotalContent}" />
+        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+            <VerticalStackLayout>
+                <ImageButton
+                    Clicked="ImageButton_Clicked"
+                    Source="/Resource/Images/mtg_icon.png"
+                    Style="{StaticResource buttonOptions}" />
+                <ScrollView
+                    BackgroundColor="AliceBlue"
+                    HeightRequest="60"
+                    IsVisible="True"
+                    Orientation="Horizontal">
+                    <FlexLayout
+                        Direction="Row"
+                        JustifyContent="SpaceBetween"
+                        Wrap="NoWrap">
+                        <ImageButton
+                            Margin="2,0,0,0"
+                            Source="mtg_icon.png"
+                            Style="{StaticResource buttonOptions}" />
+                        <ImageButton Source="mtg_icon.png" Style="{StaticResource buttonOptions}" />
+                        <ImageButton Source="mtg_icon.png" Style="{StaticResource buttonOptions}" />
+                        <ImageButton
+                            Margin="0,0,2,0"
+                            Source="mtg_icon.png"
+                            Style="{StaticResource buttonOptions}" />
+                    </FlexLayout>
+                </ScrollView>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>

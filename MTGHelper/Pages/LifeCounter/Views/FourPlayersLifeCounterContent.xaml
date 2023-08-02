@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.FourPlayersLifeCounterContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
+    HorizontalOptions="Fill"
+    VerticalOptions="Fill">
+    <ContentView.BindingContext>
+        <viewModels:FourPlayersLifeCounterContentViewModel />
+    </ContentView.BindingContext>
+    <Grid
+        BackgroundColor="Wheat"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <ContentView
+            Grid.Row="0"
+            Grid.Column="0"
+            Content="{Binding TopLeftVerticalPlayerLifeContent}"
+            HorizontalOptions="Fill"
+            Rotation="180"
+            VerticalOptions="Fill" />
+        <ContentView
+            Grid.Row="0"
+            Grid.Column="1"
+            Content="{Binding TopRightVerticalPlayerLifeContent}"
+            HorizontalOptions="Fill"
+            Rotation="180"
+            VerticalOptions="Fill" />
+        <ContentView
+            Grid.Row="1"
+            Grid.Column="0"
+            Content="{Binding BottomLeftVerticalPlayerLifeContent}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+        <ContentView
+            Grid.Row="1"
+            Grid.Column="1"
+            Content="{Binding BottomRightVerticalPlayerLifeContent}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill" />
+    </Grid>
+</ContentView>

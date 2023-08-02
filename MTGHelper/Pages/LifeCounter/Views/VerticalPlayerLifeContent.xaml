@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Pages.LifeCounter.Views.VerticalPlayerLifeContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:MTGHelper.Helpers"
+    xmlns:local="clr-namespace:MTGHelper"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <helpers:StringToColorConverter x:Key="stringToColorConverter" />
+            <Style x:Key="bottomCounterLabel" TargetType="Label">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="25" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+            <Style x:Key="buttonBottomCounters" TargetType="ImageButton">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="Margin" Value="10,5,0,5" />
+
+            </Style>
+            <ResourceDictionary.MergedDictionaries />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.BindingContext>
+        <viewModels:PlayerLifeTotalViewModel />
+    </ContentView.BindingContext>
+    <Border
+        BackgroundColor="Black"
+        HorizontalOptions="FillAndExpand"
+        Stroke="Black"
+        StrokeThickness="1"
+        VerticalOptions="FillAndExpand">
+        <Grid
+            x:Name="gridMain"
+            BackgroundColor="{Binding PlayerModel.Color, Converter={StaticResource stringToColorConverter}}"
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </Grid.GestureRecognizers>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="8*" />
+                <RowDefinition Height="4*" />
+            </Grid.RowDefinitions>
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Label
+                    Grid.Row="0"
+                    FontAttributes="Italic"
+                    FontFamily="mplantin"
+                    FontSize="140"
+                    HorizontalTextAlignment="Center"
+                    Text="{Binding CurrentNumberValue}"
+                    TextColor="Wheat"
+                    VerticalTextAlignment="Center">
+                    <Label.Style>
+                        <Style TargetType="Label" />
+                    </Label.Style>
+                </Label>
+                <Image
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    Source="{Binding BottomImageSource}"
+                    VerticalOptions="Center"
+                    WidthRequest="50">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                    </Image.Behaviors>
+                </Image>
+            </VerticalStackLayout>
+            <Grid
+                Grid.Row="1"
+                Margin="3"
+                HorizontalOptions="Center"
+                VerticalOptions="End">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ImageButton
+                    Grid.Column="0"
+                    Command="{Binding SetNumberTypeCommand}"
+                    CommandParameter="poison"
+                    Source="/Resources/Images/poison_counter.svg"
+                    Style="{StaticResource buttonBottomCounters}">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
+                <ImageButton
+                    Grid.Column="1"
+                    Command="{Binding SetNumberTypeCommand}"
+                    CommandParameter="energy"
+                    Source="/Resources/Images/energy_counter.svg"
+                    Style="{StaticResource buttonBottomCounters}">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
+                <ImageButton
+                    Grid.Column="2"
+                    Command="{Binding SetNumberTypeCommand}"
+                    CommandParameter="tickets"
+                    Source="/Resources/Images/ticket_counter.svg"
+                    Style="{StaticResource buttonBottomCounters}">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
+                <ImageButton
+                    Grid.Column="3"
+                    Command="{Binding SetNumberTypeCommand}"
+                    CommandParameter="life"
+                    Source="/Resources/Images/heart.svg"
+                    Style="{StaticResource buttonBottomCounters}">
+                    <ImageButton.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                    </ImageButton.Behaviors>
+                </ImageButton>
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>
