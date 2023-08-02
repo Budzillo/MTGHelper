@@ -23,7 +23,7 @@ namespace MTGApi.Repository
                 var result = await setService.AllAsync();
                 if(result != null && result.Value != null)
                 {
-                    return result.Value.ToList();
+                    return result.Value.OrderBy(q=>q.Name).ToList();
                 }
                 return new List<ISet>();
             }

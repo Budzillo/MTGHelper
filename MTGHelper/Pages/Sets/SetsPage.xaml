@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:MTGHelper.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
     Title="Sets">
     <ContentPage.BindingContext>
@@ -15,12 +16,22 @@
             <RowDefinition />
         </Grid.RowDefinitions>
         <Grid Margin="5">
-            <Frame BorderColor="LightGray" Padding="{OnPlatform Android='10,0',iOS='10,10'}">
-                <controls:BorderlessEntry
-                    HorizontalOptions="Center"
+            <Frame
+                x:Name="frameEntry"
+                Padding="{OnPlatform Android='10,0',
+                                     iOS='10,10'}"
+                BorderColor="LightGray"
+                HorizontalOptions="FillAndExpand">
+                <SearchBar
+                    HorizontalOptions="StartAndExpand"
                     Placeholder="Search set..."
                     PlaceholderColor="LightGray"
-                    VerticalOptions="Center" />
+                    Text="{Binding SearchText}"
+                    VerticalOptions="Center">
+                    <SearchBar.Behaviors>
+                        <toolkit:EventToCommandBehavior Command="{Binding SearchTextChangedCommand}" EventName="TextChanged" />
+                    </SearchBar.Behaviors>
+                </SearchBar>
             </Frame>
         </Grid>
         <Grid Grid.Row="1">
@@ -29,27 +40,21 @@
                     <DataTemplate>
                         <ViewCell>
                             <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="2*" />
-                                    <ColumnDefinition Width="8*" />
-                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
                                 <Label
-                                    HorizontalOptions="Center"
-                                    Text="{Binding Code}"
+                                    Margin="3"
+                                    HorizontalOptions="Start"
+                                    Text="{Binding Name}"
                                     VerticalOptions="Center" />
-                                <Grid
-                                    Grid.Column="1"
-                                    HorizontalOptions="CenterAndExpand"
-                                    VerticalOptions="Start">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="3*" />
-                                        <ColumnDefinition Width="7*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label
-                                        Grid.Column="1"
-                                        Text="{Binding Name}"
-                                        VerticalOptions="Center" />
-                                </Grid>
+                                <HorizontalStackLayout Grid.Row="1" Margin="3">
+                                    <Label Margin="0,0,5,0" Text="Release date:" />
+                                    <Label Margin="0,0,5,0" Text="{Binding ReleaseDate}" />
+                                    <Label Margin="0,0,5,0" Text="Extension:" />
+                                    <Label Margin="0,0,5,0" Text="{Binding Expansion}" />
+                                </HorizontalStackLayout>
                             </Grid>
                         </ViewCell>
                     </DataTemplate>

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using CommunityToolkit.Maui.Markup;
+
 namespace MTGHelper;
 
 public static class MauiProgram
@@ -10,6 +12,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
             .UseMauiCommunityToolkit()
+			.UseMauiCommunityToolkitMarkup()
             .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

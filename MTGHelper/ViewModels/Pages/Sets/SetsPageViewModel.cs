@@ -51,6 +51,5 @@ namespace MTGHelper.ViewModels
         {
             this.SearchedSets = new ObservableCollection<ISet>(allSets.Where(q => q.Name.ToLower().Contains(this.SearchText.ToLower())));
         }
-
     }
 }
