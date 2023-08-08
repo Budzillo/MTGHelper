@@ -1,4 +1,6 @@
-﻿using MTGHelper.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
+using MTGHelper.Models;
 using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
@@ -9,12 +11,13 @@ using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public class LifeCounterPageViewModel : BaseViewModel
+    public partial class LifeCounterPageViewModel : BaseViewModel
     {
         private int playerCount;
         private int lifeTotal;
         private ObservableCollection<PlayerModel> players = new ObservableCollection<PlayerModel>();
         private ContentView lifeTotalContent;
+        private ContentView settingsContent;
         public int PlayerCount
         {
             get { return playerCount; }
@@ -55,10 +58,66 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ContentView SettingsContent
+        {
+            get { return settingsContent; }
+            set
+            {
+                if (settingsContent == value) return;
+                settingsContent = value;
+                OnPropertyChanged();
+            }
+        }
+        [RelayCommand]
+        private async Task OpenSettingsWindowAsync(object sender)
+        {
+            if(sender is ScrollView scrollView)
+            {
+                int heightFrom = 0;
+                int heightTo = 0;
+                if (scrollView.HeightRequest == 0)
+                {
+                    heightFrom = 0;
+                    heightTo = 70;
+                }
+                else
+                {
+                    heightFrom = 70;
+                    heightTo = 0;
+                }
+                await MainThread.InvokeOnMainThreadAsync(() => {
+                    var animation = new Animation(v => scrollView.HeightRequest = v, heightFrom, heightTo);
+                    animation.Commit((IAnimatable)scrollView.Parent, "OpenSettingsAnimation",16,500,Easing.Linear);
+                });
 
+            }
+        }
+        [RelayCommand]
+        private void ResetGame()
+        {
+            PrepareGame();
+        }
+        [RelayCommand]
+        private void ChangePlayerCount(int count)
+        {
+            this.PlayerCount = count;
+            PrepareGame();
+        }
+        [RelayCommand]
+        private void ChangeSettingsToPlayers()
+        {
+            this.SettingsContent = new SettingsPlayersContent();
+            this.SettingsContent.BindingContext = this;
+        }
+        [RelayCommand]
+        private void GoBackToSettings()
+        {
+            PrepareSettings();
+        }
         public LifeCounterPageViewModel()
         {
             PrepareGame();
+            PrepareSettings();
         }
         private void PrepareGame()
         {
@@ -66,6 +125,12 @@ namespace MTGHelper.ViewModels
             this.SetFormat("Standard");
             this.PreparePlayers();
             this.PrepareCurrentLifeTotalView();
+        }
+        private void PrepareSettings()
+        {
+            SettingsContent settings = new SettingsContent();
+            settings.BindingContext = this;
+            this.SettingsContent = settings; 
         }
         private void PreparePlayers()
         {

@@ -107,6 +107,12 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\HorizontalPlayerLifeCountContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsPlayersContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\ThreePlayersLifeCounterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

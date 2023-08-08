@@ -3,6 +3,7 @@
     x:Class="MTGHelper.Pages.LifeCounterPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
     <ContentPage.BindingContext>
         <viewModels:LifeCounterPageViewModel />
@@ -22,29 +23,16 @@
         <Grid HorizontalOptions="Center" VerticalOptions="Center">
             <VerticalStackLayout>
                 <ImageButton
-                    Clicked="ImageButton_Clicked"
+                    Command="{Binding OpenSettingsWindowAsync}"
+                    CommandParameter="{Binding Source={x:Reference scrollViewOptions}}"
                     Source="/Resource/Images/mtg_icon.png"
                     Style="{StaticResource buttonOptions}" />
                 <ScrollView
+                    x:Name="scrollViewOptions"
                     BackgroundColor="AliceBlue"
-                    HeightRequest="60"
-                    IsVisible="True"
+                    HeightRequest="0"
                     Orientation="Horizontal">
-                    <FlexLayout
-                        Direction="Row"
-                        JustifyContent="SpaceBetween"
-                        Wrap="NoWrap">
-                        <ImageButton
-                            Margin="2,0,0,0"
-                            Source="mtg_icon.png"
-                            Style="{StaticResource buttonOptions}" />
-                        <ImageButton Source="mtg_icon.png" Style="{StaticResource buttonOptions}" />
-                        <ImageButton Source="mtg_icon.png" Style="{StaticResource buttonOptions}" />
-                        <ImageButton
-                            Margin="0,0,2,0"
-                            Source="mtg_icon.png"
-                            Style="{StaticResource buttonOptions}" />
-                    </FlexLayout>
+                    <ContentView Content="{Binding SettingsContent}" />
                 </ScrollView>
             </VerticalStackLayout>
         </Grid>
