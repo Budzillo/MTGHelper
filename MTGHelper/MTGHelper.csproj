@@ -98,6 +98,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="App.xaml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\LifeCounterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -125,8 +128,14 @@
 	  <MauiXaml Update="Pages\Sets\SetsPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\Colors.xaml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\PlayerLifeTotalDictionary.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\Styles.xaml">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiXaml>
 	</ItemGroup>
 

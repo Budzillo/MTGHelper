@@ -45,17 +45,22 @@
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
             </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
-                <RowDefinition Height="8*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="7*" />
                 <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
-            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+            <Grid Grid.Row="0" />
+            <VerticalStackLayout
+                Grid.Row="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
                 <Label
                     Grid.Row="0"
                     FontAttributes="Italic"
                     FontFamily="mplantin"
                     FontSize="140"
                     HorizontalTextAlignment="Center"
-                    Text="{Binding CurrentNumberValue}"
+                    Text="{Binding PlayerModel.SelectedValue}"
                     TextColor="Wheat"
                     VerticalTextAlignment="Center">
                     <Label.Style>
@@ -65,7 +70,7 @@
                 <Image
                     HeightRequest="50"
                     HorizontalOptions="Center"
-                    Source="{Binding BottomImageSource}"
+                    Source="{Binding PlayerModel.BottomImageSource}"
                     VerticalOptions="Center"
                     WidthRequest="50">
                     <Image.Behaviors>
@@ -74,7 +79,7 @@
                 </Image>
             </VerticalStackLayout>
             <Grid
-                Grid.Row="1"
+                Grid.Row="2"
                 Margin="3"
                 HorizontalOptions="Center"
                 VerticalOptions="End">

@@ -38,7 +38,7 @@ namespace MTGHelper.ViewModels
             this.bottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
             this.topVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
         }
-        public TwoPlayersLifeCounterContentViewModel(ObservableCollection<PlayerModel> playerModels) : base(playerModels)
+        public TwoPlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
         {
 
         }
@@ -46,9 +46,9 @@ namespace MTGHelper.ViewModels
         public override void PrepareViews()
         {
             this.bottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.bottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(this.playerModels[0]);
+            this.bottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 1);
             this.topVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.topVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(this.playerModels[1]);
+            this.topVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 2);
         }
     }
 }

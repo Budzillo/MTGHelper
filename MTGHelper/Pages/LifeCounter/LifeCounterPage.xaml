@@ -23,7 +23,7 @@
         <Grid HorizontalOptions="Center" VerticalOptions="Center">
             <VerticalStackLayout>
                 <ImageButton
-                    Command="{Binding OpenSettingsWindowAsync}"
+                    Command="{Binding OpenSettingsWindowCommand}"
                     CommandParameter="{Binding Source={x:Reference scrollViewOptions}}"
                     Source="/Resource/Images/mtg_icon.png"
                     Style="{StaticResource buttonOptions}" />

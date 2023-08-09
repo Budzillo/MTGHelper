@@ -14,6 +14,7 @@ namespace MTGHelper.ViewModels
         }
         private void PreparePages()
         {
+
         }
     }
 }

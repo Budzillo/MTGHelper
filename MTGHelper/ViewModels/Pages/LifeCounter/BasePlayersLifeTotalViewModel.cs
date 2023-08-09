@@ -10,11 +10,11 @@ namespace MTGHelper.ViewModels
 {
     public abstract class BasePlayersLifeTotalViewModel : BaseViewModel
     {
-        public ObservableCollection<PlayerModel> playerModels;
+        internal LifeCounterPageViewModel lifeCounterPageViewModel;
         public BasePlayersLifeTotalViewModel() { }
-        public BasePlayersLifeTotalViewModel(ObservableCollection<PlayerModel> playerModels)
+        public BasePlayersLifeTotalViewModel(LifeCounterPageViewModel lifeCounterPageViewModel)
         {
-            this.playerModels = playerModels;
+            this.lifeCounterPageViewModel = lifeCounterPageViewModel;
             this.PrepareViews();
         }
         public abstract void PrepareViews();

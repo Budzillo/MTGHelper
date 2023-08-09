@@ -14,84 +14,18 @@ namespace MTGHelper.ViewModels
 {
     public partial class PlayerLifeTotalViewModel : BaseViewModel
     {
-
-
-        private string bottomImageSource = ClassConst.HEART_IMAGE_NAME;
-        private PlayerModel playerModel = new PlayerModel();
-        private bool isLifeSelected = true;
-        private bool isPoisonSelected = false;
-        private bool isEnergySelected = false;
-        private bool isTicketsSelected = false;
-        private string currentNumberValue = string.Empty;
+        private LifeCounterPageViewModel lifeCounterPageViewModel;
+        private int playerIndex = 1;
         private int rotation;
-        public string BottomImageSource
-        {
-            get { return bottomImageSource; }
-            set
-            {
-                if (bottomImageSource == value) return;
-                bottomImageSource = value;
-                OnPropertyChanged();
-            }
-        }
         public PlayerModel PlayerModel
         {
-            get { return playerModel; }
+            get => GetPlayerModel();
             set
             {
-                if (playerModel == value) return;
-                playerModel = value;
-                OnPropertyChanged();
-            }
-        }
-        public bool IsLifeSelected
-        {
-            get { return isLifeSelected; }
-            set
-            {
-                if (isLifeSelected == value) return;
-                isLifeSelected = value;
-                OnPropertyChanged();
-            }
-        }
-        public bool IsPoisonSelected
-        {
-            get { return isPoisonSelected; }
-            set
-            {
-                if (isPoisonSelected == value) return;
-                isPoisonSelected = value;
-                OnPropertyChanged();
-            }
-        }
-        public bool IsEnergySelected
-        {
-            get { return isEnergySelected; }
-            set
-            {
-                if (isEnergySelected == value) return;
-                isEnergySelected = value;
-                OnPropertyChanged();
-            }
-        }
-        public bool IsTicketsSelected
-        {
-            get { return isTicketsSelected; }
-            set
-            {
-                if(isTicketsSelected == value) return;
-                isTicketsSelected = value;
-                OnPropertyChanged();
-            }
-        }
-        public string CurrentNumberValue
-        {
-            get { return currentNumberValue; }
-            set
-            {
-                if (currentNumberValue == value) return;
-                currentNumberValue = value; 
-                OnPropertyChanged();
+                PlayerModel tempPlayer = GetPlayerModel();
+                if (tempPlayer == value) return;
+                tempPlayer = value;
+                OnPropertyChanged(nameof(PlayerModel));
             }
         }
         public int Rotation
@@ -106,42 +40,8 @@ namespace MTGHelper.ViewModels
         }
         [RelayCommand]
         public void SetNumberType(string counterName)
-        {
-            switch(GetCounterTypeByName(counterName)) 
-            {
-                case COUNTER_TYPES.LIFE:
-                    IsLifeSelected = true;
-                    IsPoisonSelected = false;
-                    IsEnergySelected = false;
-                    IsTicketsSelected = false;
-                    BottomImageSource = ClassConst.HEART_IMAGE_NAME;
-                    SetCurrentNumberValue(PlayerModel.Life);
-                    break;
-                case COUNTER_TYPES.POISON:
-                    IsLifeSelected = false;
-                    IsPoisonSelected = true;
-                    IsEnergySelected = false;
-                    IsTicketsSelected = false;
-                    BottomImageSource = ClassConst.POISON_COUNTER_IMAGE_NAME;
-                    SetCurrentNumberValue(PlayerModel.PoisonCounter);
-                    break;
-                case COUNTER_TYPES.ENERGY:
-                    IsLifeSelected = false;
-                    IsPoisonSelected = false;
-                    IsEnergySelected = true;
-                    IsTicketsSelected = false;
-                    BottomImageSource = ClassConst.ENERGY_COUNTER_IMAGE_NAME;
-                    SetCurrentNumberValue(PlayerModel.EnergyCounter);
-                    break;
-                case COUNTER_TYPES.TICKETS:
-                    IsLifeSelected = false;
-                    IsPoisonSelected = false;
-                    IsEnergySelected = false;
-                    IsTicketsSelected = true;
-                    BottomImageSource = ClassConst.TICKETS_COUNTER_IMAGE_NAME;
-                    SetCurrentNumberValue(PlayerModel.TicketsCounter);
-                    break;
-            }
+        { 
+            GetPlayerModel().SelectCounterType(GetCounterTypeByName(counterName));           
         }
         private void SetNumberTypeByEnum(COUNTER_TYPES counterType)
         {
@@ -187,47 +87,34 @@ namespace MTGHelper.ViewModels
                 Increase();
             }
             else Decrease();
-            if (isLifeSelected) SetCurrentNumberValue(this.PlayerModel.Life);
-            if (isPoisonSelected) SetCurrentNumberValue(this.PlayerModel.PoisonCounter);
-            if (isEnergySelected) SetCurrentNumberValue(this.PlayerModel.EnergyCounter);
-            if (isTicketsSelected) SetCurrentNumberValue(this.PlayerModel.TicketsCounter);
-        }
-        private void SetCurrentNumberValue(int value)
-        {
-            this.CurrentNumberValue = $"{value}";
         }
         private void Decrease()
         {
-            if (isLifeSelected) this.PlayerModel.MinusLife();
-            if (isPoisonSelected) this.PlayerModel.MinusPoisonCounter();
-            if (isEnergySelected) this.PlayerModel.MinusEnergyCounter();
-            if (isTicketsSelected) this.PlayerModel.MinusTicketsCounter();
+            GetPlayerModel().Decrease();
         }
         private void Increase()
         {
-            if (isLifeSelected) this.PlayerModel.AddLife();
-            if (isPoisonSelected) this.PlayerModel.AddPoisonCounter();
-            if (isEnergySelected) this.PlayerModel.AddEnergyCounter();
-            if (isTicketsSelected) this.PlayerModel.AddTicketsCounter();
+            GetPlayerModel().Increase();
         }
         [RelayCommand]
         public void AddLifeClicked()
         {
-            this.PlayerModel.AddLife();
+            GetPlayerModel().AddLife();
         }
         [RelayCommand]
         public void MinusLifeClicked()
         {
-            this.PlayerModel.MinusLife();
+            GetPlayerModel().MinusLife();
         }
         public PlayerLifeTotalViewModel()
         {
 
         }
-        public PlayerLifeTotalViewModel(PlayerModel playerModel, int rotation = 0)
+        public PlayerLifeTotalViewModel(LifeCounterPageViewModel lifeCounterPageViewModel, int playerIndex, int rotation = 0)
         {
-            this.Rotation = rotation;
-            this.playerModel = playerModel;
+            this.playerIndex = playerIndex;
+            this.lifeCounterPageViewModel = lifeCounterPageViewModel;
+            this.Rotation = rotation;            
             SetNumberTypeByEnum(COUNTER_TYPES.LIFE);
             Initialize();
             PrepareCommands();
@@ -239,6 +126,26 @@ namespace MTGHelper.ViewModels
         private void PrepareCommands()
         {
 
+        }
+        public PlayerModel GetPlayerModel()
+        {
+            if (lifeCounterPageViewModel == null) return new PlayerModel();
+            switch (playerIndex)
+            {
+                case 1:
+                    return lifeCounterPageViewModel.Player1;
+                case 2:
+                    return lifeCounterPageViewModel.Player2;
+                case 3:
+                    return lifeCounterPageViewModel.Player3;
+                case 4:
+                    return lifeCounterPageViewModel.Player4;
+                case 5:
+                    return lifeCounterPageViewModel.Player5;
+                case 6:
+                    return lifeCounterPageViewModel.Player6;
+                default: return new PlayerModel();
+            }
         }
     }
 }

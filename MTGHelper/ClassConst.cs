@@ -18,6 +18,12 @@ namespace MTGHelper
         public const string POISON_COUNTER_NAME = "poison";
         public const string ENERGY_COUNTER_NAME = "energy";
         public const string TICKETS_COUNTER_NAME = "tickets";
+
+        public static readonly Color GREEN_COLOR = Color.FromRgb(0,115,62);
+        public static readonly Color BLUE_COLOR = Color.FromRgb(14,104,171);
+        public static readonly Color RED_COLOR = Color.FromRgb(211,32,42);
+        public static readonly Color WHITE_COLOR = Color.FromRgb(249,250,244);
+        public static readonly Color BLACK_COLOR = Color.FromRgb(21,11,0);
         public enum COUNTER_TYPES : int
         {
             UNKOWN = 0,
