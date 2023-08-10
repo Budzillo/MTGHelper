@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Security.Cryptography.Core;
 using static MTGHelper.ClassConst;
 
 namespace MTGHelper.Models
@@ -19,7 +18,6 @@ namespace MTGHelper.Models
         private int poisonCounter = 0;
         private int experienceCounter = 0;
         private int energyCounter = 0;
-        private int ticketsCounter = 0;
         private int selectedValue;
         private COUNTER_TYPES selectedCounterType;
         private int firstLifeValue = 0;
@@ -117,16 +115,6 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
-        public int TicketsCounter
-        {
-            get { return ticketsCounter; }
-            set
-            {
-                if (ticketsCounter == value) return;
-                ticketsCounter = value;
-                OnPropertyChanged();
-            }
-        }
         public int SelectedValue
         {
             get => selectedValue;
@@ -169,14 +157,6 @@ namespace MTGHelper.Models
                         IsEnergySelected = true;
                         IsTicketsSelected = false;
                         BottomImageSource = ClassConst.ENERGY_COUNTER_IMAGE_NAME;
-                        break;
-                    case COUNTER_TYPES.TICKETS:
-                        SelectedValue = TicketsCounter;
-                        IsLifeSelected = false;
-                        IsPoisonSelected = false;
-                        IsEnergySelected = false;
-                        IsTicketsSelected = true;
-                        BottomImageSource = ClassConst.TICKETS_COUNTER_IMAGE_NAME;
                         break;
                 }
                 OnPropertyChanged();
@@ -307,7 +287,7 @@ namespace MTGHelper.Models
         {
 
         }
-        public PlayerModel(int id, int life, string playerName,string color, int poisonCounter = 0, int experienceCounter = 0, int energyCounter = 0, int ticketsCounter = 0, string? commanderName = null)
+        public PlayerModel(int id, int life, string playerName,string color, int poisonCounter = 0, int experienceCounter = 0, int energyCounter = 0, string? commanderName = null)
         {
             firstLifeValue = life;
             Id = id;
@@ -317,7 +297,6 @@ namespace MTGHelper.Models
             PoisonCounter = poisonCounter;
             ExperienceCounter = experienceCounter;
             EnergyCounter = energyCounter;
-            TicketsCounter = ticketsCounter;
             SelectedCounterType = COUNTER_TYPES.LIFE;
         }
         public void AddLife()
@@ -352,21 +331,12 @@ namespace MTGHelper.Models
         {
             this.EnergyCounter--;
         }
-        public void AddTicketsCounter()
-        {
-            this.TicketsCounter++;
-        }
-        public void MinusTicketsCounter()
-        {
-            this.TicketsCounter--;
-        }
         public void ResetValues()
         {
             this.Life = firstLifeValue;
             this.PoisonCounter = 0;
             this.ExperienceCounter = 0;
             this.EnergyCounter = 0;
-            this.TicketsCounter = 0;
             this.SelectedCounterType = COUNTER_TYPES.LIFE;
             this.SelectedValue = Life;
 
@@ -391,10 +361,6 @@ namespace MTGHelper.Models
                     MinusEnergyCounter(); 
                     SelectedValue = EnergyCounter;  
                     break;
-                case COUNTER_TYPES.TICKETS: 
-                    MinusTicketsCounter(); 
-                    SelectedValue = TicketsCounter; 
-                    break;
             }
         }
         public void Increase()
@@ -412,10 +378,6 @@ namespace MTGHelper.Models
                 case COUNTER_TYPES.ENERGY: 
                     AddEnergyCounter(); 
                     SelectedValue = EnergyCounter;
-                    break;
-                case COUNTER_TYPES.TICKETS: 
-                    AddTicketsCounter();
-                    SelectedValue = TicketsCounter;
                     break;
             }
             
