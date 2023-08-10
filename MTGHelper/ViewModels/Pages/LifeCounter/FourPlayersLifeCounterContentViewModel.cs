@@ -1,5 +1,5 @@
 ﻿using MTGHelper.Models;
-using MTGHelper.Pages.LifeCounter.Views;
+using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;

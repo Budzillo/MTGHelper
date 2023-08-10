@@ -92,6 +92,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml.cs">
+	    <DependentUpon>HorizontalPlayerLifeContent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\VerticalPlayerLifeContent.xaml.cs">
 	    <DependentUpon>VerticalPlayerLifeContent.xaml</DependentUpon>
 	  </Compile>
@@ -107,7 +110,7 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\FourPlayersLifeCounterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LifeCounter\Views\HorizontalPlayerLifeCountContent.xaml">
+	  <MauiXaml Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsContent.xaml">

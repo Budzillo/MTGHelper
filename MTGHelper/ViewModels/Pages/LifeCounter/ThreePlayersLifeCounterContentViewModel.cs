@@ -1,5 +1,5 @@
 ﻿using MTGHelper.Models;
-using MTGHelper.Pages.LifeCounter.Views;
+using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,7 +13,7 @@ namespace MTGHelper.ViewModels
     {
         private VerticalPlayerLifeContent bottomVerticalPlayerLifeContent;
         private VerticalPlayerLifeContent topVerticalPlayerLifeContent;
-        private VerticalPlayerLifeContent rightVerticalPlayerLifeContent;
+        private HorizontalPlayerLifeContent rightHorizontalPlayerLifeContent;
         public VerticalPlayerLifeContent BottomVerticalPlayerLifeContent
         {
             get { return bottomVerticalPlayerLifeContent; }
@@ -34,13 +34,13 @@ namespace MTGHelper.ViewModels
                 return;
             }
         }
-        public VerticalPlayerLifeContent RightVerticalPlayerLifeContent
+        public HorizontalPlayerLifeContent RightHorizontalPlayerLifeContent
         {
-            get { return rightVerticalPlayerLifeContent; }
+            get { return rightHorizontalPlayerLifeContent; }
             set
             {
-                if (value == rightVerticalPlayerLifeContent) return;
-                rightVerticalPlayerLifeContent = value;
+                if (value == rightHorizontalPlayerLifeContent) return;
+                rightHorizontalPlayerLifeContent = value;
                 return;
             }
         }
@@ -48,7 +48,7 @@ namespace MTGHelper.ViewModels
         {
             this.bottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
             this.topVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.rightVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
+            this.rightHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
         }
         public ThreePlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
         {
@@ -61,8 +61,8 @@ namespace MTGHelper.ViewModels
             this.bottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel,1);
             this.topVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
             this.topVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel,2);
-            this.rightVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.rightVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 3);
+            this.rightHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
+            this.rightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 3);
         }
     }
 }

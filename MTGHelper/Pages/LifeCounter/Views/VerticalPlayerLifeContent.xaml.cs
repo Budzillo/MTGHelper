@@ -1,7 +1,7 @@
 using Microsoft.Maui.Controls;
 using MTGHelper.ViewModels;
 
-namespace MTGHelper.Pages.LifeCounter.Views;
+namespace MTGHelper.Views;
 
 public partial class VerticalPlayerLifeContent : ContentView
 {
