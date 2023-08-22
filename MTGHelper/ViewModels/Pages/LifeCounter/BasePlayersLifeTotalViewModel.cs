@@ -18,5 +18,6 @@ namespace MTGHelper.ViewModels
             this.PrepareViews();
         }
         public abstract void PrepareViews();
+
     }
 }

@@ -116,6 +116,9 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsLifeContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsPlayersContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -136,6 +139,10 @@
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\PlayerLifeTotalDictionary.xaml">
 	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\SettingsLifeTotalDictionary.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Styles.xaml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>

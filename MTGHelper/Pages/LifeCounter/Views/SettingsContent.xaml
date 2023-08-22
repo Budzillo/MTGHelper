@@ -3,12 +3,39 @@
     x:Class="MTGHelper.Views.SettingsContent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
     xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
-    <HorizontalStackLayout>
-        <Button Command="{Binding ResetGameCommand}" Text="Reset" />
-        <Button Command="{Binding ChangeSettingsToPlayersCommand}" Text="Players" />
-        <Button Text="Life" />
-        <Button Text="Settings" />
-        <Button Text="Dice" />
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/SettingsLifeTotalDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <HorizontalStackLayout Style="{StaticResource mainSettingsStackPanelStyle}">
+        <controls:FadingImageButton
+            Margin="20,0,0,0"
+            Command="{Binding ResetGameCommand}"
+            Source="/Resources/Images/reset.svg"
+            Style="{StaticResource imageButtonSetting}"
+            ToolTipProperties.Text="Reset" />
+        <ImageButton
+            Command="{Binding ChangeSettingsToPlayersCommand}"
+            Source="/Resources/Images/user.svg"
+            Style="{StaticResource imageButtonSetting}"
+            ToolTipProperties.Text="Players" />
+        <ImageButton
+            Command="{Binding ChangeSettingsToLifeCommand}"
+            Source="/Resources/Images/heart.svg"
+            Style="{StaticResource imageButtonSetting}"
+            ToolTipProperties.Text="Life" />
+        <ImageButton
+            Source="/Resources/Images/dice.svg"
+            Style="{StaticResource imageButtonSetting}"
+            ToolTipProperties.Text="Roll Dice" />
+        <ImageButton
+            Source="/Resources/Images/settings.svg"
+            Style="{StaticResource imageButtonSetting}"
+            ToolTipProperties.Text="Settings" />
     </HorizontalStackLayout>
 </ContentView>

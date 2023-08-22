@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.SettingsLifeContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/SettingsLifeTotalDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <HorizontalStackLayout Style="{StaticResource mainSettingsStackPanelStyle}">
+        <Button
+            Margin="10,0,0,0"
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="20"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="20" />
+        <Button
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="30"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="30" />
+        <Button
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="40"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="40" />
+        <Button
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="50"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="50" />
+        <Button
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="60"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="60" />
+        <Button
+            Command="{Binding SetLifeTotalCommand}"
+            CommandParameter="70"
+            Style="{StaticResource buttonLifeSetStyle}"
+            Text="70" />
+        <Button Style="{StaticResource buttonLifeSetStyle}" Text="..." />
+    </HorizontalStackLayout>
+</ContentView>

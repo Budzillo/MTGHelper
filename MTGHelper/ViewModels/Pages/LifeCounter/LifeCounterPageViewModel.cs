@@ -13,8 +13,8 @@ namespace MTGHelper.ViewModels
 {
     public partial class LifeCounterPageViewModel : BaseViewModel
     {
-        private int playerCount;
-        private int lifeTotal;
+        private int playerCount = 4;
+        private int lifeTotal = 20;
         private PlayerModel player1;
         private PlayerModel player2;
         private PlayerModel player3;
@@ -142,9 +142,12 @@ namespace MTGHelper.ViewModels
                 }
                 await MainThread.InvokeOnMainThreadAsync(() => {
                     var animation = new Animation(v => scrollView.HeightRequest = v, heightFrom, heightTo);
-                    animation.Commit((IAnimatable)scrollView.Parent, "OpenSettingsAnimation",16,500,Easing.Linear);
-                });
-
+                    animation.Commit((IAnimatable)scrollView.Parent, "OpenSettingsAnimation", 16, 500, Easing.Linear, delegate
+                    {
+                        this.SettingsContent = new SettingsContent();
+                        this.SettingsContent.BindingContext = this;
+                    });
+                });                
             }
         }
         [RelayCommand]
@@ -174,15 +177,29 @@ namespace MTGHelper.ViewModels
         {
             PrepareSettings();
         }
+        [RelayCommand]
+        private void SetLifeTotal(string value)
+        {
+            if(int.TryParse(value,out int life))
+            {
+                this.LifeTotal = life;
+                PreparePlayers();
+            }
+        }
+        [RelayCommand]
+        private void ChangeSettingsToLife()
+        {
+            this.SettingsContent = new SettingsLifeContent();
+            this.SettingsContent.BindingContext = this;
+        }
         public LifeCounterPageViewModel()
         {
-            this.PlayerCount = 4;
             PrepareGame();
             PrepareSettings();
         }
         private void PrepareGame()
         {            
-            this.SetFormat("Standard");
+           // this.SetFormat("Standard");
             this.PreparePlayers();
             this.PrepareCurrentLifeTotalView();
         }
@@ -195,12 +212,12 @@ namespace MTGHelper.ViewModels
         private void PreparePlayers()
         {
             List<string> colors = new List<string> { "Red", "Blue", "Black","Purple","Pink","Gray" };
-            Player1 = new PlayerModel(0, lifeTotal, $"Player {1}", colors[0]);
-            Player2 = new PlayerModel(1, lifeTotal, $"Player {2}", colors[1]);
-            Player3 = new PlayerModel(2, lifeTotal, $"Player {3}", colors[2]);
-            Player4 = new PlayerModel(3, lifeTotal, $"Player {4}", colors[3]);
-            Player5 = new PlayerModel(4, lifeTotal, $"Player {5}", colors[4]);
-            Player6 = new PlayerModel(5, lifeTotal, $"Player {6}", colors[5]);
+            Player1 = new PlayerModel(0, LifeTotal, $"Player {1}", colors[0]);
+            Player2 = new PlayerModel(1, LifeTotal, $"Player {2}", colors[1]);
+            Player3 = new PlayerModel(2, LifeTotal, $"Player {3}", colors[2]);
+            Player4 = new PlayerModel(3, LifeTotal, $"Player {4}", colors[3]);
+            Player5 = new PlayerModel(4, LifeTotal, $"Player {5}", colors[4]);
+            Player6 = new PlayerModel(5, LifeTotal, $"Player {6}", colors[5]);
         }
         private void SetFormat(string name)
         {

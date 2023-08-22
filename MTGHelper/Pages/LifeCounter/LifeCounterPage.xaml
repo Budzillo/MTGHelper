@@ -29,7 +29,7 @@
                     Style="{StaticResource buttonOptions}" />
                 <ScrollView
                     x:Name="scrollViewOptions"
-                    BackgroundColor="AliceBlue"
+                    BackgroundColor="Wheat"
                     HeightRequest="0"
                     Orientation="Horizontal">
                     <ContentView Content="{Binding SettingsContent}" />

@@ -66,6 +66,12 @@
                     <Label.Style>
                         <Style TargetType="Label" />
                     </Label.Style>
+                    <Label.Behaviors>
+                        <toolkit:EventToCommandBehavior
+                            Command="{Binding LoadAnimationCommand}"
+                            CommandParameter="{Binding}"
+                            EventName="Loaded" />
+                    </Label.Behaviors>
                 </Label>
                 <Image
                     HeightRequest="20"
