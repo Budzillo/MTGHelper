@@ -21,7 +21,7 @@ public partial class VerticalPlayerLifeContent : ContentView
         {
             if(sender is Grid grid)
             {
-                viewModel.GridTapped(grid, e);
+                viewModel.GridTappedVertical(grid, e);
             }
         }
     }

@@ -64,5 +64,11 @@ namespace MTGHelper.ViewModels
             this.rightHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
             this.rightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 3);
         }
+        public override void RotateLifeTotal()
+        {
+            RotateLabelFromContent(bottomVerticalPlayerLifeContent);
+            RotateLabelFromContent(topVerticalPlayerLifeContent);
+            RotateLabelFromContent(rightHorizontalPlayerLifeContent);
+        }
     }
 }

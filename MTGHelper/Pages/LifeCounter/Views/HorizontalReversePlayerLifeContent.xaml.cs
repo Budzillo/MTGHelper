@@ -2,9 +2,9 @@ using MTGHelper.ViewModels;
 
 namespace MTGHelper.Views;
 
-public partial class HorizontalPlayerLifeContent : ContentView
+public partial class HorizontalReversePlayerLifeContent : ContentView
 {
-	public HorizontalPlayerLifeContent()
+	public HorizontalReversePlayerLifeContent()
 	{
 		InitializeComponent();
 	}

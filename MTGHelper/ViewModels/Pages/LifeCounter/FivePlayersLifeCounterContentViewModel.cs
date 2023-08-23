@@ -1,20 +1,19 @@
-﻿using MTGHelper.Models;
-using MTGHelper.Views;
+﻿using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public class FourPlayersLifeCounterContentViewModel : BasePlayersLifeTotalViewModel
+    public partial class FivePlayersLifeCounterContentViewModel  : BasePlayersLifeTotalViewModel
     {
         private HorizontalPlayerLifeContent bottomLeftHorizontalPlayerLifeContent;
         private HorizontalReversePlayerLifeContent bottomRightHorizontalPlayerLifeContent;
         private HorizontalPlayerLifeContent topLeftHorizontalPlayerLifeContent;
         private HorizontalReversePlayerLifeContent topRightHorizontalPlayerLifeContent;
+        private VerticalPlayerLifeContent bottomVerticalPlayerLifeContent;
         public HorizontalPlayerLifeContent BottomLeftHorizontalPlayerLifeContent
         {
             get { return bottomLeftHorizontalPlayerLifeContent; }
@@ -55,14 +54,21 @@ namespace MTGHelper.ViewModels
                 return;
             }
         }
-        public FourPlayersLifeCounterContentViewModel()
+        public VerticalPlayerLifeContent BottomVerticalPlayerLifeContent
         {
-            this.bottomLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.bottomRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
-            this.topLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.topRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
+            get { return bottomVerticalPlayerLifeContent; }
+            set
+            {
+                if (value == bottomVerticalPlayerLifeContent) return;
+                bottomVerticalPlayerLifeContent = value;
+                return;
+            }
         }
-        public FourPlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
+        public FivePlayersLifeCounterContentViewModel()
+        {
+            
+        }
+        public FivePlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
         {
 
         }
@@ -70,21 +76,24 @@ namespace MTGHelper.ViewModels
         public override void PrepareViews()
         {
             this.bottomLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.bottomLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel,3,180);
+            this.bottomLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 3, 180);
             this.bottomRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
             this.bottomRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 4, 180);
             this.topLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
             this.topLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 1);
             this.topRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
             this.topRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 2);
+            this.bottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
+            this.bottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 5);
         }
+
         public override void RotateLifeTotal()
         {
             RotateLabelFromContent(bottomLeftHorizontalPlayerLifeContent);
             RotateLabelFromContent(bottomRightHorizontalPlayerLifeContent);
             RotateLabelFromContent(topLeftHorizontalPlayerLifeContent);
             RotateLabelFromContent(topRightHorizontalPlayerLifeContent);
+            RotateLabelFromContent(bottomVerticalPlayerLifeContent);
         }
-        
     }
 }

@@ -80,9 +80,17 @@ namespace MTGHelper.ViewModels
                     return COUNTER_TYPES.UNKOWN;
             }
         }
-        public void GridTapped(Grid grid, TappedEventArgs tappedEventArgs)
+        public void GridTappedVertical(Grid grid, TappedEventArgs tappedEventArgs)
         {
             if (tappedEventArgs.GetPosition(grid).Value.Y <= grid.Height / 2)
+            {
+                Increase();
+            }
+            else Decrease();
+        }
+        public void GridTappedHorizontal(Grid grid, TappedEventArgs tappedEventArgs)
+        {
+            if (tappedEventArgs.GetPosition(grid).Value.X >= grid.Width / 2)
             {
                 Increase();
             }

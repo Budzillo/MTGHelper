@@ -45,16 +45,16 @@
                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
             </Grid.GestureRecognizers>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*" />
-                <RowDefinition Height="7*" />
-                <RowDefinition Height="4*" />
+                <RowDefinition Height="5*" />
+                <RowDefinition Height="5*" />
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0" />
             <VerticalStackLayout
-                Grid.Row="1"
+                Grid.Row="0"
                 HorizontalOptions="Center"
-                VerticalOptions="Center">
+                VerticalOptions="Center"
+                Spacing="5">
                 <Label
+                    x:Name="labelSelectedValue"
                     Grid.Row="0"
                     FontAttributes="Italic"
                     FontFamily="mplantin"
@@ -85,7 +85,7 @@
                 </Image>
             </VerticalStackLayout>
             <Grid
-                Grid.Row="2"
+                Grid.Row="1"
                 Margin="3"
                 HorizontalOptions="Center"
                 VerticalOptions="End">

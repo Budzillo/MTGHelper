@@ -1,4 +1,5 @@
-﻿using MTGHelper.Models;
+﻿using Microsoft.Maui.Controls;
+using MTGHelper.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,6 +19,19 @@ namespace MTGHelper.ViewModels
             this.PrepareViews();
         }
         public abstract void PrepareViews();
+
+        public abstract void RotateLifeTotal();
+        internal async void RotateLabelFromContent(ContentView contentView)
+        {
+            var labelObject = contentView.FindByName("labelSelectedValue");
+            if (labelObject != null && labelObject is Label label)
+            {
+                await MainThread.InvokeOnMainThreadAsync(() => {
+                    var animation = new Animation(v => label.RotationX = v, 0, 360);
+                    animation.Commit((IAnimatable)label.Parent, "LabelRotateAnimation", 16, 600, Easing.Linear);
+                });
+            }
+        }
 
     }
 }

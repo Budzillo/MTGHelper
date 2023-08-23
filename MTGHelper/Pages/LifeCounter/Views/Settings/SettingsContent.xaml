@@ -30,6 +30,7 @@
             Style="{StaticResource imageButtonSetting}"
             ToolTipProperties.Text="Life" />
         <ImageButton
+            Command="{Binding ChangeSettingsToDicesCommand}"
             Source="/Resources/Images/dice.svg"
             Style="{StaticResource imageButtonSetting}"
             ToolTipProperties.Text="Roll Dice" />

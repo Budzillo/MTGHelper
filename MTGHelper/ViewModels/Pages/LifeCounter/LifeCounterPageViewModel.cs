@@ -1,6 +1,8 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Maui.Views;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using MTGHelper.Models;
+using MTGHelper.Pages.LifeCounter.Views;
 using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
@@ -23,6 +25,7 @@ namespace MTGHelper.ViewModels
         private PlayerModel player6;
         private ContentView lifeTotalContent;
         private ContentView settingsContent;
+        private DiceRollModel diceRollModel;
         public int PlayerCount
         {
             get { return playerCount; }
@@ -123,6 +126,16 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
+        public DiceRollModel DiceRollModel
+        {
+            get => diceRollModel;
+            set
+            {
+                if (diceRollModel == value) return;
+                diceRollModel = value;
+                OnPropertyChanged();
+            }
+        }
         [RelayCommand]
         private async Task OpenSettingsWindowAsync(object sender)
         {
@@ -153,12 +166,13 @@ namespace MTGHelper.ViewModels
         [RelayCommand]
         private void ResetGame()
         {
-            Player1.ResetValues();
-            Player2.ResetValues();
-            Player3.ResetValues();
-            Player4.ResetValues();
-            Player5.ResetValues();
-            Player6.ResetValues();
+            Player1.ResetValues(LifeTotal);
+            Player2.ResetValues(LifeTotal);
+            Player3.ResetValues(LifeTotal);
+            Player4.ResetValues(LifeTotal);
+            Player5.ResetValues(LifeTotal);
+            Player6.ResetValues(LifeTotal);
+            RotateLabels();
         }
         [RelayCommand]
         private void ChangePlayerCount(string count)
@@ -173,6 +187,12 @@ namespace MTGHelper.ViewModels
             this.SettingsContent.BindingContext = this;
         }
         [RelayCommand]
+        private void ChangeSettingsToDices()
+        {
+            this.SettingsContent = new SettingsDiceContent();
+            this.SettingsContent.BindingContext = this;
+        }
+        [RelayCommand]
         private void GoBackToSettings()
         {
             PrepareSettings();
@@ -183,7 +203,8 @@ namespace MTGHelper.ViewModels
             if(int.TryParse(value,out int life))
             {
                 this.LifeTotal = life;
-                PreparePlayers();
+                ResetGame();
+                RotateLabels();
             }
         }
         [RelayCommand]
@@ -191,6 +212,21 @@ namespace MTGHelper.ViewModels
         {
             this.SettingsContent = new SettingsLifeContent();
             this.SettingsContent.BindingContext = this;
+        }
+        [RelayCommand]
+        private async Task RollDice(string diceValue)
+        {
+            if(int.TryParse(diceValue,out int diceValueInt))
+            {
+                this.DiceRollModel = new DiceRollModel();
+                Popup popup = new Popup();
+                RollDiceD6Content content = new RollDiceD6Content();
+                content.BindingContext = this;  
+                popup.Content = new RollDiceD6Content();
+                popup.Size = new Size(150, 150);
+                var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
+                await this.DiceRollModel.RollDice(diceValueInt);
+            }
         }
         public LifeCounterPageViewModel()
         {
@@ -219,6 +255,13 @@ namespace MTGHelper.ViewModels
             Player5 = new PlayerModel(4, LifeTotal, $"Player {5}", colors[4]);
             Player6 = new PlayerModel(5, LifeTotal, $"Player {6}", colors[5]);
         }
+        private void RotateLabels()
+        {
+            if(lifeTotalContent != null && lifeTotalContent.BindingContext is BasePlayersLifeTotalViewModel totalViewModel)
+            {
+                totalViewModel.RotateLifeTotal();
+            }
+        }
         private void SetFormat(string name)
         {
             if (name == "Commander")
@@ -229,7 +272,15 @@ namespace MTGHelper.ViewModels
                 this.LifeTotal = 20;
 
         }
-        private void PrepareCurrentLifeTotalView()
+        private async void FlashAnimation()
+        {
+            if(this.LifeTotalContent != null)
+            await MainThread.InvokeOnMainThreadAsync(() => {
+                var animation = new Animation(v => this.LifeTotalContent.Opacity = v, 0, 1);
+                animation.Commit((IAnimatable)this.LifeTotalContent, "ContentFlashAnimation", 16, 600, Easing.Linear);
+            });
+        }
+        private async void PrepareCurrentLifeTotalView()
         {
             switch (PlayerCount)
             {
@@ -251,7 +302,20 @@ namespace MTGHelper.ViewModels
                     fourPlayersLifeCounterContent.BindingContext = fourPlayersLifeCounterContentViewModel;
                     this.LifeTotalContent = fourPlayersLifeCounterContent;
                     break;
+                case 5:
+                    FivePlayersLifeCounterContentViewModel fivePlayersLifeCounterContentViewModel = new FivePlayersLifeCounterContentViewModel(this);
+                    FivePlayersLifeCounterContent fivePlayersLifeCounterContent = new FivePlayersLifeCounterContent();
+                    fivePlayersLifeCounterContent.BindingContext = fivePlayersLifeCounterContentViewModel;
+                    this.LifeTotalContent = fivePlayersLifeCounterContent;
+                    break;
+                case 6:
+                    SixPlayersLifeCounterContentViewModel sixPlayersLifeCounterContentViewModel = new SixPlayersLifeCounterContentViewModel(this);
+                    SixPlayersLifeCounterContent sixPlayersLifeCounterContent = new SixPlayersLifeCounterContent();
+                    sixPlayersLifeCounterContent.BindingContext = sixPlayersLifeCounterContentViewModel;
+                    this.LifeTotalContent = sixPlayersLifeCounterContent;
+                    break;
             }
+            FlashAnimation();
         }
     }
 }

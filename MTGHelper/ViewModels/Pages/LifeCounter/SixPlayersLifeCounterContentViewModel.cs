@@ -1,21 +1,21 @@
-﻿using MTGHelper.Models;
-using MTGHelper.Views;
+﻿using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public class FourPlayersLifeCounterContentViewModel : BasePlayersLifeTotalViewModel
+    public class SixPlayersLifeCounterContentViewModel : BasePlayersLifeTotalViewModel
     {
         private HorizontalPlayerLifeContent bottomLeftHorizontalPlayerLifeContent;
-        private HorizontalReversePlayerLifeContent bottomRightHorizontalPlayerLifeContent;
+        private HorizontalReversePlayerLifeContent bottomRightHorizontalPlayerLifeContent;        
         private HorizontalPlayerLifeContent topLeftHorizontalPlayerLifeContent;
         private HorizontalReversePlayerLifeContent topRightHorizontalPlayerLifeContent;
-        public HorizontalPlayerLifeContent BottomLeftHorizontalPlayerLifeContent
+        private HorizontalPlayerLifeContent centerLeftHorizontalPlayerLifeContent;
+        private HorizontalReversePlayerLifeContent centerRightHorizontalPlayerLifeContent;
+        public HorizontalPlayerLifeContent BottomLeftHorizontallayerLifeContent
         {
             get { return bottomLeftHorizontalPlayerLifeContent; }
             set
@@ -55,14 +55,32 @@ namespace MTGHelper.ViewModels
                 return;
             }
         }
-        public FourPlayersLifeCounterContentViewModel()
+        public HorizontalPlayerLifeContent CenterLeftHorizontalPlayerLifeContent
         {
-            this.bottomLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.bottomRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
-            this.topLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.topRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
+            get { return centerLeftHorizontalPlayerLifeContent; }
+            set
+            {
+                if (value == centerLeftHorizontalPlayerLifeContent) return;
+                centerLeftHorizontalPlayerLifeContent = value;
+                return;
+            }
         }
-        public FourPlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
+        public HorizontalReversePlayerLifeContent CenterRightHorizontalPlayerLifeContent
+        {
+            get { return centerRightHorizontalPlayerLifeContent; }
+            set
+            {
+                if (value == centerRightHorizontalPlayerLifeContent) return;
+                centerRightHorizontalPlayerLifeContent = value;
+                return;
+            }
+        }
+
+        public SixPlayersLifeCounterContentViewModel()
+        {
+            
+        }
+        public SixPlayersLifeCounterContentViewModel(LifeCounterPageViewModel lifeCounterPageViewModel) : base(lifeCounterPageViewModel)
         {
 
         }
@@ -70,13 +88,17 @@ namespace MTGHelper.ViewModels
         public override void PrepareViews()
         {
             this.bottomLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
-            this.bottomLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel,3,180);
+            this.bottomLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 5, 180);
             this.bottomRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
-            this.bottomRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 4, 180);
+            this.bottomRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 6, 180);
             this.topLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
             this.topLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 1);
             this.topRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
             this.topRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 2);
+            this.centerLeftHorizontalPlayerLifeContent = new HorizontalPlayerLifeContent();
+            this.centerLeftHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 3);
+            this.centerRightHorizontalPlayerLifeContent = new HorizontalReversePlayerLifeContent();
+            this.centerRightHorizontalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 4);
         }
         public override void RotateLifeTotal()
         {
@@ -84,7 +106,8 @@ namespace MTGHelper.ViewModels
             RotateLabelFromContent(bottomRightHorizontalPlayerLifeContent);
             RotateLabelFromContent(topLeftHorizontalPlayerLifeContent);
             RotateLabelFromContent(topRightHorizontalPlayerLifeContent);
+            RotateLabelFromContent(centerLeftHorizontalPlayerLifeContent);
+            RotateLabelFromContent(centerRightHorizontalPlayerLifeContent);
         }
-        
     }
 }

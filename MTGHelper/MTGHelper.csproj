@@ -39,6 +39,18 @@
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
+		<MauiImage Update="Resources\Images\dice_d12.svg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\dice_d20.svg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\dice_d6.svg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
+		<MauiImage Update="Resources\Images\dice_d8.svg">
+		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</MauiImage>
 		<MauiImage Update="Resources\Images\dotnet_bot.svg" BaseSize="168,208" />
 		<MauiImage Update="Resources\Images\energy_counter.svg">
 		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -107,19 +119,40 @@
 	  <MauiXaml Update="Pages\LifeCounter\LifeCounterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD12Content.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD20Content.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD6Content.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\FivePlayersLifeCounterContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\FourPlayersLifeCounterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsContent.xaml">
+	  <MauiXaml Update="Pages\LifeCounter\Views\HorizontalReversePlayerLifeContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsLifeContent.xaml">
+	  <MauiXaml Update="Pages\LifeCounter\Views\Settings\SettingsContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LifeCounter\Views\SettingsPlayersContent.xaml">
+	  <MauiXaml Update="Pages\LifeCounter\Views\Settings\SettingsDiceContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Settings\SettingsLifeContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Settings\SettingsPlayersContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\SixPlayersLifeCounterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\ThreePlayersLifeCounterContent.xaml">

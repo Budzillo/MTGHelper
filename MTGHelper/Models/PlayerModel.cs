@@ -331,15 +331,14 @@ namespace MTGHelper.Models
         {
             this.EnergyCounter--;
         }
-        public void ResetValues()
+        public void ResetValues(int lifeTotal)
         {
-            this.Life = firstLifeValue;
+            this.Life = lifeTotal;
             this.PoisonCounter = 0;
             this.ExperienceCounter = 0;
             this.EnergyCounter = 0;
             this.SelectedCounterType = COUNTER_TYPES.LIFE;
             this.SelectedValue = Life;
-
         }
         public void SelectCounterType(COUNTER_TYPES counterType)
         {
