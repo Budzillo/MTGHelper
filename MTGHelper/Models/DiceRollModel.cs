@@ -19,7 +19,7 @@ namespace MTGHelper.Models
             {
                 if(diceValue == value) return;
                 diceValue = value;
-                OnPropertyChanged();
+                OnPropertyChanged();              
             }
         }
         public string DiceValueInformation
@@ -37,13 +37,12 @@ namespace MTGHelper.Models
         }
         public async Task RollDice(int walls)
         {
-            await Task.Delay(1000);
             Random rnd = new Random();  
             int rolls = rnd.Next(10, 21);
             for(int i = 0; i < rolls; i++)
             {
                 this.DiceValue = rnd.Next(1,1+walls);
-                await Task.Delay(500);
+                await Task.Delay(250);
             }
             this.DiceValueInformation = $"You rolled {this.DiceValue}";
         }

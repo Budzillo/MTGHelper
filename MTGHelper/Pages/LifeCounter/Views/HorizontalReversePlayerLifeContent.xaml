@@ -10,6 +10,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <helpers:StringToColorConverter x:Key="stringToColorConverter" />
+            <toolkit:InvertedBoolConverter x:Key="intertBoolConverter" />
             <Style x:Key="bottomCounterLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="FontSize" Value="25" />
@@ -36,97 +37,136 @@
         Stroke="Black"
         StrokeThickness="1"
         VerticalOptions="FillAndExpand">
-        <Grid
-            x:Name="gridMain"
-            BackgroundColor="{Binding PlayerModel.Color, Converter={StaticResource stringToColorConverter}}"
-            HorizontalOptions="Fill"
-            VerticalOptions="Fill">
-            <Grid.GestureRecognizers>
-                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-            </Grid.GestureRecognizers>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
+        <Grid>
             <Grid
-                Grid.Row="0"
-                Margin="3,0,3,0"
-                HorizontalOptions="Center"
-                Rotation="90"
-                VerticalOptions="Center">
+                x:Name="gridMain"
+                BackgroundColor="{Binding PlayerModel.Color}"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                </Grid.GestureRecognizers>
                 <Grid.RowDefinitions>
                     <RowDefinition />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition />
-                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <ImageButton
-                    Grid.Row="2"
-                    Command="{Binding SetNumberTypeCommand}"
-                    CommandParameter="poison"
-                    Source="/Resources/Images/poison_counter.svg"
-                    Style="{StaticResource buttonBottomCounters}">
-                    <ImageButton.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
-                    </ImageButton.Behaviors>
-                </ImageButton>
-                <ImageButton
-                    Grid.Row="1"
-                    Command="{Binding SetNumberTypeCommand}"
-                    CommandParameter="energy"
-                    Source="/Resources/Images/energy_counter.svg"
-                    Style="{StaticResource buttonBottomCounters}">
-                    <ImageButton.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
-                    </ImageButton.Behaviors>
-                </ImageButton>
-                <ImageButton
-                    Grid.Row="0"
-                    Command="{Binding SetNumberTypeCommand}"
-                    CommandParameter="life"
-                    Source="/Resources/Images/heart.svg"
-                    Style="{StaticResource buttonBottomCounters}">
-                    <ImageButton.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
-                    </ImageButton.Behaviors>
-                </ImageButton>
-            </Grid>
-            <VerticalStackLayout
-                Grid.Row="1"
-                Margin="3,30,3,3"
-                HorizontalOptions="Center"
-                Rotation="90"
-                VerticalOptions="Center">
-                <Label
-                    x:Name="labelSelectedValue"
-                    Grid.Row="0"
-                    FontAttributes="Italic"
-                    FontFamily="mplantin"
-                    FontSize="120"
-                    HorizontalTextAlignment="Center"
-                    Text="{Binding PlayerModel.SelectedValue}"
-                    TextColor="Wheat"
-                    VerticalTextAlignment="Start">
-                    <Label.Style>
-                        <Style TargetType="Label" />
-                    </Label.Style>
-                    <Label.Behaviors>
-                        <toolkit:EventToCommandBehavior
-                            Command="{Binding LoadAnimationCommand}"
-                            CommandParameter="{Binding}"
-                            EventName="Loaded" />
-                    </Label.Behaviors>
-                </Label>
-                <Image
-                    HeightRequest="20"
+                <Grid
+                    Grid.Row="3"
+                    Margin="3,0,3,3"
                     HorizontalOptions="Center"
-                    Source="{Binding PlayerModel.BottomImageSource}"
-                    VerticalOptions="Center"
-                    WidthRequest="20">
-                    <Image.Behaviors>
-                        <toolkit:IconTintColorBehavior TintColor="Wheat" />
-                    </Image.Behaviors>
-                </Image>
-            </VerticalStackLayout>
+                    Rotation="180"
+                    VerticalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ImageButton
+                        Grid.Column="0"
+                        Command="{Binding SetNumberTypeCommand}"
+                        CommandParameter="poison"
+                        Rotation="90"
+                        Source="/Resources/Images/poison_counter.svg"
+                        Style="{StaticResource buttonBottomCounters}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                    <ImageButton
+                        Grid.Column="1"
+                        Command="{Binding SetNumberTypeCommand}"
+                        CommandParameter="energy"
+                        Rotation="90"
+                        Source="/Resources/Images/energy_counter.svg"
+                        Style="{StaticResource buttonBottomCounters}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                    <ImageButton
+                        Grid.Column="2"
+                        Command="{Binding SetNumberTypeCommand}"
+                        CommandParameter="life"
+                        Rotation="90"
+                        Source="/Resources/Images/heart.svg"
+                        Style="{StaticResource buttonBottomCounters}">
+                        <ImageButton.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                        </ImageButton.Behaviors>
+                    </ImageButton>
+                </Grid>
+                <VerticalStackLayout
+                    Grid.Row="1"
+                    HorizontalOptions="Center"
+                    Rotation="270"
+                    VerticalOptions="Center">
+                    <Label
+                        x:Name="labelSelectedValue"
+                        Grid.Row="0"
+                        FontAttributes="Italic"
+                        FontFamily="mplantin"
+                        FontSize="120"
+                        HorizontalTextAlignment="Center"
+                        Text="{Binding PlayerModel.SelectedValue}"
+                        TextColor="Wheat"
+                        VerticalTextAlignment="Start">
+                        <Label.Style>
+                            <Style TargetType="Label" />
+                        </Label.Style>
+                        <Label.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                Command="{Binding LoadAnimationCommand}"
+                                CommandParameter="{Binding}"
+                                EventName="Loaded" />
+                        </Label.Behaviors>
+                    </Label>
+                    <Image
+                        HeightRequest="20"
+                        HorizontalOptions="Center"
+                        Source="{Binding PlayerModel.BottomImageSource}"
+                        VerticalOptions="Center"
+                        WidthRequest="20">
+                        <Image.Behaviors>
+                            <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                        </Image.Behaviors>
+                    </Image>
+                </VerticalStackLayout>
+            </Grid>
+            <ContentView
+                Content="{Binding ColorSelectContent}"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding PlayerModel.IsColorPickerOpen}"
+                Rotation="180"
+                VerticalOptions="Fill"
+                ZIndex="9999" />
+            <ImageButton
+                Margin="10"
+                Command="{Binding OpenColorPickerCommand}"
+                HeightRequest="40"
+                HorizontalOptions="Start"
+                IsVisible="{Binding PlayerModel.IsColorPickerOpen, Converter={StaticResource intertBoolConverter}}"
+                Rotation="-90"
+                Source="/Resource/Images/color_picker.svg"
+                VerticalOptions="Start"
+                WidthRequest="40">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                </ImageButton.Behaviors>
+            </ImageButton>
+            <ImageButton
+                Margin="10"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                Rotation="-90"
+                Source="/Resource/Images/commander_legends.svg"
+                VerticalOptions="Start"
+                WidthRequest="40">
+                <ImageButton.Behaviors>
+                    <toolkit:IconTintColorBehavior TintColor="Wheat" />
+                </ImageButton.Behaviors>
+            </ImageButton>
         </Grid>
     </Border>
 </ContentView>

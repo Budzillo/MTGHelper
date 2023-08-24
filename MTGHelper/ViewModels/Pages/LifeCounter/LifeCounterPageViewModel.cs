@@ -220,12 +220,22 @@ namespace MTGHelper.ViewModels
             {
                 this.DiceRollModel = new DiceRollModel();
                 Popup popup = new Popup();
-                RollDiceD6Content content = new RollDiceD6Content();
+                ContentView content = new ContentView();
+                switch (diceValueInt)
+                {
+                    case 6: content = new RollDiceD6Content(); break;
+                    case 8: content = new RollDiceD8Content(); break;
+                    case 12: content = new RollDiceD12Content(); break;
+                    case 20: content = new RollDiceD20Content(); break;
+                }                
                 content.BindingContext = this;  
-                popup.Content = new RollDiceD6Content();
+                popup.Content = content;
                 popup.Size = new Size(150, 150);
-                var result = await Shell.Current.CurrentPage.ShowPopupAsync(popup);
-                await this.DiceRollModel.RollDice(diceValueInt);
+                Shell.Current.CurrentPage.ShowPopupAsync(popup);
+                await MainThread.InvokeOnMainThreadAsync(async () =>
+                {
+                    await this.DiceRollModel.RollDice(diceValueInt);
+                });
             }
         }
         public LifeCounterPageViewModel()
@@ -247,7 +257,7 @@ namespace MTGHelper.ViewModels
         }
         private void PreparePlayers()
         {
-            List<string> colors = new List<string> { "Red", "Blue", "Black","Purple","Pink","Gray" };
+            List<string> colors = new List<string> { "red", "blue", "black","green","white","Gray" };
             Player1 = new PlayerModel(0, LifeTotal, $"Player {1}", colors[0]);
             Player2 = new PlayerModel(1, LifeTotal, $"Player {2}", colors[1]);
             Player3 = new PlayerModel(2, LifeTotal, $"Player {3}", colors[2]);

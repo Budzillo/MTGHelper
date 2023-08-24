@@ -34,6 +34,14 @@ namespace MTGHelper.Models
         private bool isWhite = false;
         private bool isBlack = false;
 
+        private string greenImageSource = $"{BASE_IMAGE_CATALOG_NAME}green.svg";
+        private string blueImageSource = $"{BASE_IMAGE_CATALOG_NAME}blue.svg";
+        private string redImageSource = $"{BASE_IMAGE_CATALOG_NAME}red.svg";
+        private string whiteImageSource = $"{BASE_IMAGE_CATALOG_NAME}white.svg";
+        private string blackImageSource = $"{BASE_IMAGE_CATALOG_NAME}black.svg";
+
+        private bool isColorPickerOpen = false;
+
         private Color color;
 
         public int Id 
@@ -230,6 +238,11 @@ namespace MTGHelper.Models
             {
                 if(isGreen == value) return;
                 isGreen = value;
+                if (isGreen)
+                    GreenImageSource = $"{BASE_IMAGE_CATALOG_NAME}green_w.svg";
+                else
+                    GreenImageSource = $"{BASE_IMAGE_CATALOG_NAME}green.svg";
+                MixColors();
                 OnPropertyChanged();
             }
         }
@@ -240,6 +253,11 @@ namespace MTGHelper.Models
             {
                 if (isBlue == value) return;
                 isBlue = value;
+                if (isBlue)
+                    BlueImageSource = $"{BASE_IMAGE_CATALOG_NAME}blue_w.svg";
+                else
+                    BlueImageSource = $"{BASE_IMAGE_CATALOG_NAME}blue.svg";
+                MixColors();
                 OnPropertyChanged();
             }
         }
@@ -250,6 +268,11 @@ namespace MTGHelper.Models
             {
                 if (isRed == value) return;
                 isRed = value;
+                if (isRed)
+                    RedImageSource = $"{BASE_IMAGE_CATALOG_NAME}red_w.svg";
+                else
+                    RedImageSource = $"{BASE_IMAGE_CATALOG_NAME}red.svg";
+                MixColors();
                 OnPropertyChanged();
             }
         }
@@ -260,6 +283,11 @@ namespace MTGHelper.Models
             {
                 if (isWhite == value) return;
                 isWhite = value;
+                if (isWhite)
+                    WhiteImageSource = $"{BASE_IMAGE_CATALOG_NAME}white_w.svg";
+                else
+                    WhiteImageSource = $"{BASE_IMAGE_CATALOG_NAME}white.svg";
+                MixColors();
                 OnPropertyChanged();
             }
         }
@@ -270,6 +298,72 @@ namespace MTGHelper.Models
             {
                 if (isBlack == value) return;
                 isBlack = value;
+                if (isBlack)
+                    BlackImageSource = $"{BASE_IMAGE_CATALOG_NAME}black_w.svg";
+                else
+                    BlackImageSource = $"{BASE_IMAGE_CATALOG_NAME}black.svg";
+                MixColors();
+                OnPropertyChanged();
+            }
+        }
+        public string GreenImageSource
+        {
+            get => greenImageSource;
+            set
+            {
+                if (greenImageSource == value) return;
+                greenImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public string BlueImageSource
+        {
+            get=> blueImageSource;
+            set
+            {
+                if (blueImageSource == value) return;
+                blueImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public string RedImageSource
+        {
+            get=> redImageSource; 
+            set
+            {
+                if (redImageSource == value) return;
+                redImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public string WhiteImageSource
+        {
+            get=> whiteImageSource;
+            set
+            {
+                if (whiteImageSource == value) return;
+                whiteImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+        public string BlackImageSource
+        {
+            get=> blackImageSource;
+            set
+            {
+                if (blackImageSource == value) return;
+                blackImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsColorPickerOpen
+        {
+            get => isColorPickerOpen;
+            set
+            {
+                if(isColorPickerOpen == value) return;
+                isColorPickerOpen = value;
                 OnPropertyChanged();
             }
         }
@@ -283,6 +377,7 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
+        
         public PlayerModel()
         {
 
@@ -298,6 +393,7 @@ namespace MTGHelper.Models
             ExperienceCounter = experienceCounter;
             EnergyCounter = energyCounter;
             SelectedCounterType = COUNTER_TYPES.LIFE;
+            SetColor(color);
         }
         public void AddLife()
         {
@@ -381,6 +477,25 @@ namespace MTGHelper.Models
             }
             
         }
+        public void ShowColorPicker()
+        {
+            this.IsColorPickerOpen = true;
+        }
+        public void HideColorPicker()
+        {
+            this.IsColorPickerOpen = false;
+        }
+        public void SetColor(string color)
+        {
+            switch (color)
+            {
+                case "black": this.IsBlack = !this.IsBlack; break; 
+                case "white": this.IsWhite = !this.IsWhite; break; 
+                case "red": this.IsRed = !this.IsRed; break; 
+                case "green": this.IsGreen = !this.IsGreen; break; 
+                case "blue": this.IsBlue = !this.IsBlue; break; 
+            }
+        }
         private void MixColors()
         {
             List<Color> colors = new List<Color>();
@@ -389,7 +504,13 @@ namespace MTGHelper.Models
             if (isBlue) colors.Add(ClassConst.BLUE_COLOR);
             if (isGreen) colors.Add(ClassConst.GREEN_COLOR);
             if (isRed) colors.Add(ClassConst.RED_COLOR);
+            if(colors.Count == 0)
+            {
+                this.Color = ClassConst.COLORLSESS_COLOR;
+                return;
+            }
             this.Color = ColorHelper.MixColors(colors.ToArray());
         }
     }
 }
+	

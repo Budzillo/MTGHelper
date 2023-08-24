@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using MTGHelper.Models;
+using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +18,8 @@ namespace MTGHelper.ViewModels
         private LifeCounterPageViewModel lifeCounterPageViewModel;
         private int playerIndex = 1;
         private int rotation;
+        private ColorSelectContent colorSelectContent;
+        private ColorSelectVerticalContent colorSelectVerticalContent;
         public PlayerModel PlayerModel
         {
             get => GetPlayerModel();
@@ -38,10 +41,47 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
+        public ColorSelectContent ColorSelectContent
+        {
+            get => colorSelectContent;
+            set
+            {
+                if (colorSelectContent == value) return;
+                colorSelectContent = value;
+                OnPropertyChanged();
+            }
+        }
+        public ColorSelectVerticalContent ColorSelectVerticalContent
+        {
+            get => colorSelectVerticalContent;
+            set
+            {
+                if (colorSelectVerticalContent == value) return;
+                colorSelectVerticalContent = value;
+                OnPropertyChanged();
+            }
+        }
+
         [RelayCommand]
         public void SetNumberType(string counterName)
-        { 
+        {
+            if (GetPlayerModel().IsColorPickerOpen) return;
             GetPlayerModel().SelectCounterType(GetCounterTypeByName(counterName));           
+        }
+        [RelayCommand]
+        private void OpenColorPicker()
+        {
+            GetPlayerModel().ShowColorPicker();
+        }
+        [RelayCommand]
+        private void CloseColorPicker()
+        {
+            GetPlayerModel().HideColorPicker();
+        }
+        [RelayCommand]
+        private void SetColor(string color)
+        {
+            GetPlayerModel().SetColor(color);
         }
         private void SetNumberTypeByEnum(COUNTER_TYPES counterType)
         {
@@ -82,6 +122,7 @@ namespace MTGHelper.ViewModels
         }
         public void GridTappedVertical(Grid grid, TappedEventArgs tappedEventArgs)
         {
+            if (GetPlayerModel().IsColorPickerOpen) return;
             if (tappedEventArgs.GetPosition(grid).Value.Y <= grid.Height / 2)
             {
                 Increase();
@@ -90,7 +131,17 @@ namespace MTGHelper.ViewModels
         }
         public void GridTappedHorizontal(Grid grid, TappedEventArgs tappedEventArgs)
         {
+            if (GetPlayerModel().IsColorPickerOpen) return;
             if (tappedEventArgs.GetPosition(grid).Value.X >= grid.Width / 2)
+            {
+                Increase();
+            }
+            else Decrease();
+        }
+        public void GridTappedHorizontalReverse(Grid grid, TappedEventArgs tappedEventArgs)
+        {
+            if (GetPlayerModel().IsColorPickerOpen) return;
+            if (tappedEventArgs.GetPosition(grid).Value.X <= grid.Width / 2)
             {
                 Increase();
             }
@@ -125,6 +176,7 @@ namespace MTGHelper.ViewModels
             this.Rotation = rotation;            
             SetNumberTypeByEnum(COUNTER_TYPES.LIFE);
             Initialize();
+            PrepareColorSelect();
             PrepareCommands();
         }
         private void Initialize()
@@ -134,6 +186,13 @@ namespace MTGHelper.ViewModels
         private void PrepareCommands()
         {
 
+        }
+        private void PrepareColorSelect()
+        {
+            this.ColorSelectContent = new ColorSelectContent();
+            this.ColorSelectContent.BindingContext = this;
+            this.ColorSelectVerticalContent = new ColorSelectVerticalContent();
+            this.ColorSelectVerticalContent.BindingContext = this;
         }
         public PlayerModel GetPlayerModel()
         {

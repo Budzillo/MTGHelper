@@ -1,4 +1,4 @@
-namespace MTGHelper.Pages.LifeCounter.Views.Dice;
+namespace MTGHelper.Views;
 
 public partial class RollDiceD12Content : ContentView
 {

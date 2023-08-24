@@ -30,12 +30,16 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
+	  <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<!-- App Icon -->
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\mtg_logo.png" BaseSize="256,256" Color="White" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -85,6 +89,20 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\AppIcon\mtg.svg" />
+	  <None Remove="Resources\Images\colors\black.svg" />
+	  <None Remove="Resources\Images\colors\black_w.svg" />
+	  <None Remove="Resources\Images\colors\blue.svg" />
+	  <None Remove="Resources\Images\colors\blue_w.svg" />
+	  <None Remove="Resources\Images\colors\green.svg" />
+	  <None Remove="Resources\Images\colors\green_w.svg" />
+	  <None Remove="Resources\Images\colors\red.svg" />
+	  <None Remove="Resources\Images\colors\red_w.svg" />
+	  <None Remove="Resources\Images\colors\white.svg" />
+	  <None Remove="Resources\Images\colors\white_w.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="5.2.0" />
 		<PackageReference Include="CommunityToolkit.Maui.Markup" Version="3.2.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
@@ -100,10 +118,29 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiIcon Include="Resources\AppIcon\mtg.svg" />
+	  <MauiImage Include="Resources\Images\colors\black.svg">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiImage>
+	  <MauiImage Include="Resources\Images\colors\black_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\blue.svg" />
+	  <MauiImage Include="Resources\Images\colors\blue_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\green.svg" />
+	  <MauiImage Include="Resources\Images\colors\green_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\red.svg" />
+	  <MauiImage Include="Resources\Images\colors\red_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\white.svg" />
+	  <MauiImage Include="Resources\Images\colors\white_w.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\MTGApi\MTGApi.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml.cs">
+	    <DependentUpon>ColorSelectVerticalContent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml.cs">
 	    <DependentUpon>HorizontalPlayerLifeContent.xaml</DependentUpon>
 	  </Compile>
@@ -119,6 +156,12 @@
 	  <MauiXaml Update="Pages\LifeCounter\LifeCounterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Colors\ColorSelectContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD12Content.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -126,6 +169,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD6Content.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD8Content.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\FivePlayersLifeCounterContent.xaml">
@@ -171,6 +217,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\PlayerLifeTotalDictionary.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Resources\Styles\SelectColorsDictionary.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\SettingsLifeTotalDictionary.xaml">

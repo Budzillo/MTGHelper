@@ -27,21 +27,33 @@
                 VerticalTextAlignment="Center" />
         </VerticalStackLayout>
         <VerticalStackLayout Margin="0,10,0,0">
-            <ImageButton Source="/Resources/Images/dice_d8.svg" Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding RollDiceCommand}"
+                CommandParameter="8"
+                Source="/Resources/Images/dice_d8.svg"
+                Style="{StaticResource buttonDice}" />
             <Label
                 HorizontalTextAlignment="Center"
                 Text="D8"
                 VerticalTextAlignment="Center" />
         </VerticalStackLayout>
         <VerticalStackLayout Margin="0,10,0,0">
-            <ImageButton Source="/Resources/Images/dice_d12.svg" Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding RollDiceCommand}"
+                CommandParameter="12"
+                Source="/Resources/Images/dice_d12.svg"
+                Style="{StaticResource buttonDice}" />
             <Label
                 HorizontalTextAlignment="Center"
                 Text="D12"
                 VerticalTextAlignment="Center" />
         </VerticalStackLayout>
         <VerticalStackLayout Margin="0,10,0,0">
-            <ImageButton Source="/Resources/Images/dice_d20.svg" Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding RollDiceCommand}"
+                CommandParameter="20"
+                Source="/Resources/Images/dice_d20.svg"
+                Style="{StaticResource buttonDice}" />
             <Label
                 HorizontalTextAlignment="Center"
                 Text="D20"

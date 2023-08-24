@@ -24,6 +24,7 @@ namespace MTGHelper
         public static readonly Color RED_COLOR = Color.FromRgb(211,32,42);
         public static readonly Color WHITE_COLOR = Color.FromRgb(249,250,244);
         public static readonly Color BLACK_COLOR = Color.FromRgb(21,11,0);
+        public static readonly Color COLORLSESS_COLOR = Color.FromRgb(204, 194, 192);
         public enum COUNTER_TYPES : int
         {
             UNKOWN = 0,

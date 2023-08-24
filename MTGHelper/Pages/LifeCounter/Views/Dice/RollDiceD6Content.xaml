@@ -12,18 +12,50 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <Border
-            Margin="5"
-            BackgroundColor="White"
-            HeightRequest="100"
-            Stroke="Black"
-            StrokeThickness="3"
-            WidthRequest="100">
-            <Label
-                HorizontalOptions="Center"
-                Text="{Binding DiceRollModel.DiceValue}"
-                VerticalOptions="Center" />
-        </Border>
+        <Image HeightRequest="70" WidthRequest="70">
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Style.Triggers>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="1">
+                            <Setter Property="Source" Value="/Resources/Images/dice_one.svg" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="2">
+                            <Setter Property="Source" Value="/Resources/Images/dice_two.svg" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="3">
+                            <Setter Property="Source" Value="/Resources/Images/dice_three.svg" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="4">
+                            <Setter Property="Source" Value="/Resources/Images/dice_four.svg" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="5">
+                            <Setter Property="Source" Value="/Resources/Images/dice_five.svg" />
+                        </DataTrigger>
+                        <DataTrigger
+                            Binding="{Binding DiceRollModel.DiceValue}"
+                            TargetType="Image"
+                            Value="6">
+                            <Setter Property="Source" Value="/Resources/Images/dice_six.svg" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
         <Label
             Grid.Row="1"
             HorizontalOptions="Center"

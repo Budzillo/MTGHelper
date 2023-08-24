@@ -15,7 +15,7 @@ public partial class HorizontalReversePlayerLifeContent : ContentView
         {
             if (sender is Grid grid)
             {
-                viewModel.GridTappedHorizontal(grid, e);
+                viewModel.GridTappedHorizontalReverse(grid, e);
             }
         }
     }
