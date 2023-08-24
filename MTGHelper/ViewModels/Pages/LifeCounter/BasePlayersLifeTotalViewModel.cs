@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Controls;
 using MTGHelper.Models;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public abstract class BasePlayersLifeTotalViewModel : BaseViewModel
+    public abstract partial class BasePlayersLifeTotalViewModel : BaseViewModel
     {
         internal LifeCounterPageViewModel lifeCounterPageViewModel;
         public BasePlayersLifeTotalViewModel() { }

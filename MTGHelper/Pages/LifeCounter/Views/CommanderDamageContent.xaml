@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.CommanderDamageContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:PlayerLifeTotalViewModel />
+    </ContentView.BindingContext>
+    <Grid
+        BackgroundColor="DarkBlue"
+        HorizontalOptions="Fill"
+        Opacity="0.85"
+        VerticalOptions="Fill">
+        <Label
+            x:Name="labelSelectedValue"
+            Grid.Row="0"
+            FontAttributes="Italic"
+            FontFamily="mplantin"
+            FontSize="120"
+            HorizontalTextAlignment="Center"
+            Text="{Binding}"
+            TextColor="White"
+            VerticalTextAlignment="Start">
+            <Label.Style>
+                <Style TargetType="Label" />
+            </Label.Style>
+        </Label>
+    </Grid>
+</ContentView>

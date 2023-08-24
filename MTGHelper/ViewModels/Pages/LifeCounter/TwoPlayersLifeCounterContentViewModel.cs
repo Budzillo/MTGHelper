@@ -45,10 +45,10 @@ namespace MTGHelper.ViewModels
         
         public override void PrepareViews()
         {
-            this.bottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.bottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 1);
-            this.topVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
-            this.topVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 2);
+            this.BottomVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
+            this.BottomVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 1);
+            this.TopVerticalPlayerLifeContent = new VerticalPlayerLifeContent();
+            this.TopVerticalPlayerLifeContent.BindingContext = new PlayerLifeTotalViewModel(lifeCounterPageViewModel, 2);
         }
         public override void RotateLifeTotal()
         {

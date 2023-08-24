@@ -11,6 +11,7 @@ namespace MTGHelper.Models
 {
     public class PlayerModel : BaseModel
     {
+        #region Fields
         private int id;
         private int life = 40;
         private string playerName;
@@ -41,9 +42,15 @@ namespace MTGHelper.Models
         private string blackImageSource = $"{BASE_IMAGE_CATALOG_NAME}black.svg";
 
         private bool isColorPickerOpen = false;
+        private bool isCommanderDamageOpen = false;
 
         private Color color;
 
+        private CommanderDamagesModel commanderDamagesModel;
+
+        #endregion
+
+        #region Properties
         public int Id 
         { 
             get { return id; } 
@@ -367,6 +374,16 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
+        public bool IsCommanderDamageOpen
+        {
+            get => isCommanderDamageOpen;
+            set
+            {
+                if (isCommanderDamageOpen == value) return;
+                isCommanderDamageOpen = value;
+                OnPropertyChanged();
+            }
+        }
         public Color Color
         {
             get => color;
@@ -377,12 +394,22 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
-        
+        public CommanderDamagesModel CommanderDamagesModel
+        {
+            get => commanderDamagesModel;
+            set
+            {
+                if(commanderDamagesModel == value) return; 
+                commanderDamagesModel = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
         public PlayerModel()
         {
 
         }
-        public PlayerModel(int id, int life, string playerName,string color, int poisonCounter = 0, int experienceCounter = 0, int energyCounter = 0, string? commanderName = null)
+        public PlayerModel(int id, int life, string playerName, string color, int poisonCounter = 0, int experienceCounter = 0, int energyCounter = 0, string? commanderName = null)
         {
             firstLifeValue = life;
             Id = id;
@@ -393,7 +420,26 @@ namespace MTGHelper.Models
             ExperienceCounter = experienceCounter;
             EnergyCounter = energyCounter;
             SelectedCounterType = COUNTER_TYPES.LIFE;
+            CommanderDamagesModel = new CommanderDamagesModel();
+            PrepareCommanderDamages(id);
             SetColor(color);
+        }
+
+        #region Methods
+        private void PrepareCommanderDamages(int id)
+        {
+            if (id != 1)
+                this.CommanderDamagesModel.Player1Damage = new CommanderDamageModel();
+            if (id != 2)
+                this.CommanderDamagesModel.Player2Damage = new CommanderDamageModel();
+            if (id != 3)
+                this.CommanderDamagesModel.Player3Damage = new CommanderDamageModel();
+            if (id != 4)
+                this.CommanderDamagesModel.Player4Damage = new CommanderDamageModel();
+            if (id != 5)
+                this.CommanderDamagesModel.Player5Damage = new CommanderDamageModel();
+            if (id != 6)
+                this.CommanderDamagesModel.Player6Damage = new CommanderDamageModel();
         }
         public void AddLife()
         {
@@ -434,7 +480,9 @@ namespace MTGHelper.Models
             this.ExperienceCounter = 0;
             this.EnergyCounter = 0;
             this.SelectedCounterType = COUNTER_TYPES.LIFE;
+            this.CommanderDamagesModel.ResetValues();
             this.SelectedValue = Life;
+
         }
         public void SelectCounterType(COUNTER_TYPES counterType)
         {
@@ -511,6 +559,7 @@ namespace MTGHelper.Models
             }
             this.Color = ColorHelper.MixColors(colors.ToArray());
         }
+        #endregion
     }
 }
 	

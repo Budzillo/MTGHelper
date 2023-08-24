@@ -246,7 +246,7 @@ namespace MTGHelper.ViewModels
         private void PrepareGame()
         {            
            // this.SetFormat("Standard");
-            this.PreparePlayers();
+            this.PreparePlayers(this.playerCount);
             this.PrepareCurrentLifeTotalView();
         }
         private void PrepareSettings()
@@ -255,7 +255,7 @@ namespace MTGHelper.ViewModels
             settings.BindingContext = this;
             this.SettingsContent = settings; 
         }
-        private void PreparePlayers()
+        private void PreparePlayers(int playersCount)
         {
             List<string> colors = new List<string> { "red", "blue", "black","green","white","Gray" };
             Player1 = new PlayerModel(0, LifeTotal, $"Player {1}", colors[0]);

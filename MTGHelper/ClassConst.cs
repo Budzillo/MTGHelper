@@ -14,6 +14,13 @@ namespace MTGHelper
         public const string TICKETS_COUNTER_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}ticket_counter.svg";
         public const string HEART_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}heart.svg";
 
+        public const string DICE_D6_ONE_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_one.svg";
+        public const string DICE_D6_TWO_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_two.svg";
+        public const string DICE_D6_THREE_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_three.svg";
+        public const string DICE_D6_FOUR_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_four.svg";
+        public const string DICE_D6_FIVE_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_five.svg";
+        public const string DICE_D6_SIX_IMAGE_NAME = $"{BASE_IMAGE_CATALOG_NAME}dice_six.svg";
+
         public const string LIFE_COUNTER_NAME = "life";
         public const string POISON_COUNTER_NAME = "poison";
         public const string ENERGY_COUNTER_NAME = "energy";

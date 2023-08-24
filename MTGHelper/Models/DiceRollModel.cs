@@ -12,6 +12,7 @@ namespace MTGHelper.Models
     {
         private int diceValue = 1;
         private string diceValueInformation = "";
+        private string diceD6ImageSource = ClassConst.DICE_D6_ONE_IMAGE_NAME;
         public int DiceValue
         {
             get => diceValue;
@@ -32,6 +33,16 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
+        public string DiceD6ImageSource
+        {
+            get => diceD6ImageSource;
+            set
+            {
+                if(diceD6ImageSource == value) return;
+                diceD6ImageSource = value;
+                OnPropertyChanged();
+            }
+        }
         public DiceRollModel() 
         {
         }
@@ -42,9 +53,25 @@ namespace MTGHelper.Models
             for(int i = 0; i < rolls; i++)
             {
                 this.DiceValue = rnd.Next(1,1+walls);
+                if(walls == 6)
+                {
+                    SetDiceD6ImageSource(this.DiceValue);
+                }
                 await Task.Delay(250);
             }
             this.DiceValueInformation = $"You rolled {this.DiceValue}";
+        }
+        private void SetDiceD6ImageSource(int roll)
+        {
+            switch(roll)
+            {
+                case 1: this.DiceD6ImageSource = ClassConst.DICE_D6_ONE_IMAGE_NAME; break;
+                case 2: this.DiceD6ImageSource = ClassConst.DICE_D6_TWO_IMAGE_NAME; break;
+                case 3: this.DiceD6ImageSource = ClassConst.DICE_D6_THREE_IMAGE_NAME; break;
+                case 4: this.DiceD6ImageSource = ClassConst.DICE_D6_FOUR_IMAGE_NAME; break;
+                case 5: this.DiceD6ImageSource = ClassConst.DICE_D6_FIVE_IMAGE_NAME; break;
+                case 6: this.DiceD6ImageSource = ClassConst.DICE_D6_SIX_IMAGE_NAME; break;
+            }
         }
     }
 }

@@ -162,6 +162,9 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamageContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD12Content.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
