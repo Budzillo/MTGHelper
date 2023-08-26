@@ -111,9 +111,7 @@
 
 	<ItemGroup>
 	  <Folder Include="Commands\" />
-	  <Folder Include="Pages\Cards\" />
 	  <Folder Include="Pages\Decks\" />
-	  <Folder Include="ViewModels\Pages\Cards\" />
 	  <Folder Include="ViewModels\Pages\Decks\" />
 	</ItemGroup>
 
@@ -152,6 +150,9 @@
 	<ItemGroup>
 	  <MauiXaml Update="App.xaml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Cards\CardsByColorsContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\LifeCounterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>

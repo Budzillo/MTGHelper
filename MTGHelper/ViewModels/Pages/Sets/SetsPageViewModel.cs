@@ -44,12 +44,12 @@ namespace MTGHelper.ViewModels
         {
             this.repository = new SetRepository();
             this.allSets = await repository.GetSets();
-            this.SearchedSets = new ObservableCollection<ISet>(allSets);
+            this.SearchedSets = new ObservableCollection<ISet>(allSets.OrderBy(q => q.Name).ThenByDescending(q => q.ReleaseDate));
         }
         [RelayCommand]
         private void SearchTextChanged()
         {
-            this.SearchedSets = new ObservableCollection<ISet>(allSets.Where(q => q.Name.ToLower().Contains(this.SearchText.ToLower())));
+            this.SearchedSets = new ObservableCollection<ISet>(allSets.OrderBy(q=>q.Name).ThenByDescending(q => q.ReleaseDate).Where(q => q.Name.ToLower().Contains(this.SearchText.ToLower())));
         }
     }
 }
