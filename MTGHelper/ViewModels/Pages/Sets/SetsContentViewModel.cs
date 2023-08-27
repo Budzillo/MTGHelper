@@ -10,12 +10,23 @@ using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public partial class SetsPageViewModel : BaseViewModel
+    public partial class SetsContentViewModel : BaseViewModel
     {
+        private SetSearchPageViewModel setSearchPageViewModel;
         private SetRepository repository;
         private List<ISet> allSets;
         private ObservableCollection<ISet> searchedSets;
         private string searchText;
+        public SetSearchPageViewModel SetSearchPageViewModel
+        {
+            get => setSearchPageViewModel;
+            set
+            {
+                if (setSearchPageViewModel == value) return;
+                setSearchPageViewModel = value;
+                OnPropertyChanged();
+            }
+        }
         public ObservableCollection<ISet> SearchedSets
         {
             get => searchedSets;
@@ -36,8 +47,13 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public SetsPageViewModel()
+        public SetsContentViewModel()
         {
+            
+        }
+        public SetsContentViewModel(SetSearchPageViewModel setSearchPageViewModel)
+        {
+            this.SetSearchPageViewModel = setSearchPageViewModel;
             Initialization();
         }
         private async void Initialization()
@@ -51,5 +67,14 @@ namespace MTGHelper.ViewModels
         {
             this.SearchedSets = new ObservableCollection<ISet>(allSets.OrderBy(q=>q.Name).ThenByDescending(q => q.ReleaseDate).Where(q => q.Name.ToLower().Contains(this.SearchText.ToLower())));
         }
+        [RelayCommand]
+        private void SelectedSetChanged(object sender)
+        {
+            if(sender is ISet set)
+            {
+                this.SetSearchPageViewModel.SetCardsByColorsPage(set.Name);
+            }
+        }
     }
+    
 }

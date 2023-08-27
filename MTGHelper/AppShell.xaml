@@ -25,13 +25,13 @@
             <ShellContent ContentTemplate="{DataTemplate pages:LifeCounterPage}" />
         </Tab>
         <Tab Title="Cards" Icon="/Resources/Images/search.svg">
-            <ShellContent ContentTemplate="{DataTemplate pages:SetsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:SetSearchPage}" />
         </Tab>
         <Tab Title="Sets" Icon="/Resources/Images/mtg_icon_transparent.png">
-            <ShellContent ContentTemplate="{DataTemplate pages:SetsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:SetSearchPage}" />
         </Tab>
         <Tab Title="Decks">
-            <ShellContent ContentTemplate="{DataTemplate pages:SetsPage}" />
+            <ShellContent ContentTemplate="{DataTemplate pages:SetSearchPage}" />
         </Tab>
     </TabBar>
 </Shell>

@@ -136,6 +136,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\Cards\CardsByColorsContent.xaml.cs">
+	    <DependentUpon>CardsByColorsContent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml.cs">
 	    <DependentUpon>ColorSelectVerticalContent.xaml</DependentUpon>
 	  </Compile>
@@ -144,6 +147,9 @@
 	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\VerticalPlayerLifeContent.xaml.cs">
 	    <DependentUpon>VerticalPlayerLifeContent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Sets\SetsContent.xaml.cs">
+	    <DependentUpon>SetsContent.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -214,7 +220,10 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\TwoPlayersLifeCounterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Sets\SetsPage.xaml">
+	  <MauiXaml Update="Pages\Sets\SetSearchPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Sets\SetsContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Resources\Styles\Colors.xaml">

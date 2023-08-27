@@ -12,6 +12,7 @@ namespace MTGHelper.ViewModels
     public class CardsByColorsContentViewModel : BaseViewModel
     {
         private CardRepository cardRepository;
+        private SetSearchPageViewModel setSearchPageViewModel;
 
         private List<ICard> cards = new List<ICard>();
         private ObservableCollection<ICard> whiteCards = new ObservableCollection<ICard>();
@@ -21,6 +22,17 @@ namespace MTGHelper.ViewModels
         private ObservableCollection<ICard> blueCards = new ObservableCollection<ICard>();
         private ObservableCollection<ICard> multicoloredCards = new ObservableCollection<ICard>();
         private ObservableCollection<ICard> colorlessCards = new ObservableCollection<ICard>();
+
+        public SetSearchPageViewModel SetSearchPageViewModel
+        {
+            get => setSearchPageViewModel;
+            set
+            {
+                if(setSearchPageViewModel == value) return;
+                setSearchPageViewModel = value;
+                OnPropertyChanged();
+            }
+        }
         public List<ICard> Cards
         {
             get => cards;
@@ -105,9 +117,10 @@ namespace MTGHelper.ViewModels
         {
 
         }
-        public CardsByColorsContentViewModel(string setName)
+        public CardsByColorsContentViewModel(SetSearchPageViewModel setSearchPageViewModel,string setName)
         {
             cardRepository = new CardRepository();
+            this.SetSearchPageViewModel = setSearchPageViewModel;
             GetCards(setName);
         }
         private void GetCards()
@@ -117,11 +130,13 @@ namespace MTGHelper.ViewModels
         private async void GetCards(string setName)
         {
             this.Cards = await cardRepository.GetCardsBySet(setName);
-            //this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Contains("w")));
-            //this.BlackCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Contains("b")));
-            //this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Contains("w")));
-            //this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Contains("w")));
-            //this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Contains("w")));
+            this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "w")) ;
+            this.BlackCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "b"));
+            this.RedCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "r"));
+            this.GreenCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "g"));
+            this.BlueCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "w"));
+            this.MulticoloredCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsMultiColor));
+            this.ColorlessCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsColorless));
         }
     }
 }

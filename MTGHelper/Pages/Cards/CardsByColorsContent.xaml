@@ -3,17 +3,30 @@
     x:Class="MTGHelper.Views.CardsByColorsContent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit">
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:CardsByColorsContentViewModel />
+    </ContentView.BindingContext>
     <ContentView.Resources>
         <ResourceDictionary>
             <Style x:Key="colorIconImageStyle" TargetType="Image">
                 <Setter Property="HeightRequest" Value="40" />
                 <Setter Property="WidthRequest" Value="40" />
             </Style>
+            <Style TargetType="ListView">
+                <Setter Property="ItemTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <TextCell Detail="{Binding OriginalText}" Text="{Binding Name}" />
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     <VerticalStackLayout>
-        <Button Text="Go back" />
+        <Button Command="{Binding SetSearchPageViewModel.SetSetsPageCommand}" Text="Go back" />
         <toolkit:Expander x:Name="expanderCardsWhite">
             <toolkit:Expander.Header>
                 <HorizontalStackLayout>
@@ -22,7 +35,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsWhite" />
+                <ListView x:Name="listViewCardsWhite" ItemsSource="{Binding WhiteCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsBlack">
@@ -33,7 +46,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsBlack" />
+                <ListView x:Name="listViewCardsBlack" ItemsSource="{Binding BlackCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsRed">
@@ -44,7 +57,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsRed" />
+                <ListView x:Name="listViewCardsRed" ItemsSource="{Binding RedCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsGreen">
@@ -55,7 +68,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsGreen" />
+                <ListView x:Name="listViewCardsGreen" ItemsSource="{Binding GreenCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsBlue">
@@ -66,7 +79,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsBlue" />
+                <ListView x:Name="listViewCardsBlue" ItemsSource="{Binding BlueCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsMulticolored">
@@ -77,7 +90,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsMulticolored" />
+                <ListView x:Name="listViewCardsMulticolored" ItemsSource="{Binding MulticoloredCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
         <toolkit:Expander x:Name="expanderCardsColorless">
@@ -88,7 +101,7 @@
                 </HorizontalStackLayout>
             </toolkit:Expander.Header>
             <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsColorless" />
+                <ListView x:Name="listViewCardsColorless" ItemsSource="{Binding ColorlessCards}" />
             </toolkit:Expander.Content>
         </toolkit:Expander>
     </VerticalStackLayout>

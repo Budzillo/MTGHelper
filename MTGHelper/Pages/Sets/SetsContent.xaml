@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage
-    x:Class="MTGHelper.Pages.SetsPage"
+<ContentView
+    x:Class="MTGHelper.Views.SetsContent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:MTGHelper.Controls"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
-    Title="Sets">
-    <ContentPage.BindingContext>
-        <viewModels:SetsPageViewModel />
-    </ContentPage.BindingContext>
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:SetsContentViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:SelectedItemEventArgsConverter x:Key="SelectedItemEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="60" />
@@ -36,6 +40,12 @@
         </Grid>
         <Grid Grid.Row="1">
             <ListView ItemsSource="{Binding SearchedSets}" SelectionMode="Single">
+                <ListView.Behaviors>
+                    <toolkit:EventToCommandBehavior
+                        Command="{Binding SelectedSetChangedCommand}"
+                        EventArgsConverter="{StaticResource SelectedItemEventArgsConverter}"
+                        EventName="ItemSelected" />
+                </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell Detail="{Binding ReleaseDate}" Text="{Binding Name}" />
@@ -44,4 +54,4 @@
             </ListView>
         </Grid>
     </Grid>
-</ContentPage>
+</ContentView>
