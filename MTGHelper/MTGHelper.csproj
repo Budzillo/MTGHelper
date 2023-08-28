@@ -157,6 +157,9 @@
 	  <MauiXaml Update="App.xaml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\CardListColor.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Cards\CardsByColorsContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

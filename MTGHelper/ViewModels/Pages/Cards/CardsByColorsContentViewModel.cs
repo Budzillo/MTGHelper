@@ -1,4 +1,6 @@
-﻿using MTGApi.Repository;
+﻿using CommunityToolkit.Mvvm.Input;
+using MTGApi;
+using MTGApi.Repository;
 using MtgApiManager.Lib.Model;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public class CardsByColorsContentViewModel : BaseViewModel
+    public partial class CardsByColorsContentViewModel : BaseViewModel
     {
         private CardRepository cardRepository;
         private SetSearchPageViewModel setSearchPageViewModel;
@@ -113,6 +115,10 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
+        [RelayCommand]
+        private async Task ContentViewLoaded()
+        {            
+        }
         public CardsByColorsContentViewModel()
         {
 
@@ -129,14 +135,14 @@ namespace MTGHelper.ViewModels
         }
         private async void GetCards(string setName)
         {
-            this.Cards = await cardRepository.GetCardsBySet(setName);
-            this.WhiteCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "w")) ;
-            this.BlackCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "b"));
-            this.RedCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "r"));
-            this.GreenCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "g"));
-            this.BlueCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.Colors.Count() == 1 && q.Colors[0].ToLower() == "w"));
+            //this.Cards = await cardRepository.GetCardsBySet(setName);
+            this.WhiteCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName,APIConst.COLOR_WHITE_CODE)) ;
+            this.BlackCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_BLACK_CODE));
+            this.RedCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_RED_CODE));
+            this.GreenCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_GREEN_CODE));
+            this.BlueCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_BLUE_CODE));
             this.MulticoloredCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsMultiColor));
-            this.ColorlessCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsColorless));
+            this.ColorlessCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_COLORLESSS_CODE));
         }
     }
 }

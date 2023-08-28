@@ -33,6 +33,40 @@ namespace MTGApi.Repository
                 return new List<ICard>();
             }
         }
+        public async Task<List<ICard>> GetCardsBySetAndColor(string setName,string colorCode)
+        {
+            try
+            {
+                var result = await cardService.Where(q => q.SetName, setName).Where(q=>q.ColorIdentity,colorCode).AllAsync();
+                if (result != null && result.Value != null)
+                {
+                    return result.Value.OrderBy(q=>q.Name).GroupBy(q=>q.Name).Select(q=>q.First()).ToList();
+                }
+                return new List<ICard>();
+            }
+            catch (Exception ex)
+            {
+                WriteTraceExMessage(ex);
+                return new List<ICard>();
+            }
+        }
+        public async Task<List<ICard>> GetCardsBySetAndMultiColor(string setName)
+        {
+            try
+            {
+                var result = await cardService.Where(q => q.SetName, setName).AllAsync();
+                if (result != null && result.Value != null)
+                {
+                    return result.Value.OrderBy(q => q.Name).GroupBy(q => q.Name).Select(q => q.First()).ToList();
+                }
+                return new List<ICard>();
+            }
+            catch (Exception ex)
+            {
+                WriteTraceExMessage(ex);
+                return new List<ICard>();
+            }
+        }
         public async Task<List<ICard>> GetCardsBySubTypes(string subTypes)
         {
             try

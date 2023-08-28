@@ -23,86 +23,13 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="toolkit:Expander">
+                <Setter Property="Margin" Value="10,0,10,0" />
+            </Style>
         </ResourceDictionary>
     </ContentView.Resources>
     <VerticalStackLayout>
         <Button Command="{Binding SetSearchPageViewModel.SetSetsPageCommand}" Text="Go back" />
-        <toolkit:Expander x:Name="expanderCardsWhite">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/white.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="White" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsWhite" ItemsSource="{Binding WhiteCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsBlack">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/black.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Black" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsBlack" ItemsSource="{Binding BlackCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsRed">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/red.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Red" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsRed" ItemsSource="{Binding RedCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsGreen">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/green.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Green" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsGreen" ItemsSource="{Binding GreenCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsBlue">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/blue.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Blue" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsBlue" ItemsSource="{Binding BlueCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsMulticolored">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/white.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Multicolored" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsMulticolored" ItemsSource="{Binding MulticoloredCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
-        <toolkit:Expander x:Name="expanderCardsColorless">
-            <toolkit:Expander.Header>
-                <HorizontalStackLayout>
-                    <Image Source="/Resources/Images/colors/white.svg" Style="{StaticResource colorIconImageStyle}" />
-                    <Label Text="Colorless" />
-                </HorizontalStackLayout>
-            </toolkit:Expander.Header>
-            <toolkit:Expander.Content>
-                <ListView x:Name="listViewCardsColorless" ItemsSource="{Binding ColorlessCards}" />
-            </toolkit:Expander.Content>
-        </toolkit:Expander>
+        
     </VerticalStackLayout>
 </ContentView>
