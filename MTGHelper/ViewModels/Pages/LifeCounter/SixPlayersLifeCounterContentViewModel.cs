@@ -109,5 +109,10 @@ namespace MTGHelper.ViewModels
             RotateLabelFromContent(centerLeftHorizontalPlayerLifeContent);
             RotateLabelFromContent(centerRightHorizontalPlayerLifeContent);
         }
+
+        public override void TurnOnOffCommanderDamageMode()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

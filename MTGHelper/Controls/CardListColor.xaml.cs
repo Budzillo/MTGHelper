@@ -1,13 +1,11 @@
 using MtgApiManager.Lib.Model;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
 
 namespace MTGHelper.Controls;
 
 public partial class CardListColor : ContentView
 {
-	private string colorName;
-	private string colorImageSource;
-	private ObservableCollection<ICard> cards;
 	public string ColorName
 	{
 		get => (string)GetValue(ColorNameProperty);
@@ -42,6 +40,11 @@ public partial class CardListColor : ContentView
     {
         var control = (CardListColor)bindable;
         control.listViewCardList.ItemsSource = (ObservableCollection<ICard>)newValue;
+		if (((ObservableCollection<ICard>)newValue).Count == 0)
+		{
+			control.IsVisible = false;
+		}
+		else control.IsVisible = true;
     }
     public CardListColor()
 	{
