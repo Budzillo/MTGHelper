@@ -20,6 +20,9 @@ namespace MTGHelper.ViewModels
         private int rotation;
         private ColorSelectContent colorSelectContent;
         private ColorSelectVerticalContent colorSelectVerticalContent;
+        private HorizontalCommanderDamageContent horizontalCommanderDamageContent;
+        private HorizontalReverseCommanderDamageContent horizontalReverseCommanderDamageContent;
+        private VerticalCommanderDamageContent verticalCommanderDamageContent;
         public PlayerModel PlayerModel
         {
             get => GetPlayerModel();
@@ -58,6 +61,36 @@ namespace MTGHelper.ViewModels
             {
                 if (colorSelectVerticalContent == value) return;
                 colorSelectVerticalContent = value;
+                OnPropertyChanged();
+            }
+        }
+        public HorizontalCommanderDamageContent HorizontalCommanderDamageContent
+        {
+            get => horizontalCommanderDamageContent;
+            set
+            {
+                if(horizontalCommanderDamageContent == value) return;
+                horizontalCommanderDamageContent = value;
+                OnPropertyChanged();
+            }
+        }
+        public HorizontalReverseCommanderDamageContent HorizontalReverseCommanderDamageContent
+        {
+            get => horizontalReverseCommanderDamageContent;
+            set
+            {
+                if (horizontalReverseCommanderDamageContent == value) return;
+                horizontalReverseCommanderDamageContent = value;
+                OnPropertyChanged();    
+            }
+        }
+        public VerticalCommanderDamageContent VerticalCommanderDamageContent
+        {
+            get => verticalCommanderDamageContent;
+            set
+            {
+                if (verticalCommanderDamageContent == value) return;
+                verticalCommanderDamageContent = value;
                 OnPropertyChanged();
             }
         }

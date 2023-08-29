@@ -35,6 +35,10 @@ namespace MTGHelper.Models
         {
             
         }
+        public CommanderDamageModel(PlayerModel player)
+        {
+            this.PlayerWhoDealDamage = player;
+        }
         public void IncreaseDamage()
         {
             this.Damage++;

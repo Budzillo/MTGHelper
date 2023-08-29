@@ -31,6 +31,7 @@
                     Placeholder="Search set..."
                     PlaceholderColor="LightGray"
                     Text="{Binding SearchText}"
+                    Unfocused="SearchBar_Unfocused"
                     VerticalOptions="Center">
                     <SearchBar.Behaviors>
                         <toolkit:EventToCommandBehavior Command="{Binding SearchTextChangedCommand}" EventName="TextChanged" />
@@ -48,7 +49,7 @@
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Detail="{Binding ReleaseDate}" Text="{Binding Name}" />
+                        <TextCell Detail="{Binding Type}" Text="{Binding Name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

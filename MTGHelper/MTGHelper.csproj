@@ -142,6 +142,9 @@
 	  <Compile Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml.cs">
 	    <DependentUpon>ColorSelectVerticalContent.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\LifeCounter\Views\CommanderDamage\VerticalCommanderDamageContent.xaml.cs">
+	    <DependentUpon>VerticalCommanderDamageContent.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml.cs">
 	    <DependentUpon>HorizontalPlayerLifeContent.xaml</DependentUpon>
 	  </Compile>
@@ -172,7 +175,13 @@
 	  <MauiXaml Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamageContent.xaml">
+	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamage\HorizontalCommanderDamageContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamage\HorizontalReverseCommanderDamageContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamage\VerticalCommanderDamageContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD12Content.xaml">

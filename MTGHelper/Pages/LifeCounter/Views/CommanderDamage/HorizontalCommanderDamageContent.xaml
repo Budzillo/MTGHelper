@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.HorizontalCommanderDamageContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helpers="clr-namespace:MTGHelper.Helpers"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:CommanderDamageContentViewModel />
+    </ContentView.BindingContext>
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="intertBoolConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid
+        BackgroundColor="CornflowerBlue"
+        HorizontalOptions="Fill"
+        VerticalOptions="Fill">
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+        </Grid.GestureRecognizers>
+        <Label
+            x:Name="labelValue"
+            Grid.Row="0"
+            FontAttributes="Italic"
+            FontFamily="mplantin"
+            FontSize="120"
+            HorizontalTextAlignment="Center"
+            IsVisible="{Binding IsCommanderDamageYours, Converter={StaticResource intertBoolConverter}}"
+            Rotation="90"
+            Text="{Binding PlayerCommanderDamage}"
+            TextColor="White"
+            VerticalTextAlignment="Center" />
+        <Button
+            BackgroundColor="LightGray"
+            Text="End Damage"
+            TextColor="Black" />
+    </Grid>
+</ContentView>

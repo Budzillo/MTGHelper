@@ -143,6 +143,8 @@ namespace MTGHelper.ViewModels
             this.BlueCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_BLUE_CODE));
             this.MulticoloredCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsMultiColor));
             this.ColorlessCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_COLORLESSS_CODE));
+
+            var listImages = this.WhiteCards.Where(q => q.ImageUrl != null).Select(q => q.ImageUrl).ToList();
         }
     }
 }

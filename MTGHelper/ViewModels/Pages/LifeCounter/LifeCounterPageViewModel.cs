@@ -17,6 +17,8 @@ namespace MTGHelper.ViewModels
     {
         private int playerCount = 4;
         private int lifeTotal = 20;
+        private int commanderDamagePlayerIndex = 1;
+        private bool isCommanderDamageOpen = false;
         private PlayerModel player1;
         private PlayerModel player2;
         private PlayerModel player3;
@@ -43,6 +45,26 @@ namespace MTGHelper.ViewModels
             {
                 if (lifeTotal == value) return;
                 lifeTotal = value;
+                OnPropertyChanged();
+            }
+        }
+        public int CommanderDamagePlayerIndex
+        {
+            get { return commanderDamagePlayerIndex; }
+            set
+            {
+                if (commanderDamagePlayerIndex == value) return;
+                commanderDamagePlayerIndex = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsCommanderDamageOpen
+        {
+            get => isCommanderDamageOpen;
+            set
+            {
+                if(isCommanderDamageOpen == value) return;
+                isCommanderDamageOpen = value;
                 OnPropertyChanged();
             }
         }
@@ -280,7 +302,15 @@ namespace MTGHelper.ViewModels
                 this.LifeTotal = 30;
             else
                 this.LifeTotal = 20;
-
+        }
+        public void OpenCommanderDamage(int playerIndex)
+        {
+            this.CommanderDamagePlayerIndex = playerIndex;
+            this.IsCommanderDamageOpen = true;
+        }
+        public void CloseCommanderDamage() 
+        {
+            this.IsCommanderDamageOpen = false;
         }
         private async void FlashAnimation()
         {

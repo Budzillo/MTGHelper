@@ -2,7 +2,8 @@
 <ContentView
     x:Class="MTGHelper.Controls.CardListColor"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MTGHelper.Controls">
     <ContentView.Resources>
         <ResourceDictionary>
             <Style x:Key="imageButtonHideStyle" TargetType="ImageButton">
@@ -13,13 +14,39 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    <Border Margin="2">
-        <VerticalStackLayout>
-            <HorizontalStackLayout Margin="5">
-                <Image x:Name="imageColorIdentity" />
-                <Label />
-                <ImageButton Style="{StaticResource imageButtonHide}" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-    </Border>
+    <ScrollView>
+        <Border Margin="2">
+            <VerticalStackLayout>
+                <Grid Margin="5" HorizontalOptions="Fill">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="imageColorIdentity" Grid.Column="0" />
+                    <Label
+                        x:Name="labelColorName"
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        VerticalOptions="Center" />
+                    <ImageButton
+                        Grid.Column="2"
+                        HorizontalOptions="End"
+                        Source="/Resources/Images/close_x.svg"
+                        Style="{StaticResource imageButtonHideStyle}" />
+                </Grid>
+                <BoxView HeightRequest="1" Color="LightGray" />
+                <ListView x:Name="listViewCardList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ImageCell
+                                Detail="{Binding OriginalText}"
+                                ImageSource="{Binding ImageUrl}"
+                                Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
 </ContentView>

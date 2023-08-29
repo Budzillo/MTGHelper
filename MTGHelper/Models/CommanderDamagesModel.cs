@@ -85,5 +85,54 @@ namespace MTGHelper.Models
             if(this.Player5Damage != null) this.Player5Damage.ResetDamage();   
             if(this.Player6Damage != null) this.Player6Damage.ResetDamage();   
         }
+        public void IncreaseDamage(int playerIndex)
+        {
+            switch(playerIndex)
+            {
+                case 1: this.Player1Damage.IncreaseDamage();break;
+                case 2: this.Player1Damage.IncreaseDamage();break;
+                case 3: this.Player1Damage.IncreaseDamage();break;
+                case 4: this.Player1Damage.IncreaseDamage();break;
+                case 5: this.Player1Damage.IncreaseDamage();break;
+                case 6: this.Player1Damage.IncreaseDamage();break;
+            }
+        }
+        public void DecreaseDamage(int playerIndex)
+        {
+            switch (playerIndex)
+            {
+                case 1: this.Player1Damage.DecreaseDamage(); break;
+                case 2: this.Player1Damage.DecreaseDamage(); break;
+                case 3: this.Player1Damage.DecreaseDamage(); break;
+                case 4: this.Player1Damage.DecreaseDamage(); break;
+                case 5: this.Player1Damage.DecreaseDamage(); break;
+                case 6: this.Player1Damage.DecreaseDamage(); break;
+            }
+        }
+        public int GetDamage(int playerIndex)
+        {
+            switch (playerIndex)
+            {
+                case 1: return this.Player1Damage.Damage;
+                case 2: return this.Player2Damage.Damage;
+                case 3: return this.Player3Damage.Damage;
+                case 4: return this.Player4Damage.Damage;
+                case 5: return this.Player5Damage.Damage;
+                case 6: return this.Player6Damage.Damage;
+            }
+            return 0;
+        }
+        public void SetDamage(int playerIndex, int damage)
+        {
+            switch (playerIndex)
+            {
+                case 1: this.Player1Damage.Damage = damage; break;
+                case 2: this.Player2Damage.Damage = damage; break;
+                case 3: this.Player3Damage.Damage = damage; break;
+                case 4: this.Player4Damage.Damage = damage; break;
+                case 5: this.Player5Damage.Damage = damage; break;
+                case 6: this.Player6Damage.Damage = damage; break;
+            }
+        }
     }
 }

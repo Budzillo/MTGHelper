@@ -3,6 +3,7 @@
     x:Class="MTGHelper.Views.CardsByColorsContent"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
     <ContentView.BindingContext>
@@ -28,8 +29,29 @@
             </Style>
         </ResourceDictionary>
     </ContentView.Resources>
-    <VerticalStackLayout>
-        <Button Command="{Binding SetSearchPageViewModel.SetSetsPageCommand}" Text="Go back" />
-        
-    </VerticalStackLayout>
+    <ScrollView>
+        <VerticalStackLayout>
+            <Button Command="{Binding SetSearchPageViewModel.SetSetsPageCommand}" Text="Go back" />
+            <controls:CardListColor
+                Cards="{Binding WhiteCards}"
+                ColorImageSource="/Resources/Images/colors/white.svg"
+                ColorName="White" />
+            <controls:CardListColor
+                Cards="{Binding BlackCards}"
+                ColorImageSource="/Resources/Images/colors/black.svg"
+                ColorName="Black" />
+            <controls:CardListColor
+                Cards="{Binding RedCards}"
+                ColorImageSource="/Resources/Images/colors/red.svg"
+                ColorName="Red" />
+            <controls:CardListColor
+                Cards="{Binding GreenCards}"
+                ColorImageSource="/Resources/Images/colors/green.svg"
+                ColorName="Green" />
+            <controls:CardListColor
+                Cards="{Binding BlueCards}"
+                ColorImageSource="/Resources/Images/colors/blue.svg"
+                ColorName="Blue" />
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentView>

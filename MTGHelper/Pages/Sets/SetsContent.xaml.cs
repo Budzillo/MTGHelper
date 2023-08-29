@@ -6,4 +6,9 @@ public partial class SetsContent : ContentView
 	{
 		InitializeComponent();
 	}
+
+    private void SearchBar_Unfocused(object sender, FocusEventArgs e)
+    {
+		if(sender is SearchBar search) search.Unfocus();	
+    }
 }

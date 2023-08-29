@@ -33,6 +33,7 @@ namespace MTGHelper.ViewModels
                 });
             }
         }
+        public abstract void TurnOnOffCommanderDamageMode();
 
     }
 }
