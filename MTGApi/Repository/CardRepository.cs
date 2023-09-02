@@ -5,9 +5,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ScryfallApi.Client.Apis;
-using ScryfallApi.Client.Models;
-using ScryfallApi.Client;
 
 namespace MTGApi.Repository
 {
@@ -104,6 +101,7 @@ namespace MTGApi.Repository
                 return new List<ICard>();
             }
         }
+
         #endregion
 
         #region Informations
