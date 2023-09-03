@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -60,6 +61,19 @@ namespace MTGHelper.Models
                 await Task.Delay(250);
             }
             this.DiceValueInformation = $"You rolled {this.DiceValue}";
+        }
+        public async Task FlipCoin(FlipCoinContent flipCoinContent)
+        {
+            Random rnd = new Random();
+            int rolls = rnd.Next(10, 21);
+            this.DiceValue = 1;
+            for (int i = 0; i < rolls; i++)
+            {
+                this.DiceValue = this.DiceValue == 1 ? 2 : 1;
+                await flipCoinContent.FlipCoin();
+                await Task.Delay(500);
+            }
+            this.DiceValueInformation = $"You flipped {this.DiceValue}";
         }
         private void SetDiceD6ImageSource(int roll)
         {

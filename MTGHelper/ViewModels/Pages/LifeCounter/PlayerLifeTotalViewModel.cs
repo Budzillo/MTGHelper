@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Input;
 using static MTGHelper.ClassConst;
 
@@ -15,14 +16,18 @@ namespace MTGHelper.ViewModels
 {
     public partial class PlayerLifeTotalViewModel : BaseViewModel
     {
+        private System.Timers.Timer timer;
+
         private LifeCounterPageViewModel lifeCounterPageViewModel;
         private int playerIndex = 1;
         private int rotation;
+        private int addedValue;
+        private bool addedValueIsVisible = false;
         private ColorSelectContent colorSelectContent;
         private ColorSelectVerticalContent colorSelectVerticalContent;
         private HorizontalCommanderDamageContent horizontalCommanderDamageContent;
         private HorizontalReverseCommanderDamageContent horizontalReverseCommanderDamageContent;
-        private VerticalCommanderDamageContent verticalCommanderDamageContent;
+        private VerticalCommanderDamageContent verticalCommanderDamageContent;        
         public PlayerModel PlayerModel
         {
             get => GetPlayerModel();
@@ -41,6 +46,26 @@ namespace MTGHelper.ViewModels
             {
                 if (rotation == value) return;
                 rotation = value;
+                OnPropertyChanged();
+            }
+        }
+        public int AddedValue
+        {
+            get { return addedValue; }
+            set
+            {
+                if (addedValue == value) return;
+                addedValue = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool AddedValueIsVisible
+        {
+            get => addedValueIsVisible;
+            set
+            {
+                if (addedValueIsVisible == value) return;
+                addedValueIsVisible = value;
                 OnPropertyChanged();
             }
         }
@@ -180,12 +205,24 @@ namespace MTGHelper.ViewModels
             }
             else Decrease();
         }
+
+        private void StartAddedValueTimer(bool isPlus)
+        {
+            this.timer.Close();
+            this.AddedValueIsVisible = true;
+            if(isPlus) this.AddedValue++;
+            else this.AddedValue--; 
+            this.timer.Start();
+        }
+
         private void Decrease()
         {
+            StartAddedValueTimer(false);
             GetPlayerModel().Decrease();
         }
         private void Increase()
         {
+            StartAddedValueTimer(true);
             GetPlayerModel().Increase();
         }
         [RelayCommand]
@@ -210,6 +247,7 @@ namespace MTGHelper.ViewModels
             SetNumberTypeByEnum(COUNTER_TYPES.LIFE);
             Initialize();
             PrepareColorSelect();
+            PrepareTimer();
             PrepareCommands();
         }
         private void Initialize()
@@ -227,6 +265,18 @@ namespace MTGHelper.ViewModels
             this.ColorSelectVerticalContent = new ColorSelectVerticalContent();
             this.ColorSelectVerticalContent.BindingContext = this;
         }
+        private void PrepareTimer()
+        {
+            timer = new System.Timers.Timer();
+            timer.Interval = 3000;
+            timer.Elapsed += Timer_Elapsed;
+        }
+        private void Timer_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            this.AddedValueIsVisible = false;
+            this.AddedValue = 0;
+        }
+
         public PlayerModel GetPlayerModel()
         {
             if (lifeCounterPageViewModel == null) return new PlayerModel();
@@ -246,6 +296,13 @@ namespace MTGHelper.ViewModels
                     return lifeCounterPageViewModel.Player6;
                 default: return new PlayerModel();
             }
+        }
+        public async Task FlashRandomFirstPlayer(ContentView contentView)
+        {
+            await MainThread.InvokeOnMainThreadAsync(() => {
+                var animation = new Animation(v => contentView.Opacity = v, 0, 1);
+                animation.Commit((IAnimatable)contentView, "ContentRandomFirstPlayerFlashAnimation", 16, 600, Easing.Linear);
+            });
         }
     }
 }

@@ -19,6 +19,16 @@ namespace MTGHelper.ViewModels
             this.lifeCounterPageViewModel = lifeCounterPageViewModel;
             this.PrepareViews();
         }
+        public int RandomFromOne(int count)
+        {
+            Random random = new Random();
+            return random.Next(1,count);
+        }
+        public int Random(int min,int max)
+        {
+            Random random = new Random();
+            return random.Next(min,max);
+        }
         public abstract void PrepareViews();
 
         public abstract void RotateLifeTotal();
@@ -34,6 +44,7 @@ namespace MTGHelper.ViewModels
             }
         }
         public abstract void TurnOnOffCommanderDamageMode();
+        public abstract Task RandomFirstPlayer();
 
     }
 }

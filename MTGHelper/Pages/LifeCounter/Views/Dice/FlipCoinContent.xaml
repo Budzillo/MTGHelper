@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.FlipCoinContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Name="flipCoinContent">
+    <Grid HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="gridCoin">
+            <Image
+                HorizontalOptions="Center"
+                Source="/Resources/Images/coin.svg"
+                VerticalOptions="Center" />
+            <Label
+                Margin="5,0,0,0"
+                FontSize="20"
+                HorizontalOptions="Center"
+                RotationY="50"
+                Text="{Binding DiceRollModel.DiceValue}"
+                VerticalOptions="Center" />
+        </Grid>
+        <Label
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            Text="{Binding DiceRollModel.DiceValueInformation}"
+            VerticalOptions="Center" />
+    </Grid>
+</ContentView>

@@ -16,6 +16,27 @@
     </ContentView.Resources>
     <HorizontalStackLayout Style="{StaticResource mainSettingsStackPanelStyle}">
         <VerticalStackLayout Margin="10,10,0,0">
+            <Grid>
+                <ImageButton
+                    Command="{Binding FlipCoinCommand}"
+                    HorizontalOptions="Center"
+                    Source="/Resources/Images/coin.svg"
+                    Style="{StaticResource buttonDice}"
+                    VerticalOptions="Center" />
+                <Label
+                    Margin="5,0,0,0"
+                    FontSize="20"
+                    HorizontalOptions="Center"
+                    RotationY="50"
+                    Text="1"
+                    VerticalOptions="Center" />
+            </Grid>
+            <Label
+                HorizontalTextAlignment="Center"
+                Text="Coin"
+                VerticalTextAlignment="Center" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Margin="0,10,0,0">
             <ImageButton
                 Command="{Binding RollDiceCommand}"
                 CommandParameter="6"
@@ -57,6 +78,16 @@
             <Label
                 HorizontalTextAlignment="Center"
                 Text="D20"
+                VerticalTextAlignment="Center" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Margin="0,10,0,0">
+            <ImageButton
+                Command="{Binding RandomFirstPlayerCommand}"
+                Source="/Resources/Images/first_player_medal.svg"
+                Style="{StaticResource buttonDice}" />
+            <Label
+                HorizontalTextAlignment="Center"
+                Text="1st Player"
                 VerticalTextAlignment="Center" />
         </VerticalStackLayout>
     </HorizontalStackLayout>

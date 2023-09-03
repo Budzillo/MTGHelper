@@ -90,6 +90,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\AppIcon\mtg.svg" />
+	  <None Remove="Resources\Images\coin.svg" />
 	  <None Remove="Resources\Images\colors\black.svg" />
 	  <None Remove="Resources\Images\colors\black_w.svg" />
 	  <None Remove="Resources\Images\colors\blue.svg" />
@@ -182,6 +183,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamage\VerticalCommanderDamageContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\FlipCoinContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD12Content.xaml">

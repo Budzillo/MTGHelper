@@ -100,5 +100,32 @@ namespace MTGHelper.ViewModels
         {
             throw new NotImplementedException();
         }
+        public override async Task RandomFirstPlayer()
+        {
+
+            int randomNumber = Random(11, 21);
+            int randomPlayer = 1;
+            for (int i = 0; i < randomNumber; i++)
+            {
+                randomPlayer = RandomFromOne(6);
+                switch (randomPlayer)
+                {
+                    case 1: await this.BottomLeftHorizontalPlayerLifeContent.FlashRandomFirstPlayer(); break;
+                    case 2: await this.BottomRightHorizontalPlayerLifeContent.FlashRandomFirstPlayer(); break;
+                    case 3: await this.TopLeftHorizontalPlayerLifeContent.FlashRandomFirstPlayer(); break;
+                    case 4: await this.TopRightHorizontalPlayerLifeContent.FlashRandomFirstPlayer(); break;
+                    case 5: await this.BottomVerticalPlayerLifeContent.FlashRandomFirstPlayer(); break;
+                }
+                await Task.Delay(300);
+            }
+            switch (randomPlayer)
+            {
+                case 1: await this.BottomLeftHorizontalPlayerLifeContent.ShowFirstPlayer(); break;
+                case 2: await this.BottomRightHorizontalPlayerLifeContent.ShowFirstPlayer(); break;
+                case 3: await this.TopLeftHorizontalPlayerLifeContent.ShowFirstPlayer(); break;
+                case 4: await this.TopRightHorizontalPlayerLifeContent.ShowFirstPlayer(); break;
+                case 5: await this.BottomVerticalPlayerLifeContent.ShowFirstPlayer(); break;
+            }
+        }
     }
 }

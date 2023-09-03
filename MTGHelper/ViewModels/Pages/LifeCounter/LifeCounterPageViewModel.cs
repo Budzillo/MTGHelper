@@ -260,6 +260,31 @@ namespace MTGHelper.ViewModels
                 });
             }
         }
+
+        [RelayCommand]
+        private async Task FlipCoin()
+        {
+            this.DiceRollModel = new DiceRollModel();
+            Popup popup = new Popup();
+            FlipCoinContent content = new FlipCoinContent();
+            content.BindingContext = this;
+            popup.Content = content;
+            popup.Size = new Size(150, 150);
+            Shell.Current.CurrentPage.ShowPopupAsync(popup);
+            await MainThread.InvokeOnMainThreadAsync(async () =>
+            {
+                await this.DiceRollModel.FlipCoin(content);
+            });
+        }
+
+        [RelayCommand]
+        private async Task RandomFirstPlayer()
+        {
+            if(this.LifeTotalContent.BindingContext is BasePlayersLifeTotalViewModel viewModel)
+            {
+                await viewModel.RandomFirstPlayer();
+            }
+        }
         public LifeCounterPageViewModel()
         {
             PrepareGame();

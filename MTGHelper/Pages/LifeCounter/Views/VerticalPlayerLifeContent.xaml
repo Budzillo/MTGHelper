@@ -11,6 +11,7 @@
         <ResourceDictionary>
             <helpers:StringToColorConverter x:Key="stringToColorConverter" />
             <toolkit:InvertedBoolConverter x:Key="intertBoolConverter" />
+            <helpers:AddedValueConverter x:Key="addedValueConverter" />
             <Style x:Key="bottomCounterLabel" TargetType="Label">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="FontSize" Value="25" />
@@ -97,26 +98,37 @@
                     Grid.Row="1"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
-                    <Label
-                        x:Name="labelSelectedValue"
-                        Grid.Row="0"
-                        FontAttributes="Italic"
-                        FontFamily="mplantin"
-                        FontSize="120"
-                        HorizontalTextAlignment="Center"
-                        Text="{Binding PlayerModel.SelectedValue}"
-                        TextColor="Wheat"
-                        VerticalTextAlignment="Start">
-                        <Label.Style>
-                            <Style TargetType="Label" />
-                        </Label.Style>
-                        <Label.Behaviors>
-                            <toolkit:EventToCommandBehavior
-                                Command="{Binding LoadAnimationCommand}"
-                                CommandParameter="{Binding}"
-                                EventName="Loaded" />
-                        </Label.Behaviors>
-                    </Label>
+                    <HorizontalStackLayout>
+                        <Label
+                            x:Name="labelSelectedValue"
+                            Grid.Row="0"
+                            FontAttributes="Italic"
+                            FontFamily="mplantin"
+                            FontSize="120"
+                            HorizontalTextAlignment="Center"
+                            Text="{Binding PlayerModel.SelectedValue}"
+                            TextColor="Wheat"
+                            VerticalTextAlignment="Start">
+                            <Label.Style>
+                                <Style TargetType="Label" />
+                            </Label.Style>
+                            <Label.Behaviors>
+                                <toolkit:EventToCommandBehavior
+                                    Command="{Binding LoadAnimationCommand}"
+                                    CommandParameter="{Binding}"
+                                    EventName="Loaded" />
+                            </Label.Behaviors>
+                        </Label>
+                        <Label
+                            Margin="0,10,0,0"
+                            FontAttributes="Italic"
+                            FontFamily="mplantin"
+                            FontSize="30"
+                            IsVisible="{Binding AddedValueIsVisible}"
+                            Text="{Binding AddedValue, Converter={StaticResource addedValueConverter}}"
+                            TextColor="Wheat"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
                     <Image
                         HeightRequest="20"
                         HorizontalOptions="Center"

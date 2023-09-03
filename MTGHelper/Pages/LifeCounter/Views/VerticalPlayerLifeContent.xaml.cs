@@ -25,4 +25,18 @@ public partial class VerticalPlayerLifeContent : ContentView
             }
         }
     }
+    public async Task FlashRandomFirstPlayer()
+    {
+        if(this.BindingContext is PlayerLifeTotalViewModel viewModel)
+        {
+            await viewModel.FlashRandomFirstPlayer(this);
+        }
+    }
+    public async Task ShowFirstPlayer()
+    {
+        var previousValue = this.labelSelectedValue.Text;
+        this.labelSelectedValue.Text = "1St";
+        await Task.Delay(3000);
+        this.labelSelectedValue.Text = previousValue;
+    }
 }
