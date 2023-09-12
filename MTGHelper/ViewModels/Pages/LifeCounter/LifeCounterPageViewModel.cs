@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
 using MTGHelper.Models;
 using MTGHelper.Pages.LifeCounter.Views;
+using MTGHelper.Pages.LifeCounter.Views.Dice;
 using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace MTGHelper.ViewModels
         private int lifeTotal = 20;
         private int commanderDamagePlayerIndex = 1;
         private bool isCommanderDamageOpen = false;
+        private int diceCount = 1;
+        private Popup diceCountPopup = null;    
         private PlayerModel player1;
         private PlayerModel player2;
         private PlayerModel player3;
@@ -240,23 +243,31 @@ namespace MTGHelper.ViewModels
         {
             if(int.TryParse(diceValue,out int diceValueInt))
             {
+                await OpenSelectDiceCount("dices");
                 this.DiceRollModel = new DiceRollModel();
                 Popup popup = new Popup();
-                ContentView content = new ContentView();
-                switch (diceValueInt)
+                List<ContentView> contentViews = new List<ContentView>();
+                for(int i = 0; i < diceCount; i++)
                 {
-                    case 6: content = new RollDiceD6Content(); break;
-                    case 8: content = new RollDiceD8Content(); break;
-                    case 12: content = new RollDiceD12Content(); break;
-                    case 20: content = new RollDiceD20Content(); break;
-                }                
-                content.BindingContext = this;  
+                    switch (diceValueInt)
+                    {
+                        case 6: contentViews.Add(new RollDiceD6Content() { BindingContext = new DiceContentViewModel(new DiceRollModel())}); break;
+                        case 8: contentViews.Add(new RollDiceD8Content() { BindingContext = new DiceContentViewModel(new DiceRollModel()) }); break;
+                        case 12: contentViews.Add(new RollDiceD12Content() { BindingContext = new DiceContentViewModel(new DiceRollModel()) }); break;
+                        case 20: contentViews.Add(new RollDiceD20Content() { BindingContext = new DiceContentViewModel(new DiceRollModel()) }); break;
+                    }
+                }
+                ContentView content = new MultipleDicesContent(contentViews);  
                 popup.Content = content;
-                popup.Size = new Size(150, 150);
+                popup.Size = PreparePopupSize(this.diceCount);
                 Shell.Current.CurrentPage.ShowPopupAsync(popup);
                 await MainThread.InvokeOnMainThreadAsync(async () =>
                 {
-                    await this.DiceRollModel.RollDice(diceValueInt);
+                    foreach(var item in contentViews)
+                    {
+                        if (item.BindingContext is DiceContentViewModel viewModel)
+                            viewModel.DiceRollModel.RollDice(diceValueInt);
+                    }
                 });
             }
         }
@@ -264,16 +275,25 @@ namespace MTGHelper.ViewModels
         [RelayCommand]
         private async Task FlipCoin()
         {
+            await OpenSelectDiceCount("coin flips");
             this.DiceRollModel = new DiceRollModel();
             Popup popup = new Popup();
-            FlipCoinContent content = new FlipCoinContent();
-            content.BindingContext = this;
+            List<ContentView> contentViews = new List<ContentView>();
+            for (int i = 0; i < diceCount; i++)
+            {
+                contentViews.Add(new FlipCoinContent() { BindingContext = new DiceContentViewModel(new DiceRollModel()) });
+            }
+            ContentView content = new MultipleDicesContent(contentViews);
             popup.Content = content;
-            popup.Size = new Size(150, 150);
+            popup.Size = PreparePopupSize(this.diceCount);
             Shell.Current.CurrentPage.ShowPopupAsync(popup);
             await MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                await this.DiceRollModel.FlipCoin(content);
+                foreach (var item in contentViews)
+                {
+                    if(item.BindingContext is DiceContentViewModel viewModel && item is FlipCoinContent coinContent)
+                        viewModel.DiceRollModel.FlipCoin(coinContent);
+                }
             });
         }
 
@@ -284,6 +304,31 @@ namespace MTGHelper.ViewModels
             {
                 await viewModel.RandomFirstPlayer();
             }
+        }
+        [RelayCommand]
+        private async Task SelectDiceCount(string value)
+        {
+            if(int.TryParse(value, out var count))
+            {
+                this.diceCount = count;
+            }
+            this.diceCountPopup.Close();
+        }
+        private Size PreparePopupSize(int diceCount)
+        {
+            if (diceCount <= 3)
+                return new Size(diceCount * 120, 120);
+            else
+                return new Size(3 * 100, 240);
+        }
+        private async Task OpenSelectDiceCount(string diceType)
+        {
+            this.diceCountPopup = new Popup();
+            SelectDiceCountContent content = new SelectDiceCountContent(diceType);
+            content.BindingContext = this;
+            this.diceCountPopup.Content = content;
+            this.diceCountPopup.Size = new Size(300, 100);
+            await Shell.Current.CurrentPage.ShowPopupAsync(this.diceCountPopup);
         }
         public LifeCounterPageViewModel()
         {

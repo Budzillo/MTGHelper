@@ -101,6 +101,7 @@
 	  <None Remove="Resources\Images\colors\red_w.svg" />
 	  <None Remove="Resources\Images\colors\white.svg" />
 	  <None Remove="Resources\Images\colors\white_w.svg" />
+	  <None Remove="Resources\Images\dice_one.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -198,6 +199,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\RollDiceD8Content.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\SelectDiceCountContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\FivePlayersLifeCounterContent.xaml">

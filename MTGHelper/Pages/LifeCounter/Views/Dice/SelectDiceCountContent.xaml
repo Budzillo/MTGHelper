@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Pages.LifeCounter.Views.Dice.SelectDiceCountContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonDice" TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="40" />
+                <Setter Property="HeightRequest" Value="40" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+            </Style>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Styles/SettingsLifeTotalDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Label
+            x:Name="selectLabel"
+            HorizontalOptions="Center"
+            Text="Select number of dices:"
+            VerticalOptions="Center" />
+        <HorizontalStackLayout
+            Grid.Row="1"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+            <ImageButton
+                Margin="10,10,0,0"
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="1"
+                Source="/Resources/Images/dice_one.svg"
+                Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="2"
+                Source="/Resources/Images/dice_two.svg"
+                Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="3"
+                Source="/Resources/Images/dice_three.svg"
+                Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="4"
+                Source="/Resources/Images/dice_four.svg"
+                Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="5"
+                Source="/Resources/Images/dice_five.svg"
+                Style="{StaticResource buttonDice}" />
+            <ImageButton
+                Command="{Binding SelectDiceCountCommand}"
+                CommandParameter="6"
+                Source="/Resources/Images/dice_six.svg"
+                Style="{StaticResource buttonDice}" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentView>
