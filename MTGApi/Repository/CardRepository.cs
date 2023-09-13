@@ -172,8 +172,7 @@ namespace MTGApi.Repository
                 WriteTraceExMessage(ex);
                 return new List<string>();
             }
-        }
-
+        }        
 
         #endregion
     }

@@ -39,15 +39,27 @@ public partial class CardListColor : ContentView
     private static void CardsChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (CardListColor)bindable;
-        control.listViewCardList.ItemsSource = (ObservableCollection<ICard>)newValue;
-		if (((ObservableCollection<ICard>)newValue).Count == 0)
+        control.cardList.ClearCardIndex();
+        control.cardList.Cards = (ObservableCollection<ICard>)newValue;
+        if (((ObservableCollection<ICard>)newValue).Count == 0)
 		{
 			control.IsVisible = false;
 		}
 		else control.IsVisible = true;
+        control.labelColorCount.Text = $"Cards count: {((ObservableCollection<ICard>)newValue).Count}";
     }
     public CardListColor()
 	{
 		InitializeComponent();
 	}
+
+    private void ScrollView_Scrolled(object sender, ScrolledEventArgs e)
+    {
+        if (!(sender is ScrollView scrollView)) return;
+
+        var scrollSpace = scrollView.ContentSize.Height - scrollView.Height;
+
+        if (scrollSpace > e.ScrollY) return;
+        //this.cardList.AddCards();
+    }
 }

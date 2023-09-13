@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Controls.CardListCard"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:helper="clr-namespace:MTGHelper.Helpers">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <helper:CardImageConverter x:Key="cardImageConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="8*" />
+        </Grid.ColumnDefinitions>
+        <Image
+            x:Name="imageCard"
+            Grid.Column="0"
+            HorizontalOptions="Fill"
+            Source="https://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=527424&amp;type=card"
+            VerticalOptions="Fill" />
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label
+                x:Name="labelName"
+                Grid.Row="0"
+                Text="{Binding Name}" />
+            <Label
+                x:Name="labelOriginalType"
+                Grid.Row="1"
+                Text="{Binding OriginalType}" />
+        </Grid>
+    </Grid>
+</ContentView>
