@@ -314,6 +314,15 @@ namespace MTGHelper.ViewModels
             }
             this.diceCountPopup.Close();
         }
+        [RelayCommand]
+        private async Task OpenSettings()
+        {
+            ConfigurationPopupViewModel configurationPopupViewModel = new ConfigurationPopupViewModel(this);
+            ConfigurationPoupup configurationPopup = new ConfigurationPoupup();            
+            configurationPopup.BindingContext = configurationPopupViewModel;
+            configurationPopup.Size = new Size(400, 800);
+            await Shell.Current.CurrentPage.ShowPopupAsync(configurationPopup);
+        }
         private Size PreparePopupSize(int diceCount)
         {
             if (diceCount <= 3)

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.PlayersConfigurationContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
+    BackgroundColor="Transparent">
+    <ContentView.BindingContext>
+        <viewModels:PlayersConfigurationContentViewModel />
+    </ContentView.BindingContext>
+    <VerticalStackLayout Padding="10">
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player1ConfigurationContent}"
+            IsVisible="{Binding IsPlayer1Visible}" />
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player2ConfigurationContent}"
+            IsVisible="{Binding IsPlayer2Visible}" />
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player3ConfigurationContent}"
+            IsVisible="{Binding IsPlayer3Visible}" />
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player4ConfigurationContent}"
+            IsVisible="{Binding IsPlayer4Visible}" />
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player5ConfigurationContent}"
+            IsVisible="{Binding IsPlayer5Visible}" />
+        <ContentView
+            BackgroundColor="Transparent"
+            Content="{Binding Player6ConfigurationContent}"
+            IsVisible="{Binding IsPlayer6Visible}" />
+    </VerticalStackLayout>
+</ContentView>
+

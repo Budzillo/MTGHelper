@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Views.PlayerConfigurationContent"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:MTGHelper.Controls"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
+    BackgroundColor="Transparent">
+    <ContentView.BindingContext>
+        <viewModels:PlayerConfigurationContentViewModel />
+    </ContentView.BindingContext>
+    <Frame Padding="{OnPlatform Android='10,0', iOS='10,10'}" BorderColor="LightGray">
+        <Grid x:Name="gridLayoutRoot">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <HorizontalStackLayout Grid.Row="0" Margin="0,10,0,10">
+                <Label Text="Player Name:" VerticalOptions="Center" />
+                <Frame
+                    x:Name="frameEntry"
+                    Margin="10,0,0,0"
+                    Padding="{OnPlatform Android='10,0',
+                                         iOS='10,10'}"
+                    BorderColor="LightGray"
+                    HorizontalOptions="FillAndExpand">
+                    <control:BorderlessEntry
+                        HorizontalOptions="Fill"
+                        Placeholder="Enter player name..."
+                        PlaceholderColor="LightGray"
+                        Text="{Binding Player.PlayerName}"
+                        VerticalOptions="Center" />
+                </Frame>
+            </HorizontalStackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

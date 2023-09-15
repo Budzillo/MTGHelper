@@ -102,6 +102,7 @@
 	  <None Remove="Resources\Images\colors\white.svg" />
 	  <None Remove="Resources\Images\colors\white_w.svg" />
 	  <None Remove="Resources\Images\dice_one.svg" />
+	  <None Remove="Resources\Images\settings_background.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -113,8 +114,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Commands\" />
-	  <Folder Include="Pages\Decks\" />
-	  <Folder Include="ViewModels\Pages\Decks\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -141,11 +140,17 @@
 	  <Compile Update="Pages\Cards\CardsByColorsContent.xaml.cs">
 	    <DependentUpon>CardsByColorsContent.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Decks\AddDeckPopup.xaml.cs">
+	    <DependentUpon>AddDeckPopup.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\Colors\ColorSelectVerticalContent.xaml.cs">
 	    <DependentUpon>ColorSelectVerticalContent.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\CommanderDamage\VerticalCommanderDamageContent.xaml.cs">
 	    <DependentUpon>VerticalCommanderDamageContent.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\LifeCounter\Views\Configuration\ConfigurationPopup.xaml.cs">
+	    <DependentUpon>ConfigurationPopup.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\LifeCounter\Views\HorizontalPlayerLifeContent.xaml.cs">
 	    <DependentUpon>HorizontalPlayerLifeContent.xaml</DependentUpon>
@@ -177,6 +182,12 @@
 	  <MauiXaml Update="Pages\Cards\CardsFilterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Decks\AddDeckPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Decks\MainDecksContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\LifeCounterPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -193,6 +204,15 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\CommanderDamage\VerticalCommanderDamageContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Configuration\ConfigurationPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Configuration\PlayerConfigurationContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\LifeCounter\Views\Configuration\PlayersConfigurationContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LifeCounter\Views\Dice\FlipCoinContent.xaml">

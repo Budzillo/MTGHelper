@@ -35,6 +35,7 @@
             Style="{StaticResource imageButtonSetting}"
             ToolTipProperties.Text="Roll Dice" />
         <ImageButton
+            Command="{Binding OpenSettingsCommand}"
             Source="/Resources/Images/settings.svg"
             Style="{StaticResource imageButtonSetting}"
             ToolTipProperties.Text="Settings" />
