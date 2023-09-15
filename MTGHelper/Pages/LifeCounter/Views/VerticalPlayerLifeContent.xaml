@@ -67,6 +67,7 @@
                         Grid.Column="0"
                         Command="{Binding SetNumberTypeCommand}"
                         CommandParameter="poison"
+                        IsVisible="{Binding PlayerModel.IsPoisonCounterVisible}"
                         Source="/Resources/Images/poison_counter.svg"
                         Style="{StaticResource buttonBottomCounters}">
                         <ImageButton.Behaviors>
@@ -77,6 +78,7 @@
                         Grid.Column="1"
                         Command="{Binding SetNumberTypeCommand}"
                         CommandParameter="energy"
+                        IsVisible="{Binding PlayerModel.IsEnergyCounterVisible}"
                         Source="/Resources/Images/energy_counter.svg"
                         Style="{StaticResource buttonBottomCounters}">
                         <ImageButton.Behaviors>

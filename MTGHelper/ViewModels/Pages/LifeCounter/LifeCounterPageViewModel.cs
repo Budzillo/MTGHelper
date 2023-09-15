@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Maui.Views;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Controls;
+using MTGHelper.Helpers;
 using MTGHelper.Models;
 using MTGHelper.Pages.LifeCounter.Views;
 using MTGHelper.Pages.LifeCounter.Views.Dice;
@@ -203,6 +204,7 @@ namespace MTGHelper.ViewModels
         private void ChangePlayerCount(string count)
         {
             this.PlayerCount = int.Parse(count);
+            SettingsHelper.SaveLifeCounterConfig(this);
             PrepareGame();
         }
         [RelayCommand]
@@ -228,6 +230,7 @@ namespace MTGHelper.ViewModels
             if(int.TryParse(value,out int life))
             {
                 this.LifeTotal = life;
+                SettingsHelper.SaveLifeCounterConfig(this);
                 ResetGame();
                 RotateLabels();
             }
@@ -345,9 +348,10 @@ namespace MTGHelper.ViewModels
             PrepareSettings();
         }
         private void PrepareGame()
-        {            
-           // this.SetFormat("Standard");
-            this.PreparePlayers(this.playerCount);
+        {
+            SettingsHelper.LoadLifeCounterConfig(this);
+            this.PreparePlayers();
+            SettingsHelper.LoadPlayersConfig(this);
             this.PrepareCurrentLifeTotalView();
         }
         private void PrepareSettings()
@@ -356,7 +360,7 @@ namespace MTGHelper.ViewModels
             settings.BindingContext = this;
             this.SettingsContent = settings; 
         }
-        private void PreparePlayers(int playersCount)
+        private void PreparePlayers()
         {
             List<string> colors = new List<string> { "red", "blue", "black","green","white","Gray" };
             Player1 = new PlayerModel(0, LifeTotal, $"Player {1}", colors[0]);

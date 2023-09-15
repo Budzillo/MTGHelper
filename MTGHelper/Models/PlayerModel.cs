@@ -41,6 +41,10 @@ namespace MTGHelper.Models
         private string whiteImageSource = $"{BASE_IMAGE_CATALOG_NAME}white.svg";
         private string blackImageSource = $"{BASE_IMAGE_CATALOG_NAME}black.svg";
 
+        private bool isPoisonCounterVisible = true;
+        private bool isTicketCounterVisible = true;
+        private bool isEnergyCounterVisible = true;
+
         private bool isColorPickerOpen = false;
         private bool isCommanderDamageOpen = false;
 
@@ -360,6 +364,37 @@ namespace MTGHelper.Models
             {
                 if (blackImageSource == value) return;
                 blackImageSource = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsPoisonCounterVisible
+        {
+            get => isPoisonCounterVisible;
+            set
+            {
+                if(isPoisonCounterVisible == value) return;
+                isPoisonCounterVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsEnergyCounterVisible
+        {
+            get => isEnergyCounterVisible;
+            set
+            {
+                if(isEnergyCounterVisible == value) return;
+                isEnergyCounterVisible = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsTicketCounterVisible
+        {
+            get => isTicketCounterVisible;
+            set
+            {
+                if(isTicketCounterVisible == value) return;
+                isTicketCounterVisible = value;
                 OnPropertyChanged();
             }
         }

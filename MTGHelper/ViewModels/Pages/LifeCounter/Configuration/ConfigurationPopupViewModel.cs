@@ -1,4 +1,6 @@
-﻿using MTGHelper.Models;
+﻿using CommunityToolkit.Mvvm.Input;
+using MTGHelper.Helpers;
+using MTGHelper.Models;
 using MTGHelper.Views;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace MTGHelper.ViewModels
 {
-    public class ConfigurationPopupViewModel : BaseViewModel
+    public partial class ConfigurationPopupViewModel : BaseViewModel
     {
         private LifeCounterPageViewModel lifeCounterPageViewModel;
 
@@ -22,6 +24,15 @@ namespace MTGHelper.ViewModels
                 if (playersConfigurationContent == value) return;
                 playersConfigurationContent = value;
                 OnPropertyChanged();
+            }
+        }
+        [RelayCommand]
+        private void Close(object sender)
+        {
+            if(sender is ConfigurationPoupup configurationPoupup)
+            {
+                SettingsHelper.SaveLifeCounterConfig(lifeCounterPageViewModel);
+                configurationPoupup.Close();
             }
         }
         public ConfigurationPopupViewModel() { }

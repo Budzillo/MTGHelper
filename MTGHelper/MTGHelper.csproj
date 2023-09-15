@@ -93,16 +93,24 @@
 	  <None Remove="Resources\Images\coin.svg" />
 	  <None Remove="Resources\Images\colors\black.svg" />
 	  <None Remove="Resources\Images\colors\black_w.svg" />
+	  <None Remove="Resources\Images\colors\black_wheat.svg" />
 	  <None Remove="Resources\Images\colors\blue.svg" />
 	  <None Remove="Resources\Images\colors\blue_w.svg" />
+	  <None Remove="Resources\Images\colors\blue_wheat.svg" />
 	  <None Remove="Resources\Images\colors\green.svg" />
 	  <None Remove="Resources\Images\colors\green_w.svg" />
+	  <None Remove="Resources\Images\colors\green_wheat.svg" />
 	  <None Remove="Resources\Images\colors\red.svg" />
 	  <None Remove="Resources\Images\colors\red_w.svg" />
+	  <None Remove="Resources\Images\colors\red_wheat.svg" />
 	  <None Remove="Resources\Images\colors\white.svg" />
 	  <None Remove="Resources\Images\colors\white_w.svg" />
+	  <None Remove="Resources\Images\colors\white_wheat.svg" />
 	  <None Remove="Resources\Images\dice_one.svg" />
+	  <None Remove="Resources\Images\energy_counter_w.svg" />
+	  <None Remove="Resources\Images\poison_counter_w.svg" />
 	  <None Remove="Resources\Images\settings_background.svg" />
+	  <None Remove="Resources\Images\ticket_counter_w.svg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -122,14 +130,19 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiImage>
 	  <MauiImage Include="Resources\Images\colors\black_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\black_wheat.svg" />
 	  <MauiImage Include="Resources\Images\colors\blue.svg" />
 	  <MauiImage Include="Resources\Images\colors\blue_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\blue_wheat.svg" />
 	  <MauiImage Include="Resources\Images\colors\green.svg" />
 	  <MauiImage Include="Resources\Images\colors\green_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\green_wheat.svg" />
 	  <MauiImage Include="Resources\Images\colors\red.svg" />
 	  <MauiImage Include="Resources\Images\colors\red_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\red_wheat.svg" />
 	  <MauiImage Include="Resources\Images\colors\white.svg" />
 	  <MauiImage Include="Resources\Images\colors\white_w.svg" />
+	  <MauiImage Include="Resources\Images\colors\white_wheat.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

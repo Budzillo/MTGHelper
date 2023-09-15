@@ -15,4 +15,5 @@ public partial class LifeCounterPage : ContentPage
 		}
 		else this.scrollViewOptions.HeightRequest = 0;
     }
+    
 }

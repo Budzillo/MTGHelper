@@ -67,6 +67,7 @@
                         Grid.Column="0"
                         Command="{Binding SetNumberTypeCommand}"
                         CommandParameter="poison"
+                        IsVisible="{Binding PlayerModel.IsPoisonCounterVisible}"
                         Rotation="90"
                         Source="/Resources/Images/poison_counter.svg"
                         Style="{StaticResource buttonBottomCounters}">
@@ -78,6 +79,7 @@
                         Grid.Column="1"
                         Command="{Binding SetNumberTypeCommand}"
                         CommandParameter="energy"
+                        IsVisible="{Binding PlayerModel.IsEnergyCounterVisible}"
                         Rotation="90"
                         Source="/Resources/Images/energy_counter.svg"
                         Style="{StaticResource buttonBottomCounters}">
@@ -117,7 +119,7 @@
                             Grid.Row="0"
                             FontAttributes="Italic"
                             FontFamily="mplantin"
-                            FontSize="120"
+                            FontSize="100"
                             HorizontalTextAlignment="Center"
                             Text="{Binding PlayerModel.SelectedValue}"
                             TextColor="Wheat"

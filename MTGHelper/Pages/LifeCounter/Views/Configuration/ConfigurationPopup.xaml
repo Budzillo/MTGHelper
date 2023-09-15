@@ -5,31 +5,39 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:viewModels="clr-namespace:MTGHelper.ViewModels"
+    x:Name="popup"
     HorizontalOptions="Fill"
     VerticalOptions="Fill"
     Color="White">
     <toolkit:Popup.BindingContext>
         <viewModels:ConfigurationPopupViewModel />
     </toolkit:Popup.BindingContext>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
-        <Image
-            Aspect="AspectFill"
-            Source="Resource/Images/settings_background.svg"
-            ZIndex="1" />
-        <Button
-            Margin="5"
-            Clicked="Button_Clicked"
-            HorizontalOptions="End"
-            Text="Close"
-            VerticalOptions="Center"
-            ZIndex="2" />
-        <ContentView
-            Grid.Row="1"
-            Content="{Binding PlayersConfigurationContent}"
-            ZIndex="2" />
-    </Grid>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Image
+                Grid.RowSpan="3"
+                Aspect="AspectFill"
+                Source="Resource/Images/settings_background.svg"
+                ZIndex="1" />
+            <ImageButton
+                Margin="5"
+                Command="{Binding CloseCommand}"
+                CommandParameter="{Binding Source={x:Reference popup}}"
+                HeightRequest="40"
+                HorizontalOptions="End"
+                Source="/Resources/Images/close_x.svg"
+                VerticalOptions="Center"
+                WidthRequest="40"
+                ZIndex="2" />
+            <ContentView
+                Grid.Row="1"
+                Content="{Binding PlayersConfigurationContent}"
+                ZIndex="2" />
+        </Grid>
+    </ScrollView>
 </toolkit:Popup>
