@@ -2,27 +2,27 @@
 <h2>Spis treści</h2
 <p style="font-weight:bold">Opis</p>
 <p style="font-weight:bold">Wymagania systemowe</p>
-<p> style="font-weight:bold">Instalacja</p>
-<p> style="font-weight:bold">Uruchamianie na emulatorze Androida</p>
-<p> style="font-weight:bold">Funkcje</p>
-<p> style="font-weight:bold">Struktura projektu</p>
-<p> style="font-weight:bold">Wzorzec projektowy MVVM</p>
-<p> style="font-weight:bold">Technologia MAUI .NET 7</p>
+<p style="font-weight:bold">Instalacja</p>
+<p style="font-weight:bold">Uruchamianie na emulatorze Androida</p>
+<p style="font-weight:bold">Funkcje</p>
+<p style="font-weight:bold">Struktura projektu</p>
+<p style="font-weight:bold">Wzorzec projektowy MVVM</p>
+<p style="font-weight:bold">Technologia MAUI .NET 7</p>
 <br/>
-<p> style="font-weight:bold">Opis</p>
+<h2>Opis</h2>
 Aplikacja Magic: The Gathering Helper została stworzona w celu ułatwienia graczy w zarządzaniu kartami i życiem podczas gry w Magic: The Gathering. Aplikacja wykorzystuje wzorzec projektowy MVVM (Model-View-ViewModel) do oddzielenia warstwy prezentacji od logiki biznesowej, co czyni ją bardziej skalowalną i łatwą do utrzymania. Aplikacja została napisana w technologii MAUI .NET 7, co oznacza, że jest wieloplatformowa i działa na różnych systemach operacyjnych.
 
-Wymagania systemowe
-Przed rozpoczęciem korzystania z aplikacji na emulatorze Androida upewnij się, że spełniasz następujące wymagania systemowe:
+<h2Wymagania systemowe</h2>
+<p>Przed rozpoczęciem korzystania z aplikacji na emulatorze Androida upewnij się, że spełniasz następujące wymagania systemowe:</p>
 
-System operacyjny: Windows 10, macOS, Linux
-.NET SDK 7.0 lub nowszy
-MAUI .NET 7 SDK
-Android Emulator (zainstalowany i skonfigurowany)
-Instalacja
+<p>System operacyjny: Windows 10, macOS, Linux
+.NET SDK 7.0 lub nowszy</p>
+<p>MAUI .NET 7 SDK</p>
+<p>Android Emulator (zainstalowany i skonfigurowany)</p>
+<h2>Instalacja</h2>
 Aby zainstalować aplikację Magic: The Gathering Helper, wykonaj następujące kroki:
 
-Sklonuj repozytorium z kodem źródłowym:
+<p>Sklonuj repozytorium z kodem źródłowym:</p>
 
 Skopiuj kod:
 git clone https://github.com/twoj-repozytorium/mtg-companion.git
