@@ -29,48 +29,62 @@ git clone https://github.com/twoj-repozytorium/mtg-companion.git
 Przejdź do katalogu projektu:
 
 Skopiuj kod:
+```
 cd mtg-companion
-Zbuduj i zainstaluj aplikację za pomocą .NET CLI:
+```
+<p>Zbuduj i zainstaluj aplikację za pomocą .NET CLI:</p>
 
-Skopiuj kod:
+<p>Skopiuj kod:</p>
+
+```
 dotnet build
-dotnet install
-Uruchamianie na emulatorze Androida
-Aby uruchomić aplikację na emulatorze Androida, wykonaj następujące kroki:
+```
 
-Upewnij się, że masz zainstalowany emulator Androida i jesteś w stanie go uruchomić.
+```
+dotnet install
+```
+<p>Uruchamianie na emulatorze Androida</p>
+<p>Aby uruchomić aplikację na emulatorze Androida, wykonaj następujące kroki:</p>
+
+<p>Upewnij się, że masz zainstalowany emulator Androida i jesteś w stanie go uruchomić.</p>
 
 Otwórz terminal i przejdź do katalogu projektu:
 
 Skopiuj kod:
-cd mtg-companion
-Uruchom aplikację na emulatorze Androida za pomocą następującego polecenia:
+```
+cd MTGHelper
+```
+<p>Uruchom aplikację na emulatorze Androida za pomocą następującego polecenia:</p>
 
 Skopiuj kod:
+```
 dotnet maui android -e
-Aplikacja zostanie zbudowana i uruchomi się na emulatorze Androida.
+```
+<p>Aplikacja zostanie zbudowana i uruchomi się na emulatorze Androida.</p>
 
-Funkcje
-Aplikacja Magic: The Gathering Helper oferuje szereg przydatnych funkcji, w tym:
+<h2>Funkcje</h2>
+<p>Aplikacja Magic: The Gathering Helper oferuje szereg przydatnych funkcji, w tym:</p>
+<ul>
+  <li>Odliczanie życia poszczególnych graczy.</li>
+  <li>Losowanie pierwszego gracza.</li>
+  <li>Symulacja rzutu różnymi typami kości w różnej ilość np. 2xd6, 4xd12,1xd20.</li>
+  <li>Konfiguracja ilości graczy, ich kolorów, zmiana ilości życia, personalizacja widoczności elementów gry.</li>
+  <li>Wyszukiwanie wszystkich dostępnych rozszerzeń z gry Magic The Gathering.</li>
+  <li>Wyszukiwanie kart z wybranego rozszerzenia.</li>
+</ul>
+<h2>Struktura projektu</h2>
+<p>Struktura projektu jest oparta na wzorcu MVVM i zawiera następujące główne katalogi:</p>
+<ul>
+  <li>Models: Klasyczne modele danych.</li>
+  <li>ViewModels: Klasy ViewModel, które zarządzają danymi i logiką biznesową.</li>
+  <li>Pages: Interfejsy użytkownika, pliki XAML.</li>
+  <li>Helpers: Pomocnicze klasy i narzędzia.</li>
+  <li>Resources: Zasoby, takie jak obrazy i ikony.</li>
+  <li>Controls: Utworzone kontrolki na potrzeby aplikacji.</li>
+  <li>Platforms: Konfiguracje dla poszczególnych platform w MAUI.</li>
+</ul>
+<h2>Wzorzec projektowy MVVM</h2>
+<p>Aplikacja Magic: The Gathering Helper wykorzystuje wzorzec projektowy MVVM, co oznacza, że ​​oddziela warstwę prezentacji od logiki biznesowej. Model reprezentuje dane, ViewModel obsługuje logikę biznesową, a View jest odpowiedzialne za interfejs użytkownika. To podejście ułatwia testowanie, skalowanie i utrzymanie aplikacji.</p>
 
-Odliczanie życia poszczególnych graczy.
-Losowanie pierwszego gracza.
-Symulacja rzutu różnymi typami kości w różnej ilość np. 2xd6, 4xd12,1xd20.
-Konfiguracja ilości graczy, ich kolorów, zmiana ilości życia, personalizacja widoczności elementów gry.
-Wyszukiwanie wszystkich dostępnych rozszerzeń z gry Magic The Gathering.
-Wyszukiwanie kart z wybranego rozszerzenia.
-Struktura projektu
-Struktura projektu jest oparta na wzorcu MVVM i zawiera następujące główne katalogi:
-
-Models: Klasyczne modele danych.
-ViewModels: Klasy ViewModel, które zarządzają danymi i logiką biznesową.
-Pages: Interfejsy użytkownika, pliki XAML.
-Helpers: Pomocnicze klasy i narzędzia.
-Resources: Zasoby, takie jak obrazy i ikony.
-Controls: Utworzone kontrolki na potrzeby aplikacji.
-Platforms: Konfiguracje dla poszczególnych platform w MAUI.
-Wzorzec projektowy MVVM
-Aplikacja Magic: The Gathering Helper wykorzystuje wzorzec projektowy MVVM, co oznacza, że ​​oddziela warstwę prezentacji od logiki biznesowej. Model reprezentuje dane, ViewModel obsługuje logikę biznesową, a View jest odpowiedzialne za interfejs użytkownika. To podejście ułatwia testowanie, skalowanie i utrzymanie aplikacji.
-
-Technologia MAUI .NET 7
-Aplikacja została napisana w technologii MAUI .NET 7, co oznacza, że ​​jest wieloplatformowa i może działać na różnych systemach operacyjnych, takich jak Windows, macOS i Linux. MAUI .NET 7 umożliwia tworzenie natywnych aplikacji przy użyciu jednego zestawu kodu źródłowego.
+<h2>Technologia MAUI .NET 7</h2>
+<p>Aplikacja została napisana w technologii MAUI .NET 7, co oznacza, że ​​jest wieloplatformowa i może działać na różnych systemach operacyjnych, takich jak Windows, macOS i Linux. MAUI .NET 7 umożliwia tworzenie natywnych aplikacji przy użyciu jednego zestawu kodu źródłowego.</p>
