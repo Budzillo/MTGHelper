@@ -25,7 +25,7 @@ Aby zainstalować aplikację Magic: The Gathering Helper, wykonaj następujące 
 <p>Sklonuj repozytorium z kodem źródłowym:</p>
 
 Skopiuj kod:
-git clone https://github.com/twoj-repozytorium/mtg-companion.git
+git clone [https://github.com/twoj-repozytorium/mtg-companion.git](https://github.com/Budzillo/MTGHelper.git)
 Przejdź do katalogu projektu:
 
 Skopiuj kod:
