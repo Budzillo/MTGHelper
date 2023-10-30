@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid
-        BackgroundColor="CornflowerBlue"
+        BackgroundColor="LightGray"
         HorizontalOptions="Fill"
         VerticalOptions="Fill">
         <Grid.GestureRecognizers>
@@ -28,14 +28,30 @@
             FontFamily="mplantin"
             FontSize="120"
             HorizontalTextAlignment="Center"
-            IsVisible="{Binding IsCommanderDamageYours, Converter={StaticResource intertBoolConverter}}"
+            IsVisible="{Binding Player.IsCommanderDamageDealer, Converter={StaticResource intertBoolConverter}}"
             Rotation="90"
             Text="{Binding PlayerCommanderDamage}"
             TextColor="White"
             VerticalTextAlignment="Center" />
+        <Label
+            x:Name="labelIsYours"
+            Margin="10,0,0,0"
+            FontSize="20"
+            HorizontalOptions="Center"
+            IsVisible="{Binding Player.IsCommanderDamageDealer}"
+            Rotation="90"
+            Text="Hit your opponents"
+            VerticalOptions="Center" />
         <Button
-            BackgroundColor="LightGray"
+            BackgroundColor="SlateGray"
+            Command="{Binding EndCommanderDamageCommand}"
+            HeightRequest="45"
+            HorizontalOptions="Start"
+            IsVisible="{Binding Player.IsCommanderDamageDealer}"
+            Rotation="90"
             Text="End Damage"
-            TextColor="Black" />
+            TextColor="Black"
+            VerticalOptions="Center"
+            WidthRequest="100" />
     </Grid>
 </ContentView>

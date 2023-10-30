@@ -240,7 +240,7 @@ namespace MTGHelper.ViewModels
         {
             this.SettingsContent = new SettingsLifeContent();
             this.SettingsContent.BindingContext = this;
-        }
+        }        
         [RelayCommand]
         private async Task RollDice(string diceValue)
         {
@@ -389,11 +389,36 @@ namespace MTGHelper.ViewModels
         public void OpenCommanderDamage(int playerIndex)
         {
             this.CommanderDamagePlayerIndex = playerIndex;
-            this.IsCommanderDamageOpen = true;
+            switch (playerIndex)
+            {
+                case 1: Player1.IsCommanderDamageDealer = true; break;
+                case 2: Player2.IsCommanderDamageDealer = true; break;
+                case 3: Player3.IsCommanderDamageDealer = true; break;
+                case 4: Player4.IsCommanderDamageDealer = true; break;
+                case 5: Player5.IsCommanderDamageDealer = true; break;
+                case 6: Player6.IsCommanderDamageDealer = true; break;
+            }
+            Player1.ShowCommanderDamage();
+            Player2.ShowCommanderDamage();
+            Player3.ShowCommanderDamage();
+            Player4.ShowCommanderDamage();
+            Player5.ShowCommanderDamage();
+            Player6.ShowCommanderDamage();
         }
         public void CloseCommanderDamage() 
         {
-            this.IsCommanderDamageOpen = false;
+            Player1.IsCommanderDamageDealer = false;
+            Player2.IsCommanderDamageDealer = false;
+            Player3.IsCommanderDamageDealer = false;
+            Player4.IsCommanderDamageDealer = false;
+            Player5.IsCommanderDamageDealer = false;
+            Player6.IsCommanderDamageDealer = false; 
+            Player1.HideCommanderDamage();
+            Player2.HideCommanderDamage();
+            Player3.HideCommanderDamage();
+            Player4.HideCommanderDamage();
+            Player5.HideCommanderDamage();
+            Player6.HideCommanderDamage();
         }
         private async void FlashAnimation()
         {

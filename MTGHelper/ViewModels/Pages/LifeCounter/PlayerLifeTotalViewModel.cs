@@ -119,7 +119,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-
+        public CommanderDamageContentViewModel CommanderDamageContentViewModel { get; set; }
         [RelayCommand]
         public void SetNumberType(string counterName)
         {
@@ -135,6 +135,11 @@ namespace MTGHelper.ViewModels
         private void CloseColorPicker()
         {
             GetPlayerModel().HideColorPicker();
+        }
+        [RelayCommand]
+        private void OpenCommanderDamage()
+        {
+            this.lifeCounterPageViewModel.OpenCommanderDamage(GetPlayerModel().Id);
         }
         [RelayCommand]
         private void SetColor(string color)
@@ -247,6 +252,7 @@ namespace MTGHelper.ViewModels
             SetNumberTypeByEnum(COUNTER_TYPES.LIFE);
             Initialize();
             PrepareColorSelect();
+            PrepareCommanderDamageContent();
             PrepareTimer();
             PrepareCommands();
         }
@@ -257,6 +263,16 @@ namespace MTGHelper.ViewModels
         private void PrepareCommands()
         {
 
+        }
+        private void PrepareCommanderDamageContent()
+        {
+            this.CommanderDamageContentViewModel = new CommanderDamageContentViewModel(GetPlayerModel().Id, this.lifeCounterPageViewModel);
+            this.HorizontalCommanderDamageContent = new HorizontalCommanderDamageContent();
+            this.HorizontalCommanderDamageContent.BindingContext = this.CommanderDamageContentViewModel;
+            this.HorizontalReverseCommanderDamageContent = new HorizontalReverseCommanderDamageContent();
+            this.HorizontalReverseCommanderDamageContent.BindingContext = this.CommanderDamageContentViewModel;
+            this.VerticalCommanderDamageContent = new VerticalCommanderDamageContent();
+            this.VerticalCommanderDamageContent.BindingContext = this.CommanderDamageContentViewModel;
         }
         private void PrepareColorSelect()
         {

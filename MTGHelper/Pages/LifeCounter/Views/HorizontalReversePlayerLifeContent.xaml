@@ -163,6 +163,13 @@
                 Rotation="180"
                 VerticalOptions="Fill"
                 ZIndex="9999" />
+            <ContentView
+                Content="{Binding HorizontalCommanderDamageContent}"
+                HorizontalOptions="Fill"
+                IsVisible="{Binding PlayerModel.IsCommanderDamageOpen}"
+                Rotation="180"
+                VerticalOptions="Fill"
+                ZIndex="9999" />
             <ImageButton
                 Margin="10"
                 Command="{Binding OpenColorPickerCommand}"
@@ -179,6 +186,7 @@
             </ImageButton>
             <ImageButton
                 Margin="10"
+                Command="{Binding OpenCommanderDamageCommand}"
                 HeightRequest="40"
                 HorizontalOptions="End"
                 Rotation="-90"

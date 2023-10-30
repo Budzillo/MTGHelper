@@ -52,6 +52,8 @@ namespace MTGHelper.Models
 
         private CommanderDamagesModel commanderDamagesModel;
 
+        private bool isCommanderDamageDealer = false;
+
         #endregion
 
         #region Properties
@@ -439,6 +441,16 @@ namespace MTGHelper.Models
                 OnPropertyChanged();
             }
         }
+        public bool IsCommanderDamageDealer
+        {
+            get => isCommanderDamageDealer;
+            set
+            {
+                if (isCommanderDamageDealer == value) return;
+                isCommanderDamageDealer = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
         public PlayerModel()
         {
@@ -517,6 +529,8 @@ namespace MTGHelper.Models
             this.SelectedCounterType = COUNTER_TYPES.LIFE;
             this.CommanderDamagesModel.ResetValues();
             this.SelectedValue = Life;
+            this.IsCommanderDamageOpen = false;
+            this.IsCommanderDamageDealer = false;
 
         }
         public void SelectCounterType(COUNTER_TYPES counterType)
@@ -567,6 +581,14 @@ namespace MTGHelper.Models
         public void HideColorPicker()
         {
             this.IsColorPickerOpen = false;
+        }
+        public void ShowCommanderDamage()
+        {
+            this.IsCommanderDamageOpen = true;
+        }
+        public void HideCommanderDamage()
+        {
+            this.IsCommanderDamageOpen = false;
         }
         public void SetColor(string color)
         {

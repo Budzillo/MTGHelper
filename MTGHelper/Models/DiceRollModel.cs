@@ -50,7 +50,7 @@ namespace MTGHelper.Models
         public async Task RollDice(int walls)
         {
             Random rnd = new Random();  
-            int rolls = rnd.Next(10, 21);
+            int rolls = rnd.Next(5, 12);
             for(int i = 0; i < rolls; i++)
             {
                 this.DiceValue = rnd.Next(1,1+walls);
@@ -65,7 +65,7 @@ namespace MTGHelper.Models
         public async Task FlipCoin(FlipCoinContent flipCoinContent)
         {
             Random rnd = new Random();
-            int rolls = rnd.Next(10, 21);
+            int rolls = rnd.Next(5, 12);
             this.DiceValue = 1;
             for (int i = 0; i < rolls; i++)
             {

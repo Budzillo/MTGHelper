@@ -15,15 +15,10 @@ namespace MTGHelper.ViewModels
         private int commanderDamageDealerIndex = 1;
         private LifeCounterPageViewModel lifeCounterPageViewModel;
         private bool isCommanderDamageYours = false;
+        private PlayerModel player;
         public bool IsCommanderDamageYours
         {
-            get => isCommanderDamageYours;
-            set
-            {
-                if(isCommanderDamageYours == value) return;
-                isCommanderDamageYours = value;
-                OnPropertyChanged();
-            }
+            get => lifeCounterPageViewModel.CommanderDamagePlayerIndex == playerIndex;
         }
         public int PlayerCommanderDamage
         {
@@ -65,10 +60,20 @@ namespace MTGHelper.ViewModels
             }
             else GetPlayerModel().CommanderDamagesModel.DecreaseDamage(playerIndex);
         }
+        public PlayerModel Player
+        {
+            get => player;
+            set
+            {
+                if(player == value) return; 
+                player = value;
+                OnPropertyChanged();
+            }
+        }
         [RelayCommand]
         public void EndCommanderDamage()
         {
-
+            this.lifeCounterPageViewModel.CloseCommanderDamage();
         }
         public CommanderDamageContentViewModel() 
         {
@@ -78,6 +83,7 @@ namespace MTGHelper.ViewModels
         {
             this.playerIndex = playerIndex;
             this.lifeCounterPageViewModel = lifeCounterPageViewModel;
+            this.Player = GetPlayerModel();
         }
         public void SetCommanderDamageDealerIndex(int index)
         {

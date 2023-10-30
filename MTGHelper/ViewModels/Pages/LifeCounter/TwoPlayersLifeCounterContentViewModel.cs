@@ -64,7 +64,7 @@ namespace MTGHelper.ViewModels
         public override async Task RandomFirstPlayer()
         {
            
-            int randomNumber = Random(11,21);
+            int randomNumber = Random(5, 12);
             int randomPlayer = 1;
             for (int i = 0; i < randomNumber; i++)
             {
