@@ -1,4 +1,6 @@
-﻿using MTGHelper.Controls;
+﻿using MTGApi.Repository;
+using MTGHelper.Controls;
+using Scryfall.API.Models;
 
 namespace MTGHelper;
 
@@ -8,8 +10,7 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
-
+		MainPage = new AppShell();		
 		Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(BorderlessEntry), (handler, view) =>
 		{
 			#if __ANDROID__

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31611.283
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTGHelper", "MTGHelper\MTGHelper.csproj", "{8C508323-D3ED-4502-99DA-B88EBA31E57F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MTGApi", "MTGApi\MTGApi.csproj", "{1D599EA7-7D6B-460D-8BCA-C7ED75E7D8E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MTGApi", "MTGApi\MTGApi.csproj", "{1D599EA7-7D6B-460D-8BCA-C7ED75E7D8E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

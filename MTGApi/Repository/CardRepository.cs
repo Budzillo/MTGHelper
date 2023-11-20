@@ -1,5 +1,7 @@
 ﻿using MtgApiManager.Lib.Model;
 using MtgApiManager.Lib.Service;
+using Scryfall.API;
+using Scryfall.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -99,6 +101,18 @@ namespace MTGApi.Repository
             {
                 WriteTraceExMessage(ex);
                 return new List<ICard>();
+            }
+        }
+        public async Task<Card> GetCardByName(string name = "Krenko")
+        {
+            try
+            {
+                return scryfallClient.Cards.GetNamed(name);
+            }
+            catch(Exception ex)
+            {
+                WriteTraceExMessage(ex);
+                return new Card();  
             }
         }
 

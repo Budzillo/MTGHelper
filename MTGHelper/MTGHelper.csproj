@@ -195,6 +195,9 @@
 	  <MauiXaml Update="Pages\Cards\CardsFilterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Cards\SearchCardContent.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Decks\AddDeckPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
