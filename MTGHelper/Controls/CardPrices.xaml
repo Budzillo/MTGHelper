@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Controls.CardPrices"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label
+                Grid.Row="0"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Prices" />
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Grid.Column="0" Margin="10,0,0,0">
+                    <Label Text="Normal" />
+                    <Label x:Name="labelPriceUSD" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="1" Margin="10,0,0,0">
+                    <Label Text="Foil" />
+                    <Label x:Name="labelPriceUSDFoil" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Grid.Column="2" Margin="10,0,0,0">
+                    <Label Text="Etched Foil" />
+                    <Label x:Name="labelPriceUSDEtched" />
+                </VerticalStackLayout>
+                <Label
+                    x:Name="labelPriceEuro"
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="10,0,0,0" />
+                <Label
+                    x:Name="labelPriceEuroFoil"
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="10,0,0,0" />
+                <Label
+                    x:Name="labelPriceEuroEtched"
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    Margin="10,0,0,0" />
+            </Grid>
+        </Grid>
+    </Border>
+</ContentView>

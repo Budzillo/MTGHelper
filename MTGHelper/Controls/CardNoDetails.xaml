@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Controls.CardNoDetails"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
+    <Border HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid x:Name="gridLayoutRoot">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="4*" />
+                <ColumnDefinition Width="6*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <Image x:Name="cardImage" Margin="5" />
+            </Grid>
+            <VerticalStackLayout Grid.Column="1">
+                <VerticalStackLayout Grid.Row="0" Margin="0,0,0,10">
+                    <Label x:Name="labelCardName" />
+                    <Label x:Name="labelCardManaCost" />
+                </VerticalStackLayout>
+                <Label x:Name="labelCardType" />
+                <Label x:Name="labelCardOracleText" />
+                <Label
+                    x:Name="labelCardPowerThougness"
+                    Grid.Column="1"
+                    Margin="0,0,20,0"
+                    FontAttributes="Italic"
+                    FontSize="20"
+                    HorizontalOptions="End" />
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentView>

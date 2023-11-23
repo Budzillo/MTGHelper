@@ -108,6 +108,7 @@
 	  <None Remove="Resources\Images\colors\white_wheat.svg" />
 	  <None Remove="Resources\Images\dice_one.svg" />
 	  <None Remove="Resources\Images\energy_counter_w.svg" />
+	  <None Remove="Resources\Images\filter.svg" />
 	  <None Remove="Resources\Images\poison_counter_w.svg" />
 	  <None Remove="Resources\Images\settings_background.svg" />
 	  <None Remove="Resources\Images\ticket_counter_w.svg" />
@@ -153,6 +154,9 @@
 	  <Compile Update="Pages\Cards\CardsByColorsContent.xaml.cs">
 	    <DependentUpon>CardsByColorsContent.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Cards\SearchCardPage.xaml.cs">
+	    <DependentUpon>SearchCardPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Decks\AddDeckPopup.xaml.cs">
 	    <DependentUpon>AddDeckPopup.xaml</DependentUpon>
 	  </Compile>
@@ -180,6 +184,9 @@
 	  <MauiXaml Update="App.xaml">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\CardFilter.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\CardList.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -189,13 +196,25 @@
 	  <MauiXaml Update="Controls\CardListColor.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Controls\CardNoDetails.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\CardPrices.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\CardSearchResult.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Controls\LegalityControl.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Cards\CardsByColorsContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Cards\CardsFilterContent.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Cards\SearchCardContent.xaml">
+	  <MauiXaml Update="Pages\Cards\SearchCardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Decks\AddDeckPopup.xaml">

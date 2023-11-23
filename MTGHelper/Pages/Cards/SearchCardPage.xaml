@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MTGHelper.Pages.SearchCardPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
+    xmlns:helper="clr-namespace:MTGHelper.Helpers"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModels:SearchCardContentViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView
+        Grid.Row="1"
+        HorizontalOptions="CenterAndExpand"
+        Orientation="Vertical"
+        VerticalOptions="FillAndExpand"
+        VerticalScrollBarVisibility="Always">
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10">
+                <Grid>
+                    <controls:BorderlessEntry
+                        x:Name="entryCardName"
+                        Margin="10,0,0,0"
+                        HorizontalOptions="FillAndExpand"
+                        Placeholder="Wpisz nazwę karty..."
+                        Text="{Binding CardName, Mode=TwoWay, UpdateSourceEventName=LostFocus}" />
+                    <ImageButton
+                        Margin="0,0,30,0"
+                        Command="{Binding OpenCloseFiltersCommand}"
+                        HorizontalOptions="End"
+                        Source="/Resources/Images/filter.svg"
+                        VerticalOptions="Center"
+                        WidthRequest="23" />
+                    <ImageButton
+                        Margin="0,0,5,0"
+                        Clicked="ImageButton_Clicked"
+                        Command="{Binding SearchCardCommand}"
+                        HorizontalOptions="End"
+                        Source="/Resources/Images/search.svg"
+                        VerticalOptions="Center"
+                        WidthRequest="23" />
+                </Grid>
+            </Border>
+            <controls:CardSearchResult Grid.Row="1" Cards="{Binding FoundedCards}" />
+            <!--<controls:CardNoDetails Card="{Binding FoundedCard}" IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" />
+        <controls:CardPrices Card="{Binding FoundedCard}" IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" />
+        <controls:LegalityControl IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" Legality="{Binding FoundedCard.Legalities}" />-->
+        </Grid>
+    </ScrollView>
+</ContentPage>
