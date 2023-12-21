@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using MTGApi.Repository;
+using MTGApi.ScryfallRepository;
 using MtgApiManager.Lib.Model;
+using Scryfall.API.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,9 +15,9 @@ namespace MTGHelper.ViewModels
     public partial class SetsContentViewModel : BaseViewModel
     {
         private SetSearchPageViewModel setSearchPageViewModel;
-        private SetRepository repository;
-        private List<ISet> allSets;
-        private ObservableCollection<ISet> searchedSets;
+        private ScryfallSetRepository repository;
+        private List<Set> allSets = new List<Set>();
+        private ObservableCollection<Set> searchedSets;
         private string searchText;
         public SetSearchPageViewModel SetSearchPageViewModel
         {
@@ -27,7 +29,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ISet> SearchedSets
+        public ObservableCollection<Set> SearchedSets
         {
             get => searchedSets;
             set
@@ -58,21 +60,26 @@ namespace MTGHelper.ViewModels
         }
         private async void Initialization()
         {
-            this.repository = new SetRepository();
-            this.allSets = await repository.GetSets();
-            this.SearchedSets = new ObservableCollection<ISet>(allSets.OrderBy(q => q.Name).ThenByDescending(q => q.ReleaseDate));
+            this.repository = new ScryfallSetRepository();
+            SetList setList = await repository.GetAllSets();
+            if(setList != null)
+            {
+                this.allSets = setList.Data.ToList();
+                this.SearchedSets = new ObservableCollection<Set>(allSets.OrderBy(q => q.Name));
+            }
         }
         [RelayCommand]
         private void SearchTextChanged()
-        {
-            this.SearchedSets = new ObservableCollection<ISet>(allSets.OrderBy(q=>q.Name).ThenByDescending(q => q.ReleaseDate).Where(q => q.Name.ToLower().Contains(this.SearchText.ToLower())));
+        { 
+            if(allSets != null)
+                this.SearchedSets = new ObservableCollection<Set>(allSets.Where(q => q != null).OrderBy(q=>q.Name).Where(q => q.Name != null && q.Name.ToLower().Contains(this.SearchText.ToLower())).ToList());
         }
         [RelayCommand]
         private void SelectedSetChanged(object sender)
         {
-            if(sender is ISet set)
+            if(sender is Set set)
             {
-                this.SetSearchPageViewModel.SetCardsByColorsPage(set.Name);
+                this.SetSearchPageViewModel.SetCardsByColorsPage(set.Code);
             }
         }
     }

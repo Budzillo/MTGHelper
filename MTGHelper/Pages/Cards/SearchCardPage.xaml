@@ -19,6 +19,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Border Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10">
                 <Grid>
@@ -45,10 +46,52 @@
                         WidthRequest="23" />
                 </Grid>
             </Border>
-            <controls:CardSearchResult Grid.Row="1" Cards="{Binding FoundedCards}" />
-            <!--<controls:CardNoDetails Card="{Binding FoundedCard}" IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" />
-        <controls:CardPrices Card="{Binding FoundedCard}" IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" />
-        <controls:LegalityControl IsVisible="{Binding FoundedCard, Converter={helper:NullToBoolConverter}}" Legality="{Binding FoundedCard.Legalities}" />-->
+            <Border Grid.Row="1" IsVisible="{Binding IsFiltersOpen}">
+                <VerticalStackLayout Margin="5">
+                    <VerticalStackLayout>
+                        <Label HorizontalOptions="Start" Text="Sort By"  Margin="5,0,0,0"/>
+                        <HorizontalStackLayout>
+                            <Border>
+                                <Picker x:Name="pickerSortType" WidthRequest="310" SelectedItem="{Binding SortBy}">
+                                    <Picker.ItemsSource>
+                                        <x:Array Type="{x:Type x:String}">
+                                            <x:String>Name</x:String>
+                                            <x:String>Mana value</x:String>
+                                            <x:String>Power</x:String>
+                                            <x:String>Toughness</x:String>
+                                        </x:Array>
+                                    </Picker.ItemsSource>
+                                </Picker>
+                            </Border>
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                    <Label FontSize="25" Text="FILTERS" HorizontalOptions="Center"/>
+                    <VerticalStackLayout>
+                        <Label Text="Type line" />
+                        <Border Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10">
+                            <Entry
+                             HorizontalOptions="CenterAndExpand"
+                             Placeholder="Legendary,Creature,Angel"
+                             PlaceholderColor="LightGray"
+                             Text="{Binding TypeLine}"
+                             HorizontalTextAlignment="Center"
+                             VerticalTextAlignment="Center"
+                             VerticalOptions="Start" />
+                        </Border>
+                    </VerticalStackLayout>
+                    <Label Text="Oracle text" />
+                    <Button 
+                        x:Name="buttonSortAscDsc" 
+                        Text="Filter" 
+                        Background="Wheat" 
+                        TextColor="Black" 
+                        HeightRequest="40" 
+                        Command="{Binding FilterByCommand}" 
+                        HorizontalOptions="Center" 
+                        VerticalOptions="Center"/>
+                </VerticalStackLayout>
+            </Border>
+            <controls:CardSearchResult Grid.Row="2" Cards="{Binding FoundedCards}" />
         </Grid>
     </ScrollView>
 </ContentPage>

@@ -62,6 +62,7 @@ namespace MTGHelper.ViewModels
         }
         public void SetCardsByColorsPage(string setName)
         {
+            this.CardsByColorsContent = new CardsByColorsContent();
             this.CardsByColorsContent.BindingContext = new CardsByColorsContentViewModel(this,setName);
             this.SelectedContentPage = this.CardsByColorsContent;
         }

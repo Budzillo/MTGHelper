@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:MTGHelper.Controls"
+             xmlns:scryfallModels="clr-namespace:Scryfall.API.Models;assembly=MTGApi"
+             x:Class="MTGHelper.Controls.CardDetails">
+    <ContentView.BindingContext>
+        <scryfallModels:Card/>
+    </ContentView.BindingContext>
+    <ScrollView VerticalOptions="Fill" VerticalScrollBarVisibility="Always" Orientation="Vertical">
+        <Border>
+            <VerticalStackLayout Margin="5">
+                <Image Margin="3" HorizontalOptions="Fill" VerticalOptions="Center" HeightRequest="400">
+                    <Image.Source>
+                        <UriImageSource Uri="{Binding ImageUris.Png}" CacheValidity="1" CachingEnabled="True"/>
+                    </Image.Source>
+                </Image>
+                <Label HorizontalOptions="Center" Text="{Binding Name}"/>
+                <Label HorizontalOptions="Center" Text="{Binding TypeLine}"/>
+                <Label HorizontalOptions="Center" Text="{Binding OracleText}"/>
+                <controls:LegalityControl Legality="{Binding Legalities}"/>
+                <controls:CardPrices Card="{Binding}"/>
+                <controls:CardVersions Card="{Binding}"/>
+            </VerticalStackLayout>
+        </Border>
+    </ScrollView>
+</ContentView>

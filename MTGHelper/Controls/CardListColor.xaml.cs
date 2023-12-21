@@ -1,4 +1,4 @@
-using MtgApiManager.Lib.Model;
+using Scryfall.API.Models;
 using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 
@@ -16,15 +16,15 @@ public partial class CardListColor : ContentView
         get => (string)GetValue(ColorImageSourcProperty);
         set => SetValue(ColorImageSourcProperty, value);
     }
-	public ObservableCollection<ICard> Cards
+	public ObservableCollection<Card> Cards
 	{
-        get => (ObservableCollection<ICard>)GetValue(CardsProperty);
+        get => (ObservableCollection<Card>)GetValue(CardsProperty);
         set => SetValue(CardsProperty, value);
     }
 
 	public static readonly BindableProperty ColorNameProperty = BindableProperty.Create(nameof(ColorName),typeof(string),typeof(string),"w",BindingMode.TwoWay,propertyChanged:ColorNameChanged);
 	public static readonly BindableProperty ColorImageSourcProperty = BindableProperty.Create(nameof(ColorImageSource),typeof(string),typeof(string),"/Resources/Images/snow.svg",BindingMode.TwoWay, propertyChanged: ColorImageSourceChanged);
-	public static readonly BindableProperty CardsProperty = BindableProperty.Create(nameof(Cards), typeof(ObservableCollection<ICard>), typeof(ObservableCollection<ICard>), new ObservableCollection<ICard>(), BindingMode.TwoWay, propertyChanged: CardsChanged);
+	public static readonly BindableProperty CardsProperty = BindableProperty.Create(nameof(Cards), typeof(ObservableCollection<Card>), typeof(ObservableCollection<Card>), new ObservableCollection<Card>(), BindingMode.TwoWay, propertyChanged: CardsChanged);
 
 	private static void ColorNameChanged(BindableObject bindable, object oldValue, object newValue)
 	{
@@ -39,14 +39,13 @@ public partial class CardListColor : ContentView
     private static void CardsChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var control = (CardListColor)bindable;
-        control.cardList.ClearCardIndex();
-        control.cardList.Cards = (ObservableCollection<ICard>)newValue;
-        if (((ObservableCollection<ICard>)newValue).Count == 0)
+        control.cardSearchResult.Cards = (ObservableCollection<Card>)newValue;
+        if (((ObservableCollection<Card>)newValue).Count == 0)
 		{
 			control.IsVisible = false;
 		}
 		else control.IsVisible = true;
-        control.labelColorCount.Text = $"Cards count: {((ObservableCollection<ICard>)newValue).Count}";
+        control.labelColorCount.Text = $"Cards count: {((ObservableCollection<Card>)newValue).Count}";
     }
     public CardListColor()
 	{

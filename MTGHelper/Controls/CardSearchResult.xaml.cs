@@ -1,7 +1,5 @@
-using MtgApiManager.Lib.Model;
 using Scryfall.API.Models;
 using System.Collections.ObjectModel;
-using System.Runtime.CompilerServices;
 
 namespace MTGHelper.Controls;
 

@@ -21,8 +21,11 @@ namespace MTGHelper.ViewModels
         private string cardName;
         private Card foundedCard;      
         private ObservableCollection<Card> foundedCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> allCards = new ObservableCollection<Card>();
         private Uri cardImageUri;
         private bool isFiltersOpen = false;
+        private string sortBy = "Name";
+        private string typeLine;
         public string CardName
         {
             get=> cardName;
@@ -73,16 +76,64 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
+        public string SortBy
+        {
+            get => sortBy;
+            set
+            {
+                if(sortBy == value) return;
+                sortBy = value; 
+                OnPropertyChanged();
+            }
+        }
+        public string TypeLine
+        {
+            get => typeLine;
+            set
+            {
+                if(typeLine == value) return;
+                typeLine = value; 
+                OnPropertyChanged();
+            }
+        }
         [RelayCommand]
         private async Task SearchCardAsync()
         {
             this.FoundedCards.Clear();
             HttpOperationResponse<CardList> cardList = await new ScryfallCardsRepository().GetCardsByName(CardName);
             if(cardList.Body != null && cardList.Body.Data != null)
-                FoundedCards = new ObservableCollection<Card>(cardList.Body.Data);            
+            {
+                allCards = new ObservableCollection<Card>(cardList.Body.Data);
+                FilterBy();
+            }
         }
         [RelayCommand]
-        private async Task OpenCloseFilters()
+        private void FilterBy()
+        {
+            if(allCards != null)
+            {
+                switch (SortBy)
+                {
+                    case "Name": FoundedCards = new ObservableCollection<Card>(allCards.Where(q => IsContainsType(q?.TypeLine)).OrderBy(q => q.Name)); break;
+                    case "Mana value": FoundedCards = new ObservableCollection<Card>(allCards.Where(q => IsContainsType(q?.TypeLine)).OrderBy(q => q.ManaCost)); break;
+                    case "Power": FoundedCards = new ObservableCollection<Card>(allCards.Where(q => IsContainsType(q?.TypeLine)).OrderBy(q => q.Power)); break;
+                    case "Toughness": FoundedCards = new ObservableCollection<Card>(allCards.Where(q => IsContainsType(q?.TypeLine)).OrderBy(q => q.Toughness)); break;
+                }
+            }
+        }
+        private bool IsContainsType(string typeLine)
+        {
+            bool result = false;
+            if (TypeLine == null || TypeLine == String.Empty) return true;
+            foreach(string type in TypeLine.Split(','))
+            {
+                result = typeLine.ToLower().Contains(type.ToLower());
+            }
+            return result;
+        }
+
+        [RelayCommand]
+        private void OpenCloseFilters()
         {
             IsFiltersOpen = !IsFiltersOpen;
         }

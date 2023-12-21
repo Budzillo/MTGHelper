@@ -14,5 +14,6 @@ namespace MTGApi
         public const string COLOR_WHITE_CODE = "W";
         public const string COLOR_BLACK_CODE = "B";
         public const string COLOR_COLORLESSS_CODE = "C";
+        public const string COLOR_MULTICOLOR_CODE = "M";
     }
 }
