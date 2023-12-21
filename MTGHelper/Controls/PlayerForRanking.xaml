@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Controls.PlayerForRanking"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
+    xmlns:local="MTGHelper.Controls.PlayerForRanking">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="Margin" Value="5" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <HorizontalStackLayout>
+            <Label x:Name="labelName" />
+            <Label x:Name="labelTournamentWins" />
+            <Label x:Name="labelDeckCount" />
+            <ImageButton
+                x:Name="imageButtonShow"
+                Clicked="imageButtonShow_Clicked"
+                HorizontalOptions="End"
+                Source="/Resources/Images/show_plus.svg"
+                WidthRequest="20" />
+        </HorizontalStackLayout>
+        <Border Grid.Row="1" IsVisible="False">
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:BorderlessEntry
+                    x:Name="entryName"
+                    Grid.Row="0"
+                    Margin="5"
+                    Placeholder="Entry name"
+                    Text="{Binding Path=DeckRankingModel.Name}" />
+                <controls:BorderlessEntry
+                    x:Name="entryDescription"
+                    Grid.Row="1"
+                    Margin="5"
+                    Placeholder="Entry description"
+                    Text="{Binding Path=DeckRankingModel.Description}" />
+                <Picker
+                    x:Name="pickerPowerLevel"
+                    Grid.Row="2"
+                    Margin="5"
+                    HorizontalOptions="Center"
+                    SelectedItem="{Binding Path=DeckRankingModel.PowerLevel}"
+                    VerticalOptions="Center">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>S+</x:String>
+                            <x:String>S</x:String>
+                            <x:String>A</x:String>
+                            <x:String>B</x:String>
+                            <x:String>C</x:String>
+                            <x:String>D</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <controls:BorderlessEntry
+                    x:Name="entryCommanderName"
+                    Grid.Row="3"
+                    Margin="5"
+                    Placeholder="Entry commander name"
+                    Text="{Binding Path=CommanderName}" />
+                <Button
+                    x:Name="buttonSearchCommanders"
+                    Grid.Row="4"
+                    Margin="10"
+                    Text="Search" />
+                <CarouselView
+                    x:Name="carouselViewCommanders"
+                    Grid.Row="5"
+                    HeightRequest="350"
+                    ItemsSource="{Binding SearchedCommanders}"
+                    WidthRequest="400">
+                    <CarouselView.EmptyView>
+                        <Grid HorizontalOptions="Center" VerticalOptions="Center">
+                            <Label
+                                FontSize="25"
+                                Text="Not Found"
+                                TextColor="LightGray" />
+                        </Grid>
+                    </CarouselView.EmptyView>
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid
+                                BackgroundColor="Wheat"
+                                HeightRequest="350"
+                                WidthRequest="350">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
+                                <Label
+                                    Grid.Row="0"
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding Name}" />
+                                <Label
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding TypeLine}" />
+                                <Image
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="10"
+                                    HeightRequest="200"
+                                    HorizontalOptions="Center"
+                                    Source="{Binding CardImageSource}"
+                                    VerticalOptions="Center" />
+                                <Button
+                                    x:Name="selectCommander"
+                                    Grid.Row="3"
+                                    Grid.Column="1"
+                                    Margin="10"
+                                    Clicked="selectCommander_Clicked"
+                                    Text="Select" />
+                            </Grid>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <Button
+                    x:Name="buttonAddDeck"
+                    Grid.Row="6"
+                    Margin="10"
+                    Clicked="buttonAddDeck_Clicked"
+                    Text="Search" />
+            </Grid>
+        </Border>
+        <VerticalStackLayout x:Name="verticalStackLayoutDeckList" Grid.Row="2" />
+    </Grid>
+</ContentView>

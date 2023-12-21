@@ -33,6 +33,9 @@
         <Tab Title="Decks">
             <ShellContent ContentTemplate="{DataTemplate pages:SetSearchPage}" />
         </Tab>
+        <Tab Title="Rankings">
+            <ShellContent ContentTemplate="{DataTemplate pages:MainRanking}" />
+        </Tab>
     </TabBar>
 </Shell>
 

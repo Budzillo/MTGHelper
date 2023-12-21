@@ -41,5 +41,19 @@ namespace MTGApi.ScryfallRepository
                 return new HttpOperationResponse<CardList>();
             }
         }
+        public async Task<HttpOperationResponse<CardList>> GetCommandersByName(string name)
+        {
+            try
+            {
+                string q = $"\"{name}\" unique:name t:legendary";
+                Trace.WriteLine(q);
+                return await scryfallClient.Cards.SearchWithHttpMessagesAsync(q);
+            }
+            catch (Exception ex)
+            {
+                Trace.WriteLine(ex);
+                return new HttpOperationResponse<CardList>();
+            }
+        }
     }
 }

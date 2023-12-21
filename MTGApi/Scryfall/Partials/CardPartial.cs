@@ -9,5 +9,15 @@ namespace Scryfall.API.Models
 {
     public partial class Card
     {
+        [NotMapped]
+        public ImageSource CardImageSource 
+        { 
+            get=> new UriImageSource()
+            {
+                Uri = new Uri(this.ImageUris.Png),
+                CacheValidity = new TimeSpan(1),
+                CachingEnabled = true,
+            }; 
+        }
     }
 }

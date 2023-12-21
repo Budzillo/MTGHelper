@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="MTGHelper.Pages.Ranking.RankingDecks"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:MTGHelper.Controls"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentView.BindingContext>
+        <viewModels:RankingDecksViewModel />
+    </ContentView.BindingContext>
+    <ScrollView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Button
+                Grid.Row="0"
+                Command="{Binding AddPlayerRankingCommand}"
+                Text="Add Player" />
+            <Grid Grid.Row="1" IsVisible="{Binding IsAddPlayerOpen}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <controls:BorderlessEntry
+                    x:Name="entryPlayerName"
+                    Grid.Row="0"
+                    Margin="5"
+                    Placeholder="Entry name"
+                    Text="{Binding PlayerRankingToAdd.Name}" />
+                <controls:BorderlessEntry
+                    x:Name="entryTournamentsWins"
+                    Grid.Row="1"
+                    Margin="5"
+                    Placeholder="Entry tournament wins"
+                    Text="{Binding PlayerRankingToAdd.TournamentWins}" />
+                <Button
+                    Grid.Row="2"
+                    Margin="5"
+                    Command="{Binding InsertPlayerRankingCommand}"
+                    Text="Insert Player" />
+            </Grid>
+            <Label
+                Grid.Row="2"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="Current Players:" />
+            <controls:PlayerForRankingList
+                Grid.Row="3"
+                HorizontalOptions="Center"
+                PlayerRankingModels="{Binding PlayerRankings}"
+                VerticalOptions="Start" />
+        </Grid>
+    </ScrollView>
+</ContentView>

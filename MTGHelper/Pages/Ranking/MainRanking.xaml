@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MTGHelper.Pages.MainRanking"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:MTGHelper.Pages.Ranking"
+    xmlns:viewModels="clr-namespace:MTGHelper.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModels:MainRankingViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Button
+                Grid.Column="0"
+                Command="{Binding SelectDeckPageCommand}"
+                Text="Deck List" />
+            <Button
+                Grid.Column="1"
+                Command="{Binding SelectPowerLavelPageCommand}"
+                Text="Power Levels" />
+        </Grid>
+        <ContentView Grid.Row="1" Content="{Binding CurrentSelectedPage}" />
+    </Grid>
+</ContentPage>
