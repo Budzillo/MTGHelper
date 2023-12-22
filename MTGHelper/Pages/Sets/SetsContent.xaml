@@ -49,7 +49,7 @@
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Detail="{Binding Type}" Text="{Binding Name}" />
+                        <ImageCell Text="{Binding SetFullString}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

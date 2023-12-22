@@ -1,29 +1,31 @@
 ﻿using CommunityToolkit.Mvvm.Input;
-using MTGApi;
-using MTGApi.Repository;
-using MtgApiManager.Lib.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Scryfall.API.Models;
+using MTGApi.ScryfallRepository;
+using System.ComponentModel;
+using System.Collections.Specialized;
+using Microsoft.Rest;
 
 namespace MTGHelper.ViewModels
 {
     public partial class CardsByColorsContentViewModel : BaseViewModel
     {
-        private CardRepository cardRepository;
+        private ScryfallCardsRepository cardRepository;
         private SetSearchPageViewModel setSearchPageViewModel;
 
-        private List<ICard> cards = new List<ICard>();
-        private ObservableCollection<ICard> whiteCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> blackCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> redCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> greenCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> blueCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> multicoloredCards = new ObservableCollection<ICard>();
-        private ObservableCollection<ICard> colorlessCards = new ObservableCollection<ICard>();
+        private List<Card> cards = new List<Card>();
+        private ObservableCollection<Card> whiteCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> blackCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> redCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> greenCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> blueCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> multicoloredCards = new ObservableCollection<Card>();
+        private ObservableCollection<Card> colorlessCards = new ObservableCollection<Card>();
 
         public SetSearchPageViewModel SetSearchPageViewModel
         {
@@ -35,7 +37,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public List<ICard> Cards
+        public List<Card> Cards
         {
             get => cards;
             set
@@ -45,7 +47,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> WhiteCards
+        public ObservableCollection<Card> WhiteCards
         {
             get => whiteCards;
             set
@@ -55,7 +57,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> BlackCards
+        public ObservableCollection<Card> BlackCards
         {
             get => blackCards;
             set
@@ -65,7 +67,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> RedCards
+        public ObservableCollection<Card> RedCards
         {
             get => redCards;
             set
@@ -75,7 +77,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> GreenCards
+        public ObservableCollection<Card> GreenCards
         {
             get => greenCards;
             set
@@ -85,7 +87,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> BlueCards
+        public ObservableCollection<Card> BlueCards
         {
             get => blueCards;
             set
@@ -95,7 +97,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> MulticoloredCards
+        public ObservableCollection<Card> MulticoloredCards
         {
             get => multicoloredCards;
             set
@@ -105,7 +107,7 @@ namespace MTGHelper.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ObservableCollection<ICard> ColorlessCards
+        public ObservableCollection<Card> ColorlessCards
         {
             get => colorlessCards;
             set
@@ -125,26 +127,27 @@ namespace MTGHelper.ViewModels
         }
         public CardsByColorsContentViewModel(SetSearchPageViewModel setSearchPageViewModel,string setName)
         {
-            cardRepository = new CardRepository();
+            cardRepository = new ScryfallCardsRepository();
             this.SetSearchPageViewModel = setSearchPageViewModel;
             GetCards(setName);
-        }
-        private void GetCards()
-        {
-
         }
         private async void GetCards(string setName)
         {
             //this.Cards = await cardRepository.GetCardsBySet(setName);
-            this.WhiteCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName,APIConst.COLOR_WHITE_CODE)) ;
-            this.BlackCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_BLACK_CODE));
-            this.RedCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_RED_CODE));
-            this.GreenCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_GREEN_CODE));
-            this.BlueCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_BLUE_CODE));
-            this.MulticoloredCards = new ObservableCollection<ICard>(this.Cards.Where(q => q.IsMultiColor));
-            this.ColorlessCards = new ObservableCollection<ICard>(await cardRepository.GetCardsBySetAndColor(setName, APIConst.COLOR_COLORLESSS_CODE));
-
-            var listImages = this.WhiteCards.Where(q => q.ImageUrl != null).Select(q => q.ImageUrl).ToList();
+            this.WhiteCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName,MTGApi.APIConst.COLOR_WHITE_CODE)) ;
+            this.BlackCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_BLACK_CODE));
+            this.RedCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_RED_CODE));
+            this.GreenCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_GREEN_CODE));
+            this.BlueCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_BLUE_CODE));
+            this.MulticoloredCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_MULTICOLOR_CODE));
+            this.ColorlessCards = new ObservableCollection<Card>(await GetCardsBySetColor(setName, MTGApi.APIConst.COLOR_COLORLESSS_CODE));
+        }
+        private async Task<List<Card>> GetCardsBySetColor(string setName,string color)
+        {
+            HttpOperationResponse<CardList> cardList = await cardRepository.GetCardsBySetColor(setName, color);
+            if (cardList.Body != null && cardList.Body.Data != null)
+                return cardList.Body.Data.ToList();
+            else return new List<Card>();
         }
     }
 }

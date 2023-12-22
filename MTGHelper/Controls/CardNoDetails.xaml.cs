@@ -1,4 +1,5 @@
 using CommunityToolkit.Maui.Markup;
+using CommunityToolkit.Maui.Views;
 using MtgApiManager.Lib.Model;
 using Scryfall.API.Models;
 using System.Collections.ObjectModel;
@@ -36,4 +37,14 @@ public partial class CardNoDetails : ContentView
 	{
 		InitializeComponent();
 	}
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+        Popup popup = new Popup();
+        popup.Size = new Size(400, 700);
+        CardDetails cardDetailsContent = new CardDetails();
+        cardDetailsContent.BindingContext = Card;
+        popup.Content = cardDetailsContent;
+        Shell.Current.CurrentPage.ShowPopup(popup);
+    }
 }

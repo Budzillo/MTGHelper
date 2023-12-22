@@ -41,15 +41,14 @@ namespace MTGApi.ScryfallRepository
                 return new HttpOperationResponse<CardList>();
             }
         }
-        public async Task<HttpOperationResponse<CardList>> GetCommandersByName(string name)
+        public async Task<HttpOperationResponse<CardList>> GetCardsBySetColor(string setCode,string color)
         {
             try
             {
-                string q = $"\"{name}\" unique:name t:legendary";
-                Trace.WriteLine(q);
+                string q = $"color={color} e:{setCode} unique:name";
                 return await scryfallClient.Cards.SearchWithHttpMessagesAsync(q);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Trace.WriteLine(ex);
                 return new HttpOperationResponse<CardList>();
