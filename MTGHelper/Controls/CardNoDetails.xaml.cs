@@ -3,6 +3,7 @@ using CommunityToolkit.Maui.Views;
 using MtgApiManager.Lib.Model;
 using Scryfall.API.Models;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace MTGHelper.Controls;
 
@@ -19,17 +20,25 @@ public partial class CardNoDetails : ContentView
     {
         if(bindable is CardNoDetails cardNoDetails && newValue is Card card)
         {
-            cardNoDetails.labelCardName.Text = card.Name;
-            cardNoDetails.labelCardManaCost.Text = card.ManaCost;
-            cardNoDetails.labelCardOracleText.Text = card.OracleText;
-            cardNoDetails.labelCardPowerThougness.Text = $"{card.Power}/{card.Toughness}";
-            cardNoDetails.labelCardType.Text = card.TypeLine;
-            cardNoDetails.cardImage.Source = new UriImageSource
+            try
             {
-                CacheValidity = new TimeSpan(1),
-                CachingEnabled = true,
-                Uri = new Uri(card.ImageUris.Png)
-            };
+                cardNoDetails.labelCardName.Text = card.Name;
+                cardNoDetails.labelCardManaCost.Text = card.ManaCost;
+                cardNoDetails.labelCardOracleText.Text = card.OracleText;
+                cardNoDetails.labelCardPowerThougness.Text = $"{card.Power}/{card.Toughness}";
+                cardNoDetails.labelCardType.Text = card.TypeLine;
+                cardNoDetails.cardImage.Source = new UriImageSource
+                {
+                    CacheValidity = new TimeSpan(1),
+                    CachingEnabled = true,
+                    Uri = new Uri(card.ImageUris.Png)
+                };
+            }
+            catch(Exception ex)
+            {
+                Trace.WriteLine(ex);
+            }
+            
         }
     }
 

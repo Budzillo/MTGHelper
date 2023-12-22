@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
     <Border HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
         <Border.GestureRecognizers>
-            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
         </Border.GestureRecognizers>
         <Grid x:Name="gridLayoutRoot">
             <Grid.ColumnDefinitions>

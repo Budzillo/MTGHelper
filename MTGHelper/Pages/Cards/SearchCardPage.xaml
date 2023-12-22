@@ -27,7 +27,7 @@
                         x:Name="entryCardName"
                         Margin="10,0,0,0"
                         HorizontalOptions="FillAndExpand"
-                        Placeholder="Wpisz nazwę karty..."
+                        Placeholder="Entry card name..."
                         Text="{Binding CardName, Mode=TwoWay, UpdateSourceEventName=LostFocus}" />
                     <ImageButton
                         Margin="0,0,30,0"
@@ -49,10 +49,16 @@
             <Border Grid.Row="1" IsVisible="{Binding IsFiltersOpen}">
                 <VerticalStackLayout Margin="5">
                     <VerticalStackLayout>
-                        <Label HorizontalOptions="Start" Text="Sort By"  Margin="5,0,0,0"/>
+                        <Label
+                            Margin="5,0,0,0"
+                            HorizontalOptions="Start"
+                            Text="Sort By" />
                         <HorizontalStackLayout>
                             <Border>
-                                <Picker x:Name="pickerSortType" WidthRequest="310" SelectedItem="{Binding SortBy}">
+                                <Picker
+                                    x:Name="pickerSortType"
+                                    SelectedItem="{Binding SortBy}"
+                                    WidthRequest="310">
                                     <Picker.ItemsSource>
                                         <x:Array Type="{x:Type x:String}">
                                             <x:String>Name</x:String>
@@ -65,30 +71,33 @@
                             </Border>
                         </HorizontalStackLayout>
                     </VerticalStackLayout>
-                    <Label FontSize="25" Text="FILTERS" HorizontalOptions="Center"/>
+                    <Label
+                        FontSize="25"
+                        HorizontalOptions="Center"
+                        Text="FILTERS" />
                     <VerticalStackLayout>
                         <Label Text="Type line" />
                         <Border Grid.Row="0" StrokeShape="RoundRectangle 10,10,10,10">
                             <Entry
-                             HorizontalOptions="CenterAndExpand"
-                             Placeholder="Legendary,Creature,Angel"
-                             PlaceholderColor="LightGray"
-                             Text="{Binding TypeLine}"
-                             HorizontalTextAlignment="Center"
-                             VerticalTextAlignment="Center"
-                             VerticalOptions="Start" />
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                Placeholder="Legendary,Creature,Angel"
+                                PlaceholderColor="LightGray"
+                                Text="{Binding TypeLine}"
+                                VerticalOptions="Start"
+                                VerticalTextAlignment="Center" />
                         </Border>
                     </VerticalStackLayout>
                     <Label Text="Oracle text" />
-                    <Button 
-                        x:Name="buttonSortAscDsc" 
-                        Text="Filter" 
-                        Background="Wheat" 
-                        TextColor="Black" 
-                        HeightRequest="40" 
-                        Command="{Binding FilterByCommand}" 
-                        HorizontalOptions="Center" 
-                        VerticalOptions="Center"/>
+                    <Button
+                        x:Name="buttonSortAscDsc"
+                        Background="Wheat"
+                        Command="{Binding FilterByCommand}"
+                        HeightRequest="40"
+                        HorizontalOptions="Center"
+                        Text="Filter"
+                        TextColor="Black"
+                        VerticalOptions="Center" />
                 </VerticalStackLayout>
             </Border>
             <controls:CardSearchResult Grid.Row="2" Cards="{Binding FoundedCards}" />

@@ -32,6 +32,7 @@ namespace MTGHelper.ViewModels
             if(sender is ConfigurationPoupup configurationPoupup)
             {
                 SettingsHelper.SaveLifeCounterConfig(lifeCounterPageViewModel);
+                lifeCounterPageViewModel.ResetGameCommand.Execute(null);
                 configurationPoupup.Close();
             }
         }
